@@ -877,28 +877,28 @@
         <div class="grid-2">
           <div class="form-group">
             <label class="title-label"><i class="fa-solid fa-ticket"></i> 16. Tiket masuk dan parkir (Rp)</label>
-            <input type="number" id="pengeluaranTiket" min="0" placeholder="Contoh: 15000" required />
+            <input type="text" inputmode="numeric" id="pengeluaranTiket" placeholder="Rp. 0 (Contoh: 15.000)" required />
           </div>
           <div class="form-group">
             <label class="title-label"><i class="fa-solid fa-bed"></i> 17. Penginapan per malam (Rp)</label>
-            <input type="number" id="pengeluaranPenginapan" min="0" value="0" placeholder="0 jika tidak menginap"
+            <input type="text" inputmode="numeric" id="pengeluaranPenginapan" value="Rp. 0" placeholder="Rp. 0 jika tidak menginap"
               required />
           </div>
           <div class="form-group">
             <label class="title-label"><i class="fa-solid fa-utensils"></i> 18. Makan dan minum termasuk kopi
               (Rp)</label>
-            <input type="number" id="pengeluaranMakan" min="0" placeholder="Contoh: 50000" required />
+            <input type="text" inputmode="numeric" id="pengeluaranMakan" placeholder="Rp. 0 (Contoh: 50.000)" required />
           </div>
           <div class="form-group">
             <label class="title-label"><i class="fa-solid fa-gifts"></i> 19. Suvenir dan produk lokal (Rp)</label>
-            <input type="number" id="pengeluaranSuvenir" min="0" value="0" placeholder="Contoh: 20000" required />
+            <input type="text" inputmode="numeric" id="pengeluaranSuvenir" value="Rp. 0" placeholder="Rp. 0 jika tidak beli" required />
           </div>
         </div>
 
         <div class="form-group">
           <label class="title-label"><i class="fa-solid fa-gas-pump"></i> 20. Transportasi dari tempat menginap ke Lolai
             PP (Rp)</label>
-          <input type="number" id="pengeluaranTransport" min="0" placeholder="Contoh: 25000" required />
+          <input type="text" inputmode="numeric" id="pengeluaranTransport" placeholder="Rp. 0 (Contoh: 25.000)" required />
         </div>
       </div>
 
@@ -1458,6 +1458,54 @@
     // Inisialisasi awal saat halaman pertama kali dimuat
     perbaruiTampilanNomor14();
 
+    // --- Format Otomatis Input Uang (Rp. 0) & Ekstraksi Angka Murni ke Spreadsheet ---
+    function getRawNominal(id) {
+      const el = document.getElementById(id);
+      if (!el) return 0;
+      const clean = String(el.value).replace(/[^0-9]/g, '');
+      return clean ? parseInt(clean, 10) : 0;
+    }
+
+    const uangInputIds = [
+      'pengeluaranTiket',
+      'pengeluaranPenginapan',
+      'pengeluaranMakan',
+      'pengeluaranSuvenir',
+      'pengeluaranTransport'
+    ];
+
+    uangInputIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      el.addEventListener('input', function () {
+        const raw = this.value.replace(/[^0-9]/g, '');
+        if (!raw) {
+          this.value = '';
+          return;
+        }
+        const num = parseInt(raw, 10);
+        this.value = 'Rp. ' + num.toLocaleString('id-ID');
+      });
+
+      el.addEventListener('focus', function () {
+        if (this.value === 'Rp. 0') {
+          this.value = '';
+        }
+      });
+
+      el.addEventListener('blur', function () {
+        const clean = this.value.replace(/[^0-9]/g, '');
+        if (!clean) {
+          if (id === 'pengeluaranPenginapan' || id === 'pengeluaranSuvenir') {
+            this.value = 'Rp. 0';
+          }
+        } else {
+          this.value = 'Rp. ' + parseInt(clean, 10).toLocaleString('id-ID');
+        }
+      });
+    });
+
     const form = document.getElementById('kuesionerForm');
     const btn = document.getElementById('btnSubmit');
     const alertBox = document.getElementById('alertBox');
@@ -1527,12 +1575,12 @@
         lamaTotalHari: isRespondenWargaLokal() ? "Warga Lokal (Menetap)" : (Number(document.getElementById('lamaTotalHari').value) || 0),
         dayaTarikLain: dayaTarikList,
 
-        // C. Pengeluaran
-        pengeluaranTiket: Number(document.getElementById('pengeluaranTiket').value) || 0,
-        pengeluaranPenginapan: Number(document.getElementById('pengeluaranPenginapan').value) || 0,
-        pengeluaranMakan: Number(document.getElementById('pengeluaranMakan').value) || 0,
-        pengeluaranSuvenir: Number(document.getElementById('pengeluaranSuvenir').value) || 0,
-        pengeluaranTransport: Number(document.getElementById('pengeluaranTransport').value) || 0,
+        // C. Pengeluaran (Terkirim ke Google Spreadsheet sebagai format angka murni, misal 120000 atau 0)
+        pengeluaranTiket: getRawNominal('pengeluaranTiket'),
+        pengeluaranPenginapan: getRawNominal('pengeluaranPenginapan'),
+        pengeluaranMakan: getRawNominal('pengeluaranMakan'),
+        pengeluaranSuvenir: getRawNominal('pengeluaranSuvenir'),
+        pengeluaranTransport: getRawNominal('pengeluaranTransport'),
 
         // D. 4A (21a - 21q)
         q21a: document.querySelector('input[name="q21a"]:checked')?.value || "",
@@ -1584,6 +1632,8 @@
           alertBox.innerHTML = '<i class="fa-solid fa-circle-check" style="font-size: 22px;"></i> <div><strong>Berhasil!</strong> Data kuesioner berhasil tersimpan di Google Sheets.</div>';
           alertBox.style.display = "flex";
           form.reset();
+          document.getElementById('pengeluaranPenginapan').value = 'Rp. 0';
+          document.getElementById('pengeluaranSuvenir').value = 'Rp. 0';
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
           throw new Error(result.message || "Gagal menyimpan");

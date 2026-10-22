@@ -1070,8 +1070,8 @@
             });
             return obj;
           }).filter(obj => {
-            return (obj.No_Kuesioner && obj.No_Kuesioner.trim()) ||
-                   (obj.Timestamp && obj.Timestamp.trim());
+            return (obj.No_Kuesioner !== undefined && String(obj.No_Kuesioner).trim() !== "") ||
+                   (obj.Timestamp !== undefined && String(obj.Timestamp).trim() !== "");
           });
 
           rawDataSurvei = parsedData;
@@ -1186,11 +1186,11 @@
         }
 
         // Total Belanja
-        const tTiket = parseFloat(d.Biaya_Tiket || d.pengeluaranTiket) || 0;
-        const tInap = parseFloat(d.Biaya_Penginapan || d.pengeluaranPenginapan) || 0;
-        const tMakan = parseFloat(d.Biaya_Makan || d.pengeluaranMakan) || 0;
-        const tSuvenir = parseFloat(d.Biaya_Suvenir || d.pengeluaranSuvenir) || 0;
-        const tTrans = parseFloat(d.Biaya_Transport || d.pengeluaranTransport) || 0;
+        const tTiket = parseNum(d.Biaya_Tiket || d.pengeluaranTiket);
+        const tInap = parseNum(d.Biaya_Penginapan || d.pengeluaranPenginapan);
+        const tMakan = parseNum(d.Biaya_Makan || d.pengeluaranMakan);
+        const tSuvenir = parseNum(d.Biaya_Suvenir || d.pengeluaranSuvenir);
+        const tTrans = parseNum(d.Biaya_Transport || d.pengeluaranTransport);
         totalBelanja += (tTiket + tInap + tMakan + tSuvenir + tTrans);
 
         // Kepuasan (29_KepuasanTotal skala 1-5 atau 'Puas')
@@ -1235,6 +1235,16 @@
         }
       }
       return "";
+    }
+
+    // Helper parsing nominal biaya / angka (menangani format '30000', 'Rp. 30.000', 'Rp 30.000', dll)
+    function parseNum(val) {
+      if (val === null || val === undefined) return 0;
+      if (typeof val === 'number') return isNaN(val) ? 0 : val;
+      const str = String(val).trim();
+      if (!str) return 0;
+      const cleaned = str.replace(/[^0-9]/g, '');
+      return cleaned ? parseInt(cleaned, 10) : 0;
     }
 
     // Helper render badge angka Likert
@@ -1336,11 +1346,11 @@
         const dayaTarik = getVal(d, 'Daya_Tarik_Lain', 'dayaTarikLain') || "-";
 
         // 4. Biaya
-        const tTiket = parseFloat(getVal(d, 'Biaya_Tiket', 'pengeluaranTiket')) || 0;
-        const tInap = parseFloat(getVal(d, 'Biaya_Penginapan', 'pengeluaranPenginapan')) || 0;
-        const tMakan = parseFloat(getVal(d, 'Biaya_Makan', 'pengeluaranMakan')) || 0;
-        const tSuvenir = parseFloat(getVal(d, 'Biaya_Suvenir', 'pengeluaranSuvenir')) || 0;
-        const tTrans = parseFloat(getVal(d, 'Biaya_Transport', 'pengeluaranTransport')) || 0;
+        const tTiket = parseNum(getVal(d, 'Biaya_Tiket', 'pengeluaranTiket'));
+        const tInap = parseNum(getVal(d, 'Biaya_Penginapan', 'pengeluaranPenginapan'));
+        const tMakan = parseNum(getVal(d, 'Biaya_Makan', 'pengeluaranMakan'));
+        const tSuvenir = parseNum(getVal(d, 'Biaya_Suvenir', 'pengeluaranSuvenir'));
+        const tTrans = parseNum(getVal(d, 'Biaya_Transport', 'pengeluaranTransport'));
         const totalBelanja = tTiket + tInap + tMakan + tSuvenir + tTrans;
 
         // 5. Likert 21a - 21q
@@ -1593,11 +1603,11 @@
         }
 
         // Biaya
-        sumTiket += parseFloat(getVal(d, 'Biaya_Tiket', 'pengeluaranTiket')) || 0;
-        sumInap += parseFloat(getVal(d, 'Biaya_Penginapan', 'pengeluaranPenginapan')) || 0;
-        sumMakan += parseFloat(getVal(d, 'Biaya_Makan', 'pengeluaranMakan')) || 0;
-        sumSuvenir += parseFloat(getVal(d, 'Biaya_Suvenir', 'pengeluaranSuvenir')) || 0;
-        sumTrans += parseFloat(getVal(d, 'Biaya_Transport', 'pengeluaranTransport')) || 0;
+        sumTiket += parseNum(getVal(d, 'Biaya_Tiket', 'pengeluaranTiket'));
+        sumInap += parseNum(getVal(d, 'Biaya_Penginapan', 'pengeluaranPenginapan'));
+        sumMakan += parseNum(getVal(d, 'Biaya_Makan', 'pengeluaranMakan'));
+        sumSuvenir += parseNum(getVal(d, 'Biaya_Suvenir', 'pengeluaranSuvenir'));
+        sumTrans += parseNum(getVal(d, 'Biaya_Transport', 'pengeluaranTransport'));
 
         // Likert
         likertStats.forEach(item => {
@@ -1625,7 +1635,7 @@
 
         // Rasa Aman Tebing (24)
         const aman = (getVal(d, '24_RasaAman', 'q24RasaAman') || '').toLowerCase();
-        if (aman.includes('sangat aman') || aman === 'aman') countAmanTebing++;
+        if (aman.includes('ya') || aman.includes('aman')) countAmanTebing++;
 
         // Kepadatan Sunrise (22)
         const padat = (getVal(d, '22_KepadatanSunrise', 'q22Kepadatan') || '').toLowerCase();
@@ -1633,7 +1643,7 @@
 
         // Bangunan Komersial (25)
         const bgn = (getVal(d, '25_BangunanGanggu', 'q25BangunanGanggu') || '').toLowerCase();
-        if (bgn.includes('mengganggu') || bgn.includes('sedikit mengganggu') || bgn.includes('sangat mengganggu')) countGangguBangunan++;
+        if (bgn.includes('mengganggu') || bgn.includes('sedikit') || bgn.includes('ya, sangat') || bgn === 'ya') countGangguBangunan++;
 
         // Fasilitas Prioritas (26)
         const fStr = getVal(d, '26_FasilitasPrioritas', 'fasilitasPrioritas');
@@ -1894,11 +1904,11 @@
         const lamaTotal = getVal(d, 'Lama_Total_Hari', 'lamaTotalHari') || "-";
         const dayaTarik = getVal(d, 'Daya_Tarik_Lain', 'dayaTarikLain') || "-";
 
-        const tTiket = parseFloat(getVal(d, 'Biaya_Tiket', 'pengeluaranTiket')) || 0;
-        const tInap = parseFloat(getVal(d, 'Biaya_Penginapan', 'pengeluaranPenginapan')) || 0;
-        const tMakan = parseFloat(getVal(d, 'Biaya_Makan', 'pengeluaranMakan')) || 0;
-        const tSuvenir = parseFloat(getVal(d, 'Biaya_Suvenir', 'pengeluaranSuvenir')) || 0;
-        const tTrans = parseFloat(getVal(d, 'Biaya_Transport', 'pengeluaranTransport')) || 0;
+        const tTiket = parseNum(getVal(d, 'Biaya_Tiket', 'pengeluaranTiket'));
+        const tInap = parseNum(getVal(d, 'Biaya_Penginapan', 'pengeluaranPenginapan'));
+        const tMakan = parseNum(getVal(d, 'Biaya_Makan', 'pengeluaranMakan'));
+        const tSuvenir = parseNum(getVal(d, 'Biaya_Suvenir', 'pengeluaranSuvenir'));
+        const tTrans = parseNum(getVal(d, 'Biaya_Transport', 'pengeluaranTransport'));
         const totalBelanja = tTiket + tInap + tMakan + tSuvenir + tTrans;
 
         const q21a = getVal(d, '21a_Awan', 'q21a') || "-";

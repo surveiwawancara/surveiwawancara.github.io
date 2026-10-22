@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Kuesioner Wisatawan Kawasan Wisata Lolai</title>
-  
+
   <!-- Primary Meta Tags -->
   <link rel="canonical" href="https://surveiwawancara.github.io/" />
   <meta name="title" content="Kuesioner Wisatawan - Kawasan Wisata Negeri di Atas Awan Lolai" />
-  <meta name="description" content="Survei Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai, Kabupaten Toraja Utara. Mohon kesediaan Anda mengisi kuesioner ini untuk kemajuan pariwisata Toraja." />
+  <meta name="description"
+    content="Survei Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai, Kabupaten Toraja Utara. Mohon kesediaan Anda mengisi kuesioner ini untuk kemajuan pariwisata Toraja." />
   <meta name="theme-color" content="#0f766e" />
 
   <!-- Open Graph / Facebook / WhatsApp / Telegram -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://surveiwawancara.github.io/" />
   <meta property="og:title" content="Kuesioner Wisatawan - Kawasan Wisata Negeri di Atas Awan Lolai" />
-  <meta property="og:description" content="Survei Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai, Kabupaten Toraja Utara. Partisipasi Anda sangat berharga untuk peningkatan fasilitas dan kenyamanan berwisata." />
+  <meta property="og:description"
+    content="Survei Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai, Kabupaten Toraja Utara. Partisipasi Anda sangat berharga untuk peningkatan fasilitas dan kenyamanan berwisata." />
   <meta property="og:image" content="https://surveiwawancara.github.io/og-image.jpg" />
   <meta property="og:image:secure_url" content="https://surveiwawancara.github.io/og-image.jpg" />
   <meta property="og:image:type" content="image/jpeg" />
@@ -27,14 +30,16 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://surveiwawancara.github.io/" />
   <meta name="twitter:title" content="Kuesioner Wisatawan - Kawasan Wisata Negeri di Atas Awan Lolai" />
-  <meta name="twitter:description" content="Survei Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai, Kabupaten Toraja Utara." />
+  <meta name="twitter:description"
+    content="Survei Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai, Kabupaten Toraja Utara." />
   <meta name="twitter:image" content="https://surveiwawancara.github.io/og-image.jpg" />
 
   <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
   <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
@@ -61,8 +66,12 @@
       --radius-sm: 8px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       background-color: var(--bg);
@@ -73,7 +82,9 @@
     }
 
     @media (min-width: 768px) {
-      body { padding: 32px 16px 60px; }
+      body {
+        padding: 32px 16px 60px;
+      }
     }
 
     .wrapper {
@@ -94,7 +105,8 @@
     }
 
     .hero::after {
-      content: "\f6c4"; /* fa-cloud-sun */
+      content: "\f6c4";
+      /* fa-cloud-sun */
       font-family: "Font Awesome 6 Free";
       font-weight: 900;
       position: absolute;
@@ -127,8 +139,13 @@
     }
 
     @media (min-width: 640px) {
-      .hero { padding: 36px 30px; }
-      .hero h1 { font-size: 26px; }
+      .hero {
+        padding: 36px 30px;
+      }
+
+      .hero h1 {
+        font-size: 26px;
+      }
     }
 
     .hero p {
@@ -150,7 +167,9 @@
     }
 
     @media (min-width: 640px) {
-      .card { padding: 26px 24px; }
+      .card {
+        padding: 26px 24px;
+      }
     }
 
     .card:hover {
@@ -221,8 +240,13 @@
     }
 
     @media (min-width: 640px) {
-      .grid-2 { grid-template-columns: 1fr 1fr; }
-      .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
     }
 
     /* INPUTS & SELECTS (Touch-friendly 44px+) */
@@ -245,7 +269,9 @@
       transition: all 0.2s ease;
     }
 
-    input:focus, select:focus, textarea:focus {
+    input:focus,
+    select:focus,
+    textarea:focus {
       border-color: var(--border-focus);
       box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
       background-color: #fff;
@@ -270,7 +296,9 @@
     }
 
     @media (min-width: 540px) {
-      .options-grid { grid-template-columns: 1fr 1fr; }
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     .option-label {
@@ -369,14 +397,14 @@
       font-size: 13px;
     }
 
-    table.rating-table th, 
+    table.rating-table th,
     table.rating-table td {
       border: 1px solid var(--border);
       padding: 10px 8px;
       text-align: center;
     }
 
-    table.rating-table th:first-child, 
+    table.rating-table th:first-child,
     table.rating-table td:first-child {
       text-align: left;
       min-width: 230px;
@@ -386,7 +414,7 @@
       position: sticky;
       left: 0;
       z-index: 2;
-      box-shadow: 2px 0 5px -2px rgba(0,0,0,0.06);
+      box-shadow: 2px 0 5px -2px rgba(0, 0, 0, 0.06);
     }
 
     table.rating-table th:first-child {
@@ -472,8 +500,15 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-6px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .alert-success {
@@ -497,15 +532,11 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="wrapper">
     <!-- HERO HEADER -->
-    <div style="display:flex; justify-content:flex-end; margin-bottom:12px;">
-      <a href="rekap.html" style="display:inline-flex; align-items:center; gap:8px; background:#ffffff; color:#0f766e; border:1.5px solid #ccfbf1; padding:7px 15px; border-radius:30px; font-size:12.5px; font-weight:700; text-decoration:none; box-shadow:0 2px 6px rgba(13,148,136,0.08); transition:all 0.2s ease;">
-        <i class="fa-solid fa-chart-pie" style="color:#0d9488;"></i> <span>Rekapitulasi Data & Cetak PDF</span> <i class="fa-solid fa-chevron-right" style="font-size:10px; color:#64748b;"></i>
-      </a>
-    </div>
 
     <div class="hero">
       <div class="hero-badge">
@@ -513,8 +544,9 @@
       </div>
       <h1>Kuesioner Wisatawan Kawasan Wisata Lolai</h1>
       <p>
-        Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai, Kabupaten Toraja Utara. 
-        Data survei hanya digunakan untuk keperluan riset perencanaan pengembangan pariwisata dan identitas responden dirahasiakan.
+        Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai, Kabupaten Toraja Utara.
+        Data survei hanya digunakan untuk keperluan riset perencanaan pengembangan pariwisata dan identitas responden
+        dirahasiakan.
       </p>
     </div>
 
@@ -549,7 +581,8 @@
           </div>
           <div class="form-group">
             <label class="title-label"><i class="fa-solid fa-location-dot"></i> Lokasi Pengisian</label>
-            <input type="text" id="lokasi" placeholder="Misal: Titik pandang puncak, Parkir, Kafe, Vila, dll." required />
+            <input type="text" id="lokasi" placeholder="Misal: Titik pandang puncak, Parkir, Kafe, Vila, dll."
+              required />
           </div>
         </div>
       </div>
@@ -560,13 +593,15 @@
           <i class="fa-solid fa-user-circle"></i>
           <span>A. Profil Responden</span>
         </div>
-        
+
         <div class="grid-2">
           <div class="form-group">
             <label class="title-label"><i class="fa-solid fa-venus-mars"></i> 1. Jenis Kelamin</label>
             <div class="options-col">
-              <label class="option-label"><input type="radio" name="gender" value="Laki-laki" required /> <span>Laki-laki</span></label>
-              <label class="option-label"><input type="radio" name="gender" value="Perempuan" /> <span>Perempuan</span></label>
+              <label class="option-label"><input type="radio" name="gender" value="Laki-laki" required />
+                <span>Laki-laki</span></label>
+              <label class="option-label"><input type="radio" name="gender" value="Perempuan" />
+                <span>Perempuan</span></label>
             </div>
           </div>
           <div class="form-group">
@@ -592,7 +627,8 @@
               <option value="Provinsi lain">Provinsi lain di Indonesia</option>
               <option value="Mancanegara">Mancanegara (Luar Negeri)</option>
             </select>
-            <input type="text" id="asalDetail" placeholder="Nama Kab / Kota / Negara asal" style="margin-top:8px;" required />
+            <input type="text" id="asalDetail" placeholder="Nama Kab / Kota / Negara asal" style="margin-top:8px;"
+              required />
           </div>
           <div class="form-group">
             <label class="title-label"><i class="fa-solid fa-graduation-cap"></i> 4. Pendidikan Terakhir</label>
@@ -617,7 +653,8 @@
               <option value="Wiraswasta">Wiraswasta / Pengusaha</option>
               <option value="Lainnya">Lainnya (isi manual)</option>
             </select>
-            <input type="text" id="pekerjaanLainnya" placeholder="Sebutkan pekerjaan lainnya..." style="display:none; margin-top:8px;" />
+            <input type="text" id="pekerjaanLainnya" placeholder="Sebutkan pekerjaan lainnya..."
+              style="display:none; margin-top:8px;" />
           </div>
           <div class="form-group">
             <label class="title-label"><i class="fa-solid fa-wallet"></i> 6. Pengeluaran per Bulan</label>
@@ -638,10 +675,11 @@
           <i class="fa-solid fa-route"></i>
           <span>B. Karakteristik Perjalanan</span>
         </div>
-        
+
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label"><i class="fa-solid fa-arrows-rotate"></i> 7. Ini kunjungan ke berapa ke Lolai?</label>
+            <label class="title-label"><i class="fa-solid fa-arrows-rotate"></i> 7. Ini kunjungan ke berapa ke
+              Lolai?</label>
             <select id="kunjunganKe" required>
               <option value="Pertama">Pertama kali</option>
               <option value="Kedua">Kedua kali</option>
@@ -658,20 +696,28 @@
               <option value="Pekerjaan">Pekerjaan / dinas</option>
               <option value="Lainnya">Lainnya (isi manual)</option>
             </select>
-            <input type="text" id="tujuanUtamaLainnya" placeholder="Sebutkan tujuan lainnya..." style="display:none; margin-top:8px;" />
+            <input type="text" id="tujuanUtamaLainnya" placeholder="Sebutkan tujuan lainnya..."
+              style="display:none; margin-top:8px;" />
           </div>
         </div>
 
         <div class="form-group">
-          <label class="title-label"><i class="fa-solid fa-share-nodes"></i> 9. Dari mana Anda tahu tentang Lolai? <span style="font-weight: normal; color: var(--text-muted);">(Boleh pilih lebih dari satu)</span></label>
+          <label class="title-label"><i class="fa-solid fa-share-nodes"></i> 9. Dari mana Anda tahu tentang Lolai? <span
+              style="font-weight: normal; color: var(--text-muted);">(Boleh pilih lebih dari satu)</span></label>
           <div class="options-grid">
-            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Instagram/TikTok" /> <span><i class="fa-brands fa-instagram" style="color:#e1306c;"></i> Instagram / TikTok</span></label>
-            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Teman/keluarga" /> <span><i class="fa-solid fa-user-group" style="color:#0284c7;"></i> Teman / keluarga</span></label>
-            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Biro perjalanan" /> <span><i class="fa-solid fa-van-shuttle" style="color:#10b981;"></i> Biro perjalanan / Tour</span></label>
-            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Situs web/Google" /> <span><i class="fa-brands fa-google" style="color:#ea4335;"></i> Pencarian Web / Google</span></label>
-            <label class="option-label"><input type="checkbox" name="sumberInfo" id="chkSumberInfoLainnya" value="Lainnya" /> <span><i class="fa-solid fa-ellipsis"></i> Lainnya</span></label>
+            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Instagram/TikTok" /> <span><i
+                  class="fa-brands fa-instagram" style="color:#e1306c;"></i> Instagram / TikTok</span></label>
+            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Teman/keluarga" /> <span><i
+                  class="fa-solid fa-user-group" style="color:#0284c7;"></i> Teman / keluarga</span></label>
+            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Biro perjalanan" /> <span><i
+                  class="fa-solid fa-van-shuttle" style="color:#10b981;"></i> Biro perjalanan / Tour</span></label>
+            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Situs web/Google" /> <span><i
+                  class="fa-brands fa-google" style="color:#ea4335;"></i> Pencarian Web / Google</span></label>
+            <label class="option-label"><input type="checkbox" name="sumberInfo" id="chkSumberInfoLainnya"
+                value="Lainnya" /> <span><i class="fa-solid fa-ellipsis"></i> Lainnya</span></label>
           </div>
-          <input type="text" id="sumberInfoLainnya" placeholder="Sebutkan sumber info lainnya..." style="display:none; margin-top:8px;" />
+          <input type="text" id="sumberInfoLainnya" placeholder="Sebutkan sumber info lainnya..."
+            style="display:none; margin-top:8px;" />
         </div>
 
         <div class="grid-2">
@@ -702,7 +748,8 @@
               <option value="Bus rombongan">Bus rombongan</option>
               <option value="Lainnya">Lainnya (isi manual)</option>
             </select>
-            <input type="text" id="kendaraanLainnya" placeholder="Sebutkan kendaraan lainnya..." style="display:none; margin-top:8px;" />
+            <input type="text" id="kendaraanLainnya" placeholder="Sebutkan kendaraan lainnya..."
+              style="display:none; margin-top:8px;" />
           </div>
           <div class="form-group">
             <label class="title-label"><i class="fa-solid fa-hotel"></i> 12. Apakah Anda menginap di Lolai?</label>
@@ -716,7 +763,8 @@
               <option value="Tidak, lainnya">Tidak, menginap di tempat lainnya</option>
               <option value="Tidak menginap (pulang hari)">Tidak menginap (langsung pulang)</option>
             </select>
-            <input type="text" id="menginapLainnya" placeholder="Sebutkan nama tempat menginap lainnya..." style="display:none; margin-top:8px;" />
+            <input type="text" id="menginapLainnya" placeholder="Sebutkan nama tempat menginap lainnya..."
+              style="display:none; margin-top:8px;" />
           </div>
         </div>
 
@@ -725,27 +773,34 @@
           <label class="title-label" style="color:#0f766e; margin-bottom: 4px;">
             <i class="fa-solid fa-clock-rotate-left"></i> 13a. Waktu Kedatangan di Kawasan Lolai
           </label>
-          <div class="hint">Banyak pengunjung tiba sehari atau dua hari sebelumnya untuk mengejar matahari terbit. Tentukan tanggal & jam kedatangan:</div>
-          
+          <div class="hint">Banyak pengunjung tiba sehari atau dua hari sebelumnya untuk mengejar matahari terbit.
+            Tentukan tanggal & jam kedatangan:</div>
+
           <div class="grid-2">
             <div>
-              <label style="font-size:12px; font-weight:600; color:#475569; display:block; margin-bottom:4px;"><i class="fa-regular fa-calendar-check"></i> Tanggal Tiba</label>
+              <label style="font-size:12px; font-weight:600; color:#475569; display:block; margin-bottom:4px;"><i
+                  class="fa-regular fa-calendar-check"></i> Tanggal Tiba</label>
               <input type="date" id="tglTiba" required />
             </div>
             <div>
-              <label style="font-size:12px; font-weight:600; color:#475569; display:block; margin-bottom:4px;"><i class="fa-regular fa-clock"></i> Jam Tiba</label>
+              <label style="font-size:12px; font-weight:600; color:#475569; display:block; margin-bottom:4px;"><i
+                  class="fa-regular fa-clock"></i> Jam Tiba</label>
               <input type="time" id="jamTiba" required />
             </div>
           </div>
 
           <div style="display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-top:10px;">
             <span style="font-size:12px; color:#64748b; font-weight:600;">Pilihan Cepat:</span>
-            <button type="button" class="quick-btn" id="btnTibaHariIni"><i class="fa-solid fa-calendar-day"></i> Hari Ini (Sama dgn Survei)</button>
-            <button type="button" class="quick-btn" id="btnTibaKemarin"><i class="fa-solid fa-arrow-left"></i> Kemarin (H-1)</button>
-            <button type="button" class="quick-btn" id="btnTibaH2"><i class="fa-solid fa-backward"></i> 2 Hari Lalu (H-2)</button>
+            <button type="button" class="quick-btn" id="btnTibaHariIni"><i class="fa-solid fa-calendar-day"></i> Hari
+              Ini (Sama dgn Survei)</button>
+            <button type="button" class="quick-btn" id="btnTibaKemarin"><i class="fa-solid fa-arrow-left"></i> Kemarin
+              (H-1)</button>
+            <button type="button" class="quick-btn" id="btnTibaH2"><i class="fa-solid fa-backward"></i> 2 Hari Lalu
+              (H-2)</button>
           </div>
 
-          <div id="waktuTibaError" style="display:none; color:#dc2626; font-size:12.5px; margin-top:10px; font-weight:600; background:#fef2f2; padding:10px 12px; border-radius:8px; border:1px solid #fecaca;">
+          <div id="waktuTibaError"
+            style="display:none; color:#dc2626; font-size:12.5px; margin-top:10px; font-weight:600; background:#fef2f2; padding:10px 12px; border-radius:8px; border:1px solid #fecaca;">
             ⚠️ Waktu tiba tidak boleh melewati waktu survei!
           </div>
         </div>
@@ -757,45 +812,58 @@
           </div>
           <div class="form-group" id="groupNomor14">
             <label class="title-label"><i class="fa-solid fa-calendar-days"></i> 14. Lama Total di Toraja</label>
-            
+
             <!-- Tampilan untuk Wisatawan / Luar Toraja -->
             <div id="boxInputLamaTotal">
               <input type="number" id="lamaTotalHari" placeholder="Jumlah hari kunjungan (cth: 2)" min="1" />
-              <label class="option-label" style="margin-top: 8px; font-size: 13px; background: #f0fdfa; border: 1px dashed #0d9488; cursor: pointer; padding: 8px 12px; border-radius: 8px;">
+              <label class="option-label"
+                style="margin-top: 8px; font-size: 13px; background: #f0fdfa; border: 1px dashed #0d9488; cursor: pointer; padding: 8px 12px; border-radius: 8px;">
                 <input type="checkbox" id="chkWargaLokal" />
-                <span><i class="fa-solid fa-house-chimney-user" style="color:#0f766e;"></i> Responden adalah warga lokal (Tinggal menetap di Toraja)</span>
+                <span><i class="fa-solid fa-house-chimney-user" style="color:#0f766e;"></i> Responden adalah warga lokal
+                  (Tinggal menetap di Toraja)</span>
               </label>
             </div>
 
             <!-- Tampilan Otomatis untuk Warga Lokal: Dilewati, tidak perlu diisi, tidak menghalangi submit -->
-            <div id="boxInfoWargaLokal" style="display:none; background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 8px; padding: 12px 14px;">
+            <div id="boxInfoWargaLokal"
+              style="display:none; background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 8px; padding: 12px 14px;">
               <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
                 <div style="font-size: 13.5px; color: #065f46; font-weight: 700;">
                   <i class="fa-solid fa-circle-check" style="color:#10b981; font-size:16px;"></i>
                   <span>Warga Lokal Toraja (Tinggal Menetap)</span>
                 </div>
-                <button type="button" id="btnBukaInputLama" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; font-size:11.5px; font-weight:600; padding:4px 8px; border-radius:6px; cursor:pointer;">
+                <button type="button" id="btnBukaInputLama"
+                  style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; font-size:11.5px; font-weight:600; padding:4px 8px; border-radius:6px; cursor:pointer;">
                   <i class="fa-solid fa-pencil"></i> Isi Jumlah Hari
                 </button>
               </div>
               <div style="font-size: 12px; color: #047857; margin-top: 4px;">
-                ✓ Pertanyaan ini dilewati otomatis (tidak perlu diisi). Tersimpan: <strong>Warga Lokal (Menetap)</strong>.
+                ✓ Pertanyaan ini dilewati otomatis (tidak perlu diisi). Tersimpan: <strong>Warga Lokal
+                  (Menetap)</strong>.
               </div>
             </div>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="title-label"><i class="fa-solid fa-monument"></i> 15. Daya tarik lain yang dikunjungi di Toraja <span style="font-weight: normal; color: var(--text-muted);">(Boleh pilih lebih dari satu)</span></label>
+          <label class="title-label"><i class="fa-solid fa-monument"></i> 15. Daya tarik lain yang dikunjungi di Toraja
+            <span style="font-weight: normal; color: var(--text-muted);">(Boleh pilih lebih dari satu)</span></label>
           <div class="options-grid">
-            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Batutumonga" /> <span>Batutumonga</span></label>
-            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Kete Kesu" /> <span>Ke'te' Kesu'</span></label>
-            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Londa" /> <span>Londa</span></label>
-            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Lemo" /> <span>Lemo</span></label>
-            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Patung Yesus Buntu Burake" /> <span>Patung Yesus Buntu Burake</span></label>
-            <label class="option-label"><input type="checkbox" name="dayaTarikLain" id="chkDayaTarikLainnya" value="Lainnya" /> <span><i class="fa-solid fa-ellipsis"></i> Lainnya</span></label>
+            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Batutumonga" />
+              <span>Batutumonga</span></label>
+            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Kete Kesu" /> <span>Ke'te'
+                Kesu'</span></label>
+            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Londa" />
+              <span>Londa</span></label>
+            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Lemo" />
+              <span>Lemo</span></label>
+            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Patung Yesus Buntu Burake" />
+              <span>Patung Yesus Buntu Burake</span></label>
+            <label class="option-label"><input type="checkbox" name="dayaTarikLain" id="chkDayaTarikLainnya"
+                value="Lainnya" /> <span><i class="fa-solid fa-ellipsis"></i> Lainnya</span></label>
           </div>
-          <input type="text" id="dayaTarikLainnya" placeholder="Sebutkan objek wisata lainnya..." style="display:none; margin-top:8px;" />
+          <input type="text" id="dayaTarikLainnya" placeholder="Sebutkan objek wisata lainnya..."
+            style="display:none; margin-top:8px;" />
         </div>
       </div>
 
@@ -813,10 +881,12 @@
           </div>
           <div class="form-group">
             <label class="title-label"><i class="fa-solid fa-bed"></i> 17. Penginapan per malam (Rp)</label>
-            <input type="number" id="pengeluaranPenginapan" min="0" value="0" placeholder="0 jika tidak menginap" required />
+            <input type="number" id="pengeluaranPenginapan" min="0" value="0" placeholder="0 jika tidak menginap"
+              required />
           </div>
           <div class="form-group">
-            <label class="title-label"><i class="fa-solid fa-utensils"></i> 18. Makan dan minum termasuk kopi (Rp)</label>
+            <label class="title-label"><i class="fa-solid fa-utensils"></i> 18. Makan dan minum termasuk kopi
+              (Rp)</label>
             <input type="number" id="pengeluaranMakan" min="0" placeholder="Contoh: 50000" required />
           </div>
           <div class="form-group">
@@ -826,7 +896,8 @@
         </div>
 
         <div class="form-group">
-          <label class="title-label"><i class="fa-solid fa-gas-pump"></i> 20. Transportasi dari tempat menginap ke Lolai PP (Rp)</label>
+          <label class="title-label"><i class="fa-solid fa-gas-pump"></i> 20. Transportasi dari tempat menginap ke Lolai
+            PP (Rp)</label>
           <input type="number" id="pengeluaranTransport" min="0" placeholder="Contoh: 25000" required />
         </div>
       </div>
@@ -857,23 +928,142 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>21a. Atraksi: panorama lautan awan & sunrise</td><td><input type="radio" name="q21a" value="1" required /></td><td><input type="radio" name="q21a" value="2" /></td><td><input type="radio" name="q21a" value="3" /></td><td><input type="radio" name="q21a" value="4" /></td><td><input type="radio" name="q21a" value="5" /></td></tr>
-              <tr><td>21b. Atraksi budaya (kopi, tenun, rumah adat)</td><td><input type="radio" name="q21b" value="1" required /></td><td><input type="radio" name="q21b" value="2" /></td><td><input type="radio" name="q21b" value="3" /></td><td><input type="radio" name="q21b" value="4" /></td><td><input type="radio" name="q21b" value="5" /></td></tr>
-              <tr><td>21c. Variasi kegiatan selain melihat pemandangan</td><td><input type="radio" name="q21c" value="1" required /></td><td><input type="radio" name="q21c" value="2" /></td><td><input type="radio" name="q21c" value="3" /></td><td><input type="radio" name="q21c" value="4" /></td><td><input type="radio" name="q21c" value="5" /></td></tr>
-              <tr><td>21d. Aksesibilitas: kondisi jalan menuju Lolai</td><td><input type="radio" name="q21d" value="1" required /></td><td><input type="radio" name="q21d" value="2" /></td><td><input type="radio" name="q21d" value="3" /></td><td><input type="radio" name="q21d" value="4" /></td><td><input type="radio" name="q21d" value="5" /></td></tr>
-              <tr><td>21e. Petunjuk arah dan papan informasi</td><td><input type="radio" name="q21e" value="1" required /></td><td><input type="radio" name="q21e" value="2" /></td><td><input type="radio" name="q21e" value="3" /></td><td><input type="radio" name="q21e" value="4" /></td><td><input type="radio" name="q21e" value="5" /></td></tr>
-              <tr><td>21f. Ketersediaan dan kemudahan parkir</td><td><input type="radio" name="q21f" value="1" required /></td><td><input type="radio" name="q21f" value="2" /></td><td><input type="radio" name="q21f" value="3" /></td><td><input type="radio" name="q21f" value="4" /></td><td><input type="radio" name="q21f" value="5" /></td></tr>
-              <tr><td>21g. Ketersediaan transportasi umum / ojek</td><td><input type="radio" name="q21g" value="1" required /></td><td><input type="radio" name="q21g" value="2" /></td><td><input type="radio" name="q21g" value="3" /></td><td><input type="radio" name="q21g" value="4" /></td><td><input type="radio" name="q21g" value="5" /></td></tr>
-              <tr><td>21h. Amenitas: kualitas penginapan</td><td><input type="radio" name="q21h" value="1" required /></td><td><input type="radio" name="q21h" value="2" /></td><td><input type="radio" name="q21h" value="3" /></td><td><input type="radio" name="q21h" value="4" /></td><td><input type="radio" name="q21h" value="5" /></td></tr>
-              <tr><td>21i. Kualitas tempat makan dan minum</td><td><input type="radio" name="q21i" value="1" required /></td><td><input type="radio" name="q21i" value="2" /></td><td><input type="radio" name="q21i" value="3" /></td><td><input type="radio" name="q21i" value="4" /></td><td><input type="radio" name="q21i" value="5" /></td></tr>
-              <tr><td>21j. Kebersihan dan ketersediaan toilet</td><td><input type="radio" name="q21j" value="1" required /></td><td><input type="radio" name="q21j" value="2" /></td><td><input type="radio" name="q21j" value="3" /></td><td><input type="radio" name="q21j" value="4" /></td><td><input type="radio" name="q21j" value="5" /></td></tr>
-              <tr><td>21k. Fasilitas tempat ibadah</td><td><input type="radio" name="q21k" value="1" required /></td><td><input type="radio" name="q21k" value="2" /></td><td><input type="radio" name="q21k" value="3" /></td><td><input type="radio" name="q21k" value="4" /></td><td><input type="radio" name="q21k" value="5" /></td></tr>
-              <tr><td>21l. Kestabilan sinyal telepon & internet</td><td><input type="radio" name="q21l" value="1" required /></td><td><input type="radio" name="q21l" value="2" /></td><td><input type="radio" name="q21l" value="3" /></td><td><input type="radio" name="q21l" value="4" /></td><td><input type="radio" name="q21l" value="5" /></td></tr>
-              <tr><td>21m. Kebersihan lingkungan & pengelolaan sampah</td><td><input type="radio" name="q21m" value="1" required /></td><td><input type="radio" name="q21m" value="2" /></td><td><input type="radio" name="q21m" value="3" /></td><td><input type="radio" name="q21m" value="4" /></td><td><input type="radio" name="q21m" value="5" /></td></tr>
-              <tr><td>21n. Pelayanan: keramahan pengelola/warga</td><td><input type="radio" name="q21n" value="1" required /></td><td><input type="radio" name="q21n" value="2" /></td><td><input type="radio" name="q21n" value="3" /></td><td><input type="radio" name="q21n" value="4" /></td><td><input type="radio" name="q21n" value="5" /></td></tr>
-              <tr><td>21o. Ketersediaan informasi & pemandu wisata</td><td><input type="radio" name="q21o" value="1" required /></td><td><input type="radio" name="q21o" value="2" /></td><td><input type="radio" name="q21o" value="3" /></td><td><input type="radio" name="q21o" value="4" /></td><td><input type="radio" name="q21o" value="5" /></td></tr>
-              <tr><td>21p. Keamanan & keselamatan (pagar jurang, lampu)</td><td><input type="radio" name="q21p" value="1" required /></td><td><input type="radio" name="q21p" value="2" /></td><td><input type="radio" name="q21p" value="3" /></td><td><input type="radio" name="q21p" value="4" /></td><td><input type="radio" name="q21p" value="5" /></td></tr>
-              <tr><td>21q. Kesesuaian harga tiket/fasilitas dgn mutu</td><td><input type="radio" name="q21q" value="1" required /></td><td><input type="radio" name="q21q" value="2" /></td><td><input type="radio" name="q21q" value="3" /></td><td><input type="radio" name="q21q" value="4" /></td><td><input type="radio" name="q21q" value="5" /></td></tr>
+              <tr>
+                <td>21a. Atraksi: panorama lautan awan & sunrise</td>
+                <td><input type="radio" name="q21a" value="1" required /></td>
+                <td><input type="radio" name="q21a" value="2" /></td>
+                <td><input type="radio" name="q21a" value="3" /></td>
+                <td><input type="radio" name="q21a" value="4" /></td>
+                <td><input type="radio" name="q21a" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21b. Atraksi budaya (kopi, tenun, rumah adat)</td>
+                <td><input type="radio" name="q21b" value="1" required /></td>
+                <td><input type="radio" name="q21b" value="2" /></td>
+                <td><input type="radio" name="q21b" value="3" /></td>
+                <td><input type="radio" name="q21b" value="4" /></td>
+                <td><input type="radio" name="q21b" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21c. Variasi kegiatan selain melihat pemandangan</td>
+                <td><input type="radio" name="q21c" value="1" required /></td>
+                <td><input type="radio" name="q21c" value="2" /></td>
+                <td><input type="radio" name="q21c" value="3" /></td>
+                <td><input type="radio" name="q21c" value="4" /></td>
+                <td><input type="radio" name="q21c" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21d. Aksesibilitas: kondisi jalan menuju Lolai</td>
+                <td><input type="radio" name="q21d" value="1" required /></td>
+                <td><input type="radio" name="q21d" value="2" /></td>
+                <td><input type="radio" name="q21d" value="3" /></td>
+                <td><input type="radio" name="q21d" value="4" /></td>
+                <td><input type="radio" name="q21d" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21e. Petunjuk arah dan papan informasi</td>
+                <td><input type="radio" name="q21e" value="1" required /></td>
+                <td><input type="radio" name="q21e" value="2" /></td>
+                <td><input type="radio" name="q21e" value="3" /></td>
+                <td><input type="radio" name="q21e" value="4" /></td>
+                <td><input type="radio" name="q21e" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21f. Ketersediaan dan kemudahan parkir</td>
+                <td><input type="radio" name="q21f" value="1" required /></td>
+                <td><input type="radio" name="q21f" value="2" /></td>
+                <td><input type="radio" name="q21f" value="3" /></td>
+                <td><input type="radio" name="q21f" value="4" /></td>
+                <td><input type="radio" name="q21f" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21g. Ketersediaan transportasi umum / ojek</td>
+                <td><input type="radio" name="q21g" value="1" required /></td>
+                <td><input type="radio" name="q21g" value="2" /></td>
+                <td><input type="radio" name="q21g" value="3" /></td>
+                <td><input type="radio" name="q21g" value="4" /></td>
+                <td><input type="radio" name="q21g" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21h. Amenitas: kualitas penginapan</td>
+                <td><input type="radio" name="q21h" value="1" required /></td>
+                <td><input type="radio" name="q21h" value="2" /></td>
+                <td><input type="radio" name="q21h" value="3" /></td>
+                <td><input type="radio" name="q21h" value="4" /></td>
+                <td><input type="radio" name="q21h" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21i. Kualitas tempat makan dan minum</td>
+                <td><input type="radio" name="q21i" value="1" required /></td>
+                <td><input type="radio" name="q21i" value="2" /></td>
+                <td><input type="radio" name="q21i" value="3" /></td>
+                <td><input type="radio" name="q21i" value="4" /></td>
+                <td><input type="radio" name="q21i" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21j. Kebersihan dan ketersediaan toilet</td>
+                <td><input type="radio" name="q21j" value="1" required /></td>
+                <td><input type="radio" name="q21j" value="2" /></td>
+                <td><input type="radio" name="q21j" value="3" /></td>
+                <td><input type="radio" name="q21j" value="4" /></td>
+                <td><input type="radio" name="q21j" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21k. Fasilitas tempat ibadah</td>
+                <td><input type="radio" name="q21k" value="1" required /></td>
+                <td><input type="radio" name="q21k" value="2" /></td>
+                <td><input type="radio" name="q21k" value="3" /></td>
+                <td><input type="radio" name="q21k" value="4" /></td>
+                <td><input type="radio" name="q21k" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21l. Kestabilan sinyal telepon & internet</td>
+                <td><input type="radio" name="q21l" value="1" required /></td>
+                <td><input type="radio" name="q21l" value="2" /></td>
+                <td><input type="radio" name="q21l" value="3" /></td>
+                <td><input type="radio" name="q21l" value="4" /></td>
+                <td><input type="radio" name="q21l" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21m. Kebersihan lingkungan & pengelolaan sampah</td>
+                <td><input type="radio" name="q21m" value="1" required /></td>
+                <td><input type="radio" name="q21m" value="2" /></td>
+                <td><input type="radio" name="q21m" value="3" /></td>
+                <td><input type="radio" name="q21m" value="4" /></td>
+                <td><input type="radio" name="q21m" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21n. Pelayanan: keramahan pengelola/warga</td>
+                <td><input type="radio" name="q21n" value="1" required /></td>
+                <td><input type="radio" name="q21n" value="2" /></td>
+                <td><input type="radio" name="q21n" value="3" /></td>
+                <td><input type="radio" name="q21n" value="4" /></td>
+                <td><input type="radio" name="q21n" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21o. Ketersediaan informasi & pemandu wisata</td>
+                <td><input type="radio" name="q21o" value="1" required /></td>
+                <td><input type="radio" name="q21o" value="2" /></td>
+                <td><input type="radio" name="q21o" value="3" /></td>
+                <td><input type="radio" name="q21o" value="4" /></td>
+                <td><input type="radio" name="q21o" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21p. Keamanan & keselamatan (pagar jurang, lampu)</td>
+                <td><input type="radio" name="q21p" value="1" required /></td>
+                <td><input type="radio" name="q21p" value="2" /></td>
+                <td><input type="radio" name="q21p" value="3" /></td>
+                <td><input type="radio" name="q21p" value="4" /></td>
+                <td><input type="radio" name="q21p" value="5" /></td>
+              </tr>
+              <tr>
+                <td>21q. Kesesuaian harga tiket/fasilitas dgn mutu</td>
+                <td><input type="radio" name="q21q" value="1" required /></td>
+                <td><input type="radio" name="q21q" value="2" /></td>
+                <td><input type="radio" name="q21q" value="3" /></td>
+                <td><input type="radio" name="q21q" value="4" /></td>
+                <td><input type="radio" name="q21q" value="5" /></td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -885,10 +1075,11 @@
           <i class="fa-solid fa-users-viewfinder"></i>
           <span>E. Persepsi Kepadatan dan Kenyamanan</span>
         </div>
-        
+
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label"><i class="fa-solid fa-sun"></i> 22. Pada saat matahari terbit, kawasan ini terasa:</label>
+            <label class="title-label"><i class="fa-solid fa-sun"></i> 22. Pada saat matahari terbit, kawasan ini
+              terasa:</label>
             <select id="q22Kepadatan" required>
               <option value="Sepi">Sepi</option>
               <option value="Cukup nyaman">Cukup nyaman</option>
@@ -897,7 +1088,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="title-label"><i class="fa-solid fa-person-circle-exclamation"></i> 23. Apakah kepadatan mengganggu pengalaman Anda?</label>
+            <label class="title-label"><i class="fa-solid fa-person-circle-exclamation"></i> 23. Apakah kepadatan
+              mengganggu pengalaman Anda?</label>
             <select id="q23GangguanKepadatan" required>
               <option value="Tidak sama sekali">Tidak sama sekali</option>
               <option value="Sedikit">Sedikit</option>
@@ -909,15 +1101,18 @@
 
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label"><i class="fa-solid fa-shield-halved"></i> 24. Apakah Anda merasa aman di jalur dan titik pandang?</label>
+            <label class="title-label"><i class="fa-solid fa-shield-halved"></i> 24. Apakah Anda merasa aman di jalur
+              dan titik pandang?</label>
             <select id="q24RasaAman" required>
               <option value="Ya">Ya, merasa aman</option>
               <option value="Tidak">Tidak merasa aman</option>
             </select>
-            <input type="text" id="q24AlasanTidakAman" placeholder="Jika tidak, sebutkan alasannya..." style="display:none; margin-top:8px;" />
+            <input type="text" id="q24AlasanTidakAman" placeholder="Jika tidak, sebutkan alasannya..."
+              style="display:none; margin-top:8px;" />
           </div>
           <div class="form-group">
-            <label class="title-label"><i class="fa-solid fa-building"></i> 25. Apakah bangunan kafe/vila terasa mengganggu pemandangan?</label>
+            <label class="title-label"><i class="fa-solid fa-building"></i> 25. Apakah bangunan kafe/vila terasa
+              mengganggu pemandangan?</label>
             <select id="q25BangunanGanggu" required>
               <option value="Tidak">Tidak</option>
               <option value="Sedikit">Sedikit</option>
@@ -933,40 +1128,66 @@
           <i class="fa-solid fa-lightbulb"></i>
           <span>F. Harapan Pengembangan & Evaluasi</span>
         </div>
-        
+
         <div class="form-group">
-          <label class="title-label"><i class="fa-solid fa-screwdriver-wrench"></i> 26. Fasilitas yang paling perlu ditambah atau diperbaiki <span style="font-weight: normal; color: var(--danger);">(Pilih maksimal 3)</span>:</label>
+          <label class="title-label"><i class="fa-solid fa-screwdriver-wrench"></i> 26. Fasilitas yang paling perlu
+            ditambah atau diperbaiki <span style="font-weight: normal; color: var(--danger);">(Pilih maksimal
+              3)</span>:</label>
           <div class="options-grid" id="groupFasilitas">
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Parkir" /> <span><i class="fa-solid fa-square-parking" style="color:#0284c7;"></i> Parkir</span></label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Toilet" /> <span><i class="fa-solid fa-restroom" style="color:#10b981;"></i> Toilet</span></label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Penginapan" /> <span><i class="fa-solid fa-bed" style="color:#8b5cf6;"></i> Penginapan</span></label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Tempat makan" /> <span><i class="fa-solid fa-bowl-food" style="color:#f59e0b;"></i> Tempat makan</span></label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Pusat informasi" /> <span><i class="fa-solid fa-circle-info" style="color:#3b82f6;"></i> Pusat informasi</span></label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Jalur pejalan kaki & pagar" /> <span><i class="fa-solid fa-person-walking" style="color:#14b8a6;"></i> Jalur pejalan & pagar</span></label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Penerangan" /> <span><i class="fa-regular fa-lightbulb" style="color:#eab308;"></i> Penerangan jalur</span></label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Shuttle dari Rantepao" /> <span><i class="fa-solid fa-bus" style="color:#6366f1;"></i> Shuttle dari Rantepao</span></label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" id="chkFasilitasLainnya" value="Lainnya" /> <span><i class="fa-solid fa-ellipsis"></i> Lainnya</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Parkir" /> <span><i
+                  class="fa-solid fa-square-parking" style="color:#0284c7;"></i> Parkir</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Toilet" /> <span><i
+                  class="fa-solid fa-restroom" style="color:#10b981;"></i> Toilet</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Penginapan" /> <span><i
+                  class="fa-solid fa-bed" style="color:#8b5cf6;"></i> Penginapan</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Tempat makan" />
+              <span><i class="fa-solid fa-bowl-food" style="color:#f59e0b;"></i> Tempat makan</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Pusat informasi" />
+              <span><i class="fa-solid fa-circle-info" style="color:#3b82f6;"></i> Pusat informasi</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas"
+                value="Jalur pejalan kaki & pagar" /> <span><i class="fa-solid fa-person-walking"
+                  style="color:#14b8a6;"></i> Jalur pejalan & pagar</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Penerangan" /> <span><i
+                  class="fa-regular fa-lightbulb" style="color:#eab308;"></i> Penerangan jalur</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas"
+                value="Shuttle dari Rantepao" /> <span><i class="fa-solid fa-bus" style="color:#6366f1;"></i> Shuttle
+                dari Rantepao</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" id="chkFasilitasLainnya"
+                value="Lainnya" /> <span><i class="fa-solid fa-ellipsis"></i> Lainnya</span></label>
           </div>
-          <input type="text" id="fasilitasLainnya" placeholder="Sebutkan fasilitas lainnya..." style="display:none; margin-top:8px;" />
+          <input type="text" id="fasilitasLainnya" placeholder="Sebutkan fasilitas lainnya..."
+            style="display:none; margin-top:8px;" />
         </div>
 
         <div class="form-group">
-          <label class="title-label"><i class="fa-solid fa-person-hiking"></i> 27. Kegiatan yang ingin Anda lakukan jika tersedia:</label>
+          <label class="title-label"><i class="fa-solid fa-person-hiking"></i> 27. Kegiatan yang ingin Anda lakukan jika
+            tersedia:</label>
           <div class="options-grid">
-            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Trekking/jungle tracking" /> <span><i class="fa-solid fa-mountain" style="color:#059669;"></i> Trekking / Jungle tracking</span></label>
-            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Wisata kopi (kebun-seduh)" /> <span><i class="fa-solid fa-mug-hot" style="color:#b45309;"></i> Wisata kopi (kebun s/d seduh)</span></label>
-            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Belajar tenun" /> <span><i class="fa-solid fa-vest" style="color:#db2777;"></i> Workshop belajar tenun</span></label>
-            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Kemah" /> <span><i class="fa-solid fa-campground" style="color:#16a34a;"></i> Berkemah (Camping)</span></label>
-            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Paralayang" /> <span><i class="fa-solid fa-parachute-box" style="color:#0284c7;"></i> Paralayang (Paragliding)</span></label>
-            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Paket wisata budaya" /> <span><i class="fa-solid fa-masks-theater" style="color:#7c3aed;"></i> Paket wisata budaya</span></label>
-            <label class="option-label"><input type="checkbox" name="kegiatanBaru" id="chkKegiatanLainnya" value="Lainnya" /> <span><i class="fa-solid fa-ellipsis"></i> Lainnya</span></label>
+            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Trekking/jungle tracking" />
+              <span><i class="fa-solid fa-mountain" style="color:#059669;"></i> Trekking / Jungle
+                tracking</span></label>
+            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Wisata kopi (kebun-seduh)" />
+              <span><i class="fa-solid fa-mug-hot" style="color:#b45309;"></i> Wisata kopi (kebun s/d
+                seduh)</span></label>
+            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Belajar tenun" /> <span><i
+                  class="fa-solid fa-vest" style="color:#db2777;"></i> Workshop belajar tenun</span></label>
+            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Kemah" /> <span><i
+                  class="fa-solid fa-campground" style="color:#16a34a;"></i> Berkemah (Camping)</span></label>
+            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Paralayang" /> <span><i
+                  class="fa-solid fa-parachute-box" style="color:#0284c7;"></i> Paralayang (Paragliding)</span></label>
+            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Paket wisata budaya" />
+              <span><i class="fa-solid fa-masks-theater" style="color:#7c3aed;"></i> Paket wisata budaya</span></label>
+            <label class="option-label"><input type="checkbox" name="kegiatanBaru" id="chkKegiatanLainnya"
+                value="Lainnya" /> <span><i class="fa-solid fa-ellipsis"></i> Lainnya</span></label>
           </div>
-          <input type="text" id="kegiatanLainnya" placeholder="Sebutkan kegiatan lainnya..." style="display:none; margin-top:8px;" />
+          <input type="text" id="kegiatanLainnya" placeholder="Sebutkan kegiatan lainnya..."
+            style="display:none; margin-top:8px;" />
         </div>
 
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label"><i class="fa-solid fa-tags"></i> 28. Harga tiket masuk yang masih wajar jika fasilitas diperbaiki:</label>
+            <label class="title-label"><i class="fa-solid fa-tags"></i> 28. Harga tiket masuk yang masih wajar jika
+              fasilitas diperbaiki:</label>
             <select id="tiketWajar" required>
               <option value="Rp15.000 (tetap)">Rp 15.000 (tetap)</option>
               <option value="Rp20.000">Rp 20.000</option>
@@ -976,7 +1197,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="title-label"><i class="fa-solid fa-face-smile"></i> 29. Kepuasan Keseluruhan (1 = Sangat tidak puas, 5 = Sangat puas)</label>
+            <label class="title-label"><i class="fa-solid fa-face-smile"></i> 29. Kepuasan Keseluruhan (1 = Sangat tidak
+              puas, 5 = Sangat puas)</label>
             <select id="kepuasanTotal" required>
               <option value="5">⭐⭐⭐⭐⭐ 5 - Sangat Puas</option>
               <option value="4" selected>⭐⭐⭐⭐ 4 - Puas</option>
@@ -989,7 +1211,8 @@
 
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label"><i class="fa-solid fa-arrow-rotate-left"></i> 30. Apakah Anda ingin berkunjung kembali?</label>
+            <label class="title-label"><i class="fa-solid fa-arrow-rotate-left"></i> 30. Apakah Anda ingin berkunjung
+              kembali?</label>
             <select id="minatKembali" required>
               <option value="Ya">👍 Ya</option>
               <option value="Mungkin">🤔 Mungkin</option>
@@ -997,7 +1220,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="title-label"><i class="fa-solid fa-thumbs-up"></i> 31. Merekomendasikan Lolai ke orang lain?</label>
+            <label class="title-label"><i class="fa-solid fa-thumbs-up"></i> 31. Merekomendasikan Lolai ke orang
+              lain?</label>
             <select id="rekomendasi" required>
               <option value="Ya">👍 Ya</option>
               <option value="Mungkin">🤔 Mungkin</option>
@@ -1007,8 +1231,10 @@
         </div>
 
         <div class="form-group">
-          <label class="title-label"><i class="fa-regular fa-comment-dots"></i> 32. Saran untuk pengembangan kawasan Lolai:</label>
-          <textarea id="saran" rows="3" placeholder="Tuliskan saran perbaikan fisik, fasilitas, kebersihan, atau pelayanan..."></textarea>
+          <label class="title-label"><i class="fa-regular fa-comment-dots"></i> 32. Saran untuk pengembangan kawasan
+            Lolai:</label>
+          <textarea id="saran" rows="3"
+            placeholder="Tuliskan saran perbaikan fisik, fasilitas, kebersihan, atau pelayanan..."></textarea>
         </div>
       </div>
 
@@ -1236,7 +1462,7 @@
     const btn = document.getElementById('btnSubmit');
     const alertBox = document.getElementById('alertBox');
 
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
 
       // Pastikan No 14 bebas validasi jika responden adalah warga lokal
@@ -1374,4 +1600,5 @@
     });
   </script>
 </body>
+
 </html>

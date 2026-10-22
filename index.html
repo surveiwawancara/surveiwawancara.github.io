@@ -2,177 +2,547 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Kuesioner Wisatawan Kawasan Wisata Lolai</title>
+  
+  <!-- Primary Meta Tags -->
+  <link rel="canonical" href="https://surveiwawancara.github.io/" />
+  <meta name="title" content="Kuesioner Wisatawan - Kawasan Wisata Negeri di Atas Awan Lolai" />
+  <meta name="description" content="Survei Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai, Kabupaten Toraja Utara. Mohon kesediaan Anda mengisi kuesioner ini untuk kemajuan pariwisata Toraja." />
+  <meta name="theme-color" content="#0f766e" />
+
+  <!-- Open Graph / Facebook / WhatsApp / Telegram -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://surveiwawancara.github.io/" />
+  <meta property="og:title" content="Kuesioner Wisatawan - Kawasan Wisata Negeri di Atas Awan Lolai" />
+  <meta property="og:description" content="Survei Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai, Kabupaten Toraja Utara. Partisipasi Anda sangat berharga untuk peningkatan fasilitas dan kenyamanan berwisata." />
+  <meta property="og:image" content="https://surveiwawancara.github.io/og-image.jpg" />
+  <meta property="og:image:secure_url" content="https://surveiwawancara.github.io/og-image.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="675" />
+  <meta property="og:image:alt" content="Pemandangan Lautan Awan Sunrise Negeri di Atas Awan Lolai Toraja Utara" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://surveiwawancara.github.io/" />
+  <meta name="twitter:title" content="Kuesioner Wisatawan - Kawasan Wisata Negeri di Atas Awan Lolai" />
+  <meta name="twitter:description" content="Survei Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai, Kabupaten Toraja Utara." />
+  <meta name="twitter:image" content="https://surveiwawancara.github.io/og-image.jpg" />
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
   <style>
     :root {
       --primary: #0d9488;
       --primary-dark: #0f766e;
       --primary-light: #ccfbf1;
+      --primary-subtle: #f0fdfa;
+      --accent: #f59e0b;
       --bg: #f8fafc;
       --card: #ffffff;
-      --text: #1e293b;
-      --muted: #64748b;
+      --text: #0f172a;
+      --text-muted: #64748b;
       --border: #e2e8f0;
+      --border-focus: #14b8a6;
+      --danger: #ef4444;
+      --danger-bg: #fef2f2;
+      --success: #10b981;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --radius: 12px;
+      --radius-sm: 8px;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
       color: var(--text);
-      line-height: 1.5;
-      padding: 24px 12px;
+      line-height: 1.55;
+      padding: 16px 10px 40px;
+      -webkit-font-smoothing: antialiased;
     }
-    .wrapper { max-width: 820px; margin: 0 auto; }
+
+    @media (min-width: 768px) {
+      body { padding: 32px 16px 60px; }
+    }
+
+    .wrapper {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    /* HERO HEADER */
     .hero {
-      background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+      background: linear-gradient(135deg, #0f766e 0%, #115e59 50%, #134e4a 100%);
       color: white;
-      padding: 30px 24px;
-      border-radius: 14px;
+      padding: 28px 20px;
+      border-radius: 16px;
       margin-bottom: 24px;
-      box-shadow: 0 10px 25px -5px rgba(15, 118, 110, 0.25);
+      box-shadow: 0 12px 28px -6px rgba(15, 118, 110, 0.35);
+      position: relative;
+      overflow: hidden;
     }
-    .hero h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
-    .hero p { font-size: 13.5px; opacity: 0.95; line-height: 1.6; }
+
+    .hero::after {
+      content: "\f6c4"; /* fa-cloud-sun */
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      right: -20px;
+      bottom: -30px;
+      font-size: 150px;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(8px);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero h1 {
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .hero { padding: 36px 30px; }
+      .hero h1 { font-size: 26px; }
+    }
+
+    .hero p {
+      font-size: 13.5px;
+      opacity: 0.92;
+      line-height: 1.6;
+      max-width: 700px;
+    }
+
+    /* CARD CONTAINER */
     .card {
       background: var(--card);
-      border-radius: 12px;
+      border-radius: var(--radius);
       border: 1px solid var(--border);
-      padding: 24px;
+      padding: 20px 16px;
       margin-bottom: 22px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
     }
+
+    @media (min-width: 640px) {
+      .card { padding: 26px 24px; }
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow);
+      border-color: #cbd5e1;
+    }
+
     .card-title {
-      font-size: 16px;
+      font-size: 16.5px;
       font-weight: 700;
       color: var(--primary-dark);
       border-bottom: 2px solid var(--primary-light);
-      padding-bottom: 8px;
-      margin-bottom: 18px;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .form-group { margin-bottom: 18px; }
+
+    .card-title i {
+      font-size: 18px;
+      color: var(--primary);
+    }
+
+    /* FORM ELEMENTS */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
     label.title-label {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 7px;
       font-size: 14px;
       font-weight: 600;
       color: #334155;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
-    .hint { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-    @media (max-width: 640px) {
-      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+
+    label.title-label i {
+      color: var(--primary);
+      font-size: 13px;
+      width: 16px;
+      text-align: center;
     }
-    input[type="text"], input[type="number"], input[type="date"], input[type="time"], select, textarea {
+
+    .hint {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+      .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    /* INPUTS & SELECTS (Touch-friendly 44px+) */
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="time"],
+    select,
+    textarea {
       width: 100%;
-      padding: 10px 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
       font-size: 14px;
+      font-family: inherit;
+      color: var(--text);
+      background-color: #fff;
       outline: none;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
     }
+
     input:focus, select:focus, textarea:focus {
-      border-color: var(--primary);
+      border-color: var(--border-focus);
       box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+      background-color: #fff;
     }
-    .options-col { display: flex; flex-direction: column; gap: 8px; }
-    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    @media (max-width: 550px) { .options-grid { grid-template-columns: 1fr; } }
+
+    textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    /* PILL-STYLE OPTIONS (Mobile & Desktop friendly) */
+    .options-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    @media (min-width: 540px) {
+      .options-grid { grid-template-columns: 1fr 1fr; }
+    }
+
     .option-label {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #f8fafc;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
       font-size: 13.5px;
       cursor: pointer;
-      font-weight: normal;
+      user-select: none;
+      transition: all 0.18s ease;
+      min-height: 42px;
     }
-    .option-label input { cursor: pointer; }
 
-    /* Table Rating */
-    .table-container { overflow-x: auto; margin-top: 8px; }
+    .option-label:hover {
+      background: var(--primary-subtle);
+      border-color: #99f6e4;
+    }
+
+    .option-label:has(input:checked) {
+      background: #ecfdf5;
+      border-color: var(--primary);
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .option-label input[type="radio"],
+    .option-label input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* TIME SECTION BOX */
+    .time-helper-box {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 16px;
+      border-radius: var(--radius);
+      margin-bottom: 18px;
+    }
+
+    .quick-btn {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-family: inherit;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.18s ease;
+    }
+
+    .quick-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* RATING TABLE (4A) - FULLY RESPONSIVE WITH STICKY COLUMN */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: #fff;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .mobile-scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      color: #0284c7;
+      background: #e0f2fe;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
     table.rating-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 13px;
     }
-    table.rating-table th, table.rating-table td {
+
+    table.rating-table th, 
+    table.rating-table td {
       border: 1px solid var(--border);
-      padding: 9px 6px;
+      padding: 10px 8px;
       text-align: center;
     }
-    table.rating-table th:first-child, table.rating-table td:first-child {
-      text-align: left;
-      min-width: 260px;
-      font-weight: 500;
-    }
-    table.rating-table th { background: #f1f5f9; color: #475569; font-weight: 600; }
-    table.rating-table tr:nth-child(even) { background-color: #fbfcfe; }
 
+    table.rating-table th:first-child, 
+    table.rating-table td:first-child {
+      text-align: left;
+      min-width: 230px;
+      max-width: 320px;
+      font-weight: 500;
+      background: #ffffff;
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      box-shadow: 2px 0 5px -2px rgba(0,0,0,0.06);
+    }
+
+    table.rating-table th:first-child {
+      background: #f1f5f9;
+      z-index: 3;
+    }
+
+    table.rating-table th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    table.rating-table tr:nth-child(even) td:first-child {
+      background-color: #fbfcfe;
+    }
+
+    table.rating-table tr:nth-child(even) {
+      background-color: #fbfcfe;
+    }
+
+    table.rating-table tr:hover td {
+      background-color: #f0fdfa;
+    }
+
+    table.rating-table input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* BUTTON SUBMIT */
     .btn-submit {
       width: 100%;
-      background: var(--primary);
+      min-height: 52px;
+      background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
       color: white;
       border: none;
-      padding: 16px;
+      padding: 14px 20px;
       font-size: 16px;
       font-weight: 700;
-      border-radius: 8px;
+      font-family: inherit;
+      border-radius: var(--radius);
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
-      transition: background 0.2s;
+      box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
-    .btn-submit:hover { background: var(--primary-dark); }
-    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(13, 148, 136, 0.4);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ALERTS */
     .alert {
       display: none;
-      padding: 16px;
-      border-radius: 8px;
-      margin-top: 18px;
-      text-align: center;
-      font-size: 14px;
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      margin-top: 20px;
+      font-size: 14.5px;
       font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: fadeIn 0.3s ease;
     }
-    .alert-success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
-    .alert-error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .alert-success {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1.5px solid #a7f3d0;
+    }
+
+    .alert-error {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1.5px solid #fecaca;
+    }
+
+    /* FOOTER */
+    .footer-note {
+      text-align: center;
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 24px;
+    }
   </style>
 </head>
 <body>
 
   <div class="wrapper">
+    <!-- HERO HEADER -->
     <div class="hero">
+      <div class="hero-badge">
+        <i class="fa-solid fa-mountain-sun"></i> Survei Lapangan Primer
+      </div>
       <h1>Kuesioner Wisatawan Kawasan Wisata Lolai</h1>
-      <p>Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai, Kabupaten Toraja Utara. Data survei hanya digunakan untuk keperluan riset perencanaan dan identitas responden dirahasiakan.</p>
+      <p>
+        Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai, Kabupaten Toraja Utara. 
+        Data survei hanya digunakan untuk keperluan riset perencanaan pengembangan pariwisata dan identitas responden dirahasiakan.
+      </p>
     </div>
 
     <form id="kuesionerForm">
 
-      <!-- ADMINISTRASI SURVEI -->
+      <!-- DATA ADMINISTRASI SURVEI -->
       <div class="card">
-        <div class="card-title">Data Administrasi Survei</div>
+        <div class="card-title">
+          <i class="fa-solid fa-clipboard-list"></i>
+          <span>Data Administrasi Survei</span>
+        </div>
+
         <div class="grid-3">
           <div class="form-group">
-            <label class="title-label">No. Kuesioner</label>
+            <label class="title-label"><i class="fa-solid fa-hashtag"></i> No. Kuesioner</label>
             <input type="text" id="noKuesioner" placeholder="Contoh: K-001" required />
           </div>
           <div class="form-group">
-            <label class="title-label">Tanggal Survei</label>
+            <label class="title-label"><i class="fa-regular fa-calendar-days"></i> Tanggal Survei</label>
             <input type="date" id="tglSurvei" required />
           </div>
           <div class="form-group">
-            <label class="title-label">Jam Survei</label>
+            <label class="title-label"><i class="fa-regular fa-clock"></i> Jam Survei</label>
             <input type="time" id="jamSurvei" required />
           </div>
         </div>
+
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label">Nama Responden</label>
+            <label class="title-label"><i class="fa-regular fa-id-badge"></i> Nama Responden</label>
             <input type="text" id="namaResponden" placeholder="Nama lengkap atau inisial responden" required />
           </div>
           <div class="form-group">
-            <label class="title-label">Lokasi Pengisian</label>
+            <label class="title-label"><i class="fa-solid fa-location-dot"></i> Lokasi Pengisian</label>
             <input type="text" id="lokasi" placeholder="Misal: Titik pandang puncak, Parkir, Kafe, Vila, dll." required />
           </div>
         </div>
@@ -180,18 +550,21 @@
 
       <!-- A. PROFIL RESPONDEN -->
       <div class="card">
-        <div class="card-title">A. Profil Responden</div>
+        <div class="card-title">
+          <i class="fa-solid fa-user-circle"></i>
+          <span>A. Profil Responden</span>
+        </div>
         
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label">1. Jenis Kelamin</label>
+            <label class="title-label"><i class="fa-solid fa-venus-mars"></i> 1. Jenis Kelamin</label>
             <div class="options-col">
-              <label class="option-label"><input type="radio" name="gender" value="Laki-laki" required /> Laki-laki</label>
-              <label class="option-label"><input type="radio" name="gender" value="Perempuan" /> Perempuan</label>
+              <label class="option-label"><input type="radio" name="gender" value="Laki-laki" required /> <span>Laki-laki</span></label>
+              <label class="option-label"><input type="radio" name="gender" value="Perempuan" /> <span>Perempuan</span></label>
             </div>
           </div>
           <div class="form-group">
-            <label class="title-label">2. Usia</label>
+            <label class="title-label"><i class="fa-solid fa-hourglass-half"></i> 2. Usia</label>
             <select id="usia" required>
               <option value="">-- Pilih Usia --</option>
               <option value="17–24">17–24 tahun</option>
@@ -205,7 +578,7 @@
 
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label">3. Asal Daerah</label>
+            <label class="title-label"><i class="fa-solid fa-earth-asia"></i> 3. Asal Daerah</label>
             <select id="asalKategori" required>
               <option value="">-- Pilih Kategori Asal --</option>
               <option value="Toraja Utara/Tana Toraja">Toraja Utara / Tana Toraja</option>
@@ -213,10 +586,10 @@
               <option value="Provinsi lain">Provinsi lain di Indonesia</option>
               <option value="Mancanegara">Mancanegara (Luar Negeri)</option>
             </select>
-            <input type="text" id="asalDetail" placeholder="Nama Kab / Kota / Negara asal" style="margin-top:6px;" required />
+            <input type="text" id="asalDetail" placeholder="Nama Kab / Kota / Negara asal" style="margin-top:8px;" required />
           </div>
           <div class="form-group">
-            <label class="title-label">4. Pendidikan Terakhir</label>
+            <label class="title-label"><i class="fa-solid fa-graduation-cap"></i> 4. Pendidikan Terakhir</label>
             <select id="pendidikan" required>
               <option value="">-- Pilih Pendidikan --</option>
               <option value="SMA/sederajat ke bawah">SMA / Sederajat ke bawah</option>
@@ -229,7 +602,7 @@
 
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label">5. Pekerjaan</label>
+            <label class="title-label"><i class="fa-solid fa-briefcase"></i> 5. Pekerjaan</label>
             <select id="pekerjaan" required>
               <option value="">-- Pilih Pekerjaan --</option>
               <option value="Pelajar/mahasiswa">Pelajar / Mahasiswa</option>
@@ -238,10 +611,10 @@
               <option value="Wiraswasta">Wiraswasta / Pengusaha</option>
               <option value="Lainnya">Lainnya (isi manual)</option>
             </select>
-            <input type="text" id="pekerjaanLainnya" placeholder="Sebutkan pekerjaan lainnya..." style="display:none; margin-top:6px;" />
+            <input type="text" id="pekerjaanLainnya" placeholder="Sebutkan pekerjaan lainnya..." style="display:none; margin-top:8px;" />
           </div>
           <div class="form-group">
-            <label class="title-label">6. Pengeluaran per Bulan</label>
+            <label class="title-label"><i class="fa-solid fa-wallet"></i> 6. Pengeluaran per Bulan</label>
             <select id="pengeluaranBulan" required>
               <option value="">-- Pilih Pengeluaran Bulanan --</option>
               <option value="<Rp3 juta">&lt; Rp 3.000.000</option>
@@ -255,11 +628,14 @@
 
       <!-- B. KARAKTERISTIK PERJALANAN -->
       <div class="card">
-        <div class="card-title">B. Karakteristik Perjalanan</div>
+        <div class="card-title">
+          <i class="fa-solid fa-route"></i>
+          <span>B. Karakteristik Perjalanan</span>
+        </div>
         
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label">7. Ini kunjungan ke berapa ke Lolai?</label>
+            <label class="title-label"><i class="fa-solid fa-arrows-rotate"></i> 7. Ini kunjungan ke berapa ke Lolai?</label>
             <select id="kunjunganKe" required>
               <option value="Pertama">Pertama kali</option>
               <option value="Kedua">Kedua kali</option>
@@ -267,7 +643,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="title-label">8. Tujuan utama ke Toraja</label>
+            <label class="title-label"><i class="fa-solid fa-bullseye"></i> 8. Tujuan utama ke Toraja</label>
             <select id="tujuanUtama" required>
               <option value="">-- Pilih Tujuan --</option>
               <option value="Wisata alam">Wisata alam</option>
@@ -276,25 +652,25 @@
               <option value="Pekerjaan">Pekerjaan / dinas</option>
               <option value="Lainnya">Lainnya (isi manual)</option>
             </select>
-            <input type="text" id="tujuanUtamaLainnya" placeholder="Sebutkan tujuan lainnya..." style="display:none; margin-top:6px;" />
+            <input type="text" id="tujuanUtamaLainnya" placeholder="Sebutkan tujuan lainnya..." style="display:none; margin-top:8px;" />
           </div>
         </div>
 
         <div class="form-group">
-          <label class="title-label">9. Dari mana Anda tahu tentang Lolai? (Boleh pilih lebih dari satu)</label>
+          <label class="title-label"><i class="fa-solid fa-share-nodes"></i> 9. Dari mana Anda tahu tentang Lolai? <span style="font-weight: normal; color: var(--text-muted);">(Boleh pilih lebih dari satu)</span></label>
           <div class="options-grid">
-            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Instagram/TikTok" /> Instagram / TikTok</label>
-            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Teman/keluarga" /> Teman / keluarga</label>
-            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Biro perjalanan" /> Biro perjalanan / Tour</label>
-            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Situs web/Google" /> Pencarian Web / Google</label>
-            <label class="option-label"><input type="checkbox" name="sumberInfo" id="chkSumberInfoLainnya" value="Lainnya" /> Lainnya</label>
+            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Instagram/TikTok" /> <span><i class="fa-brands fa-instagram" style="color:#e1306c;"></i> Instagram / TikTok</span></label>
+            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Teman/keluarga" /> <span><i class="fa-solid fa-user-group" style="color:#0284c7;"></i> Teman / keluarga</span></label>
+            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Biro perjalanan" /> <span><i class="fa-solid fa-van-shuttle" style="color:#10b981;"></i> Biro perjalanan / Tour</span></label>
+            <label class="option-label"><input type="checkbox" name="sumberInfo" value="Situs web/Google" /> <span><i class="fa-brands fa-google" style="color:#ea4335;"></i> Pencarian Web / Google</span></label>
+            <label class="option-label"><input type="checkbox" name="sumberInfo" id="chkSumberInfoLainnya" value="Lainnya" /> <span><i class="fa-solid fa-ellipsis"></i> Lainnya</span></label>
           </div>
-          <input type="text" id="sumberInfoLainnya" placeholder="Sebutkan sumber info lainnya..." style="display:none; margin-top:6px;" />
+          <input type="text" id="sumberInfoLainnya" placeholder="Sebutkan sumber info lainnya..." style="display:none; margin-top:8px;" />
         </div>
 
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label">10. Anda datang bersama:</label>
+            <label class="title-label"><i class="fa-solid fa-users"></i> 10. Anda datang bersama:</label>
             <select id="temanPerjalanan" required>
               <option value="Sendiri">Sendiri</option>
               <option value="Pasangan">Pasangan</option>
@@ -304,14 +680,14 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="title-label">Jumlah orang dalam rombongan</label>
+            <label class="title-label"><i class="fa-solid fa-calculator"></i> Jumlah orang dalam rombongan</label>
             <input type="number" id="jumlahRombongan" min="1" value="1" required />
           </div>
         </div>
 
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label">11. Kendaraan yang dipakai ke Lolai</label>
+            <label class="title-label"><i class="fa-solid fa-car-side"></i> 11. Kendaraan yang dipakai ke Lolai</label>
             <select id="kendaraan" required>
               <option value="Mobil pribadi">Mobil pribadi</option>
               <option value="Mobil sewa/travel">Mobil sewa / travel</option>
@@ -320,10 +696,10 @@
               <option value="Bus rombongan">Bus rombongan</option>
               <option value="Lainnya">Lainnya (isi manual)</option>
             </select>
-            <input type="text" id="kendaraanLainnya" placeholder="Sebutkan kendaraan lainnya..." style="display:none; margin-top:6px;" />
+            <input type="text" id="kendaraanLainnya" placeholder="Sebutkan kendaraan lainnya..." style="display:none; margin-top:8px;" />
           </div>
           <div class="form-group">
-            <label class="title-label">12. Apakah Anda menginap di Lolai?</label>
+            <label class="title-label"><i class="fa-solid fa-hotel"></i> 12. Apakah Anda menginap di Lolai?</label>
             <select id="menginapStatus" required>
               <option value="Ya, di Gazebo/tenda">Ya, di Gazebo / Tenda</option>
               <option value="Ya, di Homestay">Ya, di Homestay</option>
@@ -334,105 +710,124 @@
               <option value="Tidak, lainnya">Tidak, menginap di tempat lainnya</option>
               <option value="Tidak menginap (pulang hari)">Tidak menginap (langsung pulang)</option>
             </select>
-            <input type="text" id="menginapLainnya" placeholder="Sebutkan nama tempat menginap lainnya..." style="display:none; margin-top:6px;" />
+            <input type="text" id="menginapLainnya" placeholder="Sebutkan nama tempat menginap lainnya..." style="display:none; margin-top:8px;" />
           </div>
         </div>
 
-        <div class="form-group" style="background:#f1f5f9; padding:16px; border-radius:10px; margin-bottom:18px;">
-          <label class="title-label" style="color:#0f766e;">13a. Waktu Kedatangan di Kawasan Lolai</label>
-          <div class="hint" style="margin-bottom:10px;">Pengunjung sering tiba sore/malam sehari atau dua hari sebelumnya untuk mengejar sunrise. Tentukan tanggal & jam kedatangan:</div>
+        <!-- 13a WAKTU KEDATANGAN RESPONSIF & CERDAS -->
+        <div class="time-helper-box">
+          <label class="title-label" style="color:#0f766e; margin-bottom: 4px;">
+            <i class="fa-solid fa-clock-rotate-left"></i> 13a. Waktu Kedatangan di Kawasan Lolai
+          </label>
+          <div class="hint">Banyak pengunjung tiba sehari atau dua hari sebelumnya untuk mengejar matahari terbit. Tentukan tanggal & jam kedatangan:</div>
+          
           <div class="grid-2">
             <div>
-              <label style="font-size:12px; font-weight:600; color:#475569; display:block; margin-bottom:4px;">Tanggal Tiba</label>
+              <label style="font-size:12px; font-weight:600; color:#475569; display:block; margin-bottom:4px;"><i class="fa-regular fa-calendar-check"></i> Tanggal Tiba</label>
               <input type="date" id="tglTiba" required />
             </div>
             <div>
-              <label style="font-size:12px; font-weight:600; color:#475569; display:block; margin-bottom:4px;">Jam Tiba</label>
+              <label style="font-size:12px; font-weight:600; color:#475569; display:block; margin-bottom:4px;"><i class="fa-regular fa-clock"></i> Jam Tiba</label>
               <input type="time" id="jamTiba" required />
             </div>
           </div>
-          <div style="display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-top:8px;">
-            <span style="font-size:12px; color:#64748b; font-weight:600;">Pilihan Cepat Tanggal:</span>
-            <button type="button" id="btnTibaHariIni" style="background:#e2e8f0; border:1px solid #cbd5e1; padding:4px 10px; border-radius:6px; font-size:12px; cursor:pointer; font-weight:500;">Hari Ini (Sama dgn Survei)</button>
-            <button type="button" id="btnTibaKemarin" style="background:#e2e8f0; border:1px solid #cbd5e1; padding:4px 10px; border-radius:6px; font-size:12px; cursor:pointer; font-weight:500;">Kemarin (H-1)</button>
-            <button type="button" id="btnTibaH2" style="background:#e2e8f0; border:1px solid #cbd5e1; padding:4px 10px; border-radius:6px; font-size:12px; cursor:pointer; font-weight:500;">2 Hari Lalu (H-2)</button>
+
+          <div style="display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-top:10px;">
+            <span style="font-size:12px; color:#64748b; font-weight:600;">Pilihan Cepat:</span>
+            <button type="button" class="quick-btn" id="btnTibaHariIni"><i class="fa-solid fa-calendar-day"></i> Hari Ini (Sama dgn Survei)</button>
+            <button type="button" class="quick-btn" id="btnTibaKemarin"><i class="fa-solid fa-arrow-left"></i> Kemarin (H-1)</button>
+            <button type="button" class="quick-btn" id="btnTibaH2"><i class="fa-solid fa-backward"></i> 2 Hari Lalu (H-2)</button>
           </div>
-          <div id="waktuTibaError" style="display:none; color:#dc2626; font-size:12.5px; margin-top:8px; font-weight:600; background:#fef2f2; padding:8px 12px; border-radius:6px; border:1px solid #fecaca;">
+
+          <div id="waktuTibaError" style="display:none; color:#dc2626; font-size:12.5px; margin-top:10px; font-weight:600; background:#fef2f2; padding:10px 12px; border-radius:8px; border:1px solid #fecaca;">
             ⚠️ Waktu tiba tidak boleh melewati waktu survei!
           </div>
         </div>
 
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label">13b. Rencana Lama di Lolai</label>
+            <label class="title-label"><i class="fa-solid fa-hourglass-start"></i> 13b. Rencana Lama di Lolai</label>
             <input type="number" id="lamaDiLolaiJam" placeholder="Jumlah jam (cth: 3)" min="1" required />
           </div>
           <div class="form-group">
-            <label class="title-label">14. Lama Total di Toraja</label>
+            <label class="title-label"><i class="fa-solid fa-calendar-days"></i> 14. Lama Total di Toraja</label>
             <input type="number" id="lamaTotalHari" placeholder="Jumlah hari (cth: 2)" min="1" required />
           </div>
         </div>
 
         <div class="form-group">
-          <label class="title-label">15. Daya tarik lain yang dikunjungi di Toraja (Boleh pilih lebih dari satu)</label>
+          <label class="title-label"><i class="fa-solid fa-monument"></i> 15. Daya tarik lain yang dikunjungi di Toraja <span style="font-weight: normal; color: var(--text-muted);">(Boleh pilih lebih dari satu)</span></label>
           <div class="options-grid">
-            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Batutumonga" /> Batutumonga</label>
-            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Kete Kesu" /> Ke'te' Kesu'</label>
-            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Londa" /> Londa</label>
-            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Lemo" /> Lemo</label>
-            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Patung Yesus Buntu Burake" /> Patung Yesus Buntu Burake</label>
-            <label class="option-label"><input type="checkbox" name="dayaTarikLain" id="chkDayaTarikLainnya" value="Lainnya" /> Lainnya</label>
+            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Batutumonga" /> <span>Batutumonga</span></label>
+            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Kete Kesu" /> <span>Ke'te' Kesu'</span></label>
+            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Londa" /> <span>Londa</span></label>
+            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Lemo" /> <span>Lemo</span></label>
+            <label class="option-label"><input type="checkbox" name="dayaTarikLain" value="Patung Yesus Buntu Burake" /> <span>Patung Yesus Buntu Burake</span></label>
+            <label class="option-label"><input type="checkbox" name="dayaTarikLain" id="chkDayaTarikLainnya" value="Lainnya" /> <span><i class="fa-solid fa-ellipsis"></i> Lainnya</span></label>
           </div>
-          <input type="text" id="dayaTarikLainnya" placeholder="Sebutkan objek wisata lainnya..." style="display:none; margin-top:6px;" />
+          <input type="text" id="dayaTarikLainnya" placeholder="Sebutkan objek wisata lainnya..." style="display:none; margin-top:8px;" />
         </div>
       </div>
 
       <!-- C. PENGELUARAN DI LOLAI -->
       <div class="card">
-        <div class="card-title">C. Pengeluaran di Kawasan Lolai (per orang dlm Rupiah)</div>
+        <div class="card-title">
+          <i class="fa-solid fa-money-bill-wave"></i>
+          <span>C. Pengeluaran di Kawasan Lolai (per orang dalam Rupiah)</span>
+        </div>
+
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label">16. Tiket masuk dan parkir (Rp)</label>
-            <input type="number" id="pengeluaranTiket" min="0" placeholder="15000" required />
+            <label class="title-label"><i class="fa-solid fa-ticket"></i> 16. Tiket masuk dan parkir (Rp)</label>
+            <input type="number" id="pengeluaranTiket" min="0" placeholder="Contoh: 15000" required />
           </div>
           <div class="form-group">
-            <label class="title-label">17. Penginapan per malam (Rp)</label>
+            <label class="title-label"><i class="fa-solid fa-bed"></i> 17. Penginapan per malam (Rp)</label>
             <input type="number" id="pengeluaranPenginapan" min="0" value="0" placeholder="0 jika tidak menginap" required />
           </div>
           <div class="form-group">
-            <label class="title-label">18. Makan dan minum termasuk kopi (Rp)</label>
-            <input type="number" id="pengeluaranMakan" min="0" placeholder="50000" required />
+            <label class="title-label"><i class="fa-solid fa-utensils"></i> 18. Makan dan minum termasuk kopi (Rp)</label>
+            <input type="number" id="pengeluaranMakan" min="0" placeholder="Contoh: 50000" required />
           </div>
           <div class="form-group">
-            <label class="title-label">19. Suvenir dan produk lokal (Rp)</label>
-            <input type="number" id="pengeluaranSuvenir" min="0" value="0" placeholder="20000" required />
+            <label class="title-label"><i class="fa-solid fa-gifts"></i> 19. Suvenir dan produk lokal (Rp)</label>
+            <input type="number" id="pengeluaranSuvenir" min="0" value="0" placeholder="Contoh: 20000" required />
           </div>
         </div>
+
         <div class="form-group">
-          <label class="title-label">20. Transportasi dari tempat menginap ke Lolai PP (Rp)</label>
-          <input type="number" id="pengeluaranTransport" min="0" placeholder="25000" required />
+          <label class="title-label"><i class="fa-solid fa-gas-pump"></i> 20. Transportasi dari tempat menginap ke Lolai PP (Rp)</label>
+          <input type="number" id="pengeluaranTransport" min="0" placeholder="Contoh: 25000" required />
         </div>
       </div>
 
       <!-- D. PENILAIAN KONDISI KAWASAN 4A (17 ASPEK LENGKAP) -->
       <div class="card">
-        <div class="card-title">D. Penilaian Kondisi Kawasan (4A)</div>
+        <div class="card-title">
+          <i class="fa-solid fa-star-half-stroke"></i>
+          <span>D. Penilaian Kondisi Kawasan (4A)</span>
+        </div>
         <div class="hint">Beri penilaian: 1 = Sangat Buruk, 2 = Buruk, 3 = Cukup, 4 = Baik, 5 = Sangat Baik</div>
+
+        <div class="mobile-scroll-hint">
+          <i class="fa-solid fa-arrows-left-right"></i>
+          <span>Geser tabel ke samping pada layar HP untuk melihat semua angka (1 s/d 5)</span>
+        </div>
 
         <div class="table-container">
           <table class="rating-table">
             <thead>
               <tr>
                 <th>Aspek yang Dinilai</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
+                <th>1<br><span style="font-size:10px; font-weight:normal;">S. Buruk</span></th>
+                <th>2<br><span style="font-size:10px; font-weight:normal;">Buruk</span></th>
+                <th>3<br><span style="font-size:10px; font-weight:normal;">Cukup</span></th>
+                <th>4<br><span style="font-size:10px; font-weight:normal;">Baik</span></th>
+                <th>5<br><span style="font-size:10px; font-weight:normal;">S. Baik</span></th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>21a. Atraksi: keindahan panorama lautan awan & sunrise</td><td><input type="radio" name="q21a" value="1" required /></td><td><input type="radio" name="q21a" value="2" /></td><td><input type="radio" name="q21a" value="3" /></td><td><input type="radio" name="q21a" value="4" /></td><td><input type="radio" name="q21a" value="5" /></td></tr>
+              <tr><td>21a. Atraksi: panorama lautan awan & sunrise</td><td><input type="radio" name="q21a" value="1" required /></td><td><input type="radio" name="q21a" value="2" /></td><td><input type="radio" name="q21a" value="3" /></td><td><input type="radio" name="q21a" value="4" /></td><td><input type="radio" name="q21a" value="5" /></td></tr>
               <tr><td>21b. Atraksi budaya (kopi, tenun, rumah adat)</td><td><input type="radio" name="q21b" value="1" required /></td><td><input type="radio" name="q21b" value="2" /></td><td><input type="radio" name="q21b" value="3" /></td><td><input type="radio" name="q21b" value="4" /></td><td><input type="radio" name="q21b" value="5" /></td></tr>
               <tr><td>21c. Variasi kegiatan selain melihat pemandangan</td><td><input type="radio" name="q21c" value="1" required /></td><td><input type="radio" name="q21c" value="2" /></td><td><input type="radio" name="q21c" value="3" /></td><td><input type="radio" name="q21c" value="4" /></td><td><input type="radio" name="q21c" value="5" /></td></tr>
               <tr><td>21d. Aksesibilitas: kondisi jalan menuju Lolai</td><td><input type="radio" name="q21d" value="1" required /></td><td><input type="radio" name="q21d" value="2" /></td><td><input type="radio" name="q21d" value="3" /></td><td><input type="radio" name="q21d" value="4" /></td><td><input type="radio" name="q21d" value="5" /></td></tr>
@@ -445,10 +840,10 @@
               <tr><td>21k. Fasilitas tempat ibadah</td><td><input type="radio" name="q21k" value="1" required /></td><td><input type="radio" name="q21k" value="2" /></td><td><input type="radio" name="q21k" value="3" /></td><td><input type="radio" name="q21k" value="4" /></td><td><input type="radio" name="q21k" value="5" /></td></tr>
               <tr><td>21l. Kestabilan sinyal telepon & internet</td><td><input type="radio" name="q21l" value="1" required /></td><td><input type="radio" name="q21l" value="2" /></td><td><input type="radio" name="q21l" value="3" /></td><td><input type="radio" name="q21l" value="4" /></td><td><input type="radio" name="q21l" value="5" /></td></tr>
               <tr><td>21m. Kebersihan lingkungan & pengelolaan sampah</td><td><input type="radio" name="q21m" value="1" required /></td><td><input type="radio" name="q21m" value="2" /></td><td><input type="radio" name="q21m" value="3" /></td><td><input type="radio" name="q21m" value="4" /></td><td><input type="radio" name="q21m" value="5" /></td></tr>
-              <tr><td>21n. Pelayanan (ancillary): keramahan pengelola/warga</td><td><input type="radio" name="q21n" value="1" required /></td><td><input type="radio" name="q21n" value="2" /></td><td><input type="radio" name="q21n" value="3" /></td><td><input type="radio" name="q21n" value="4" /></td><td><input type="radio" name="q21n" value="5" /></td></tr>
-              <tr><td>21o. Ketersediaan informasi & pemanduan wisata</td><td><input type="radio" name="q21o" value="1" required /></td><td><input type="radio" name="q21o" value="2" /></td><td><input type="radio" name="q21o" value="3" /></td><td><input type="radio" name="q21o" value="4" /></td><td><input type="radio" name="q21o" value="5" /></td></tr>
-              <tr><td>21p. Keamanan & keselamatan (pagar jurang, lampu jalur)</td><td><input type="radio" name="q21p" value="1" required /></td><td><input type="radio" name="q21p" value="2" /></td><td><input type="radio" name="q21p" value="3" /></td><td><input type="radio" name="q21p" value="4" /></td><td><input type="radio" name="q21p" value="5" /></td></tr>
-              <tr><td>21q. Kesesuaian harga tiket/fasilitas dgn kualitas</td><td><input type="radio" name="q21q" value="1" required /></td><td><input type="radio" name="q21q" value="2" /></td><td><input type="radio" name="q21q" value="3" /></td><td><input type="radio" name="q21q" value="4" /></td><td><input type="radio" name="q21q" value="5" /></td></tr>
+              <tr><td>21n. Pelayanan: keramahan pengelola/warga</td><td><input type="radio" name="q21n" value="1" required /></td><td><input type="radio" name="q21n" value="2" /></td><td><input type="radio" name="q21n" value="3" /></td><td><input type="radio" name="q21n" value="4" /></td><td><input type="radio" name="q21n" value="5" /></td></tr>
+              <tr><td>21o. Ketersediaan informasi & pemandu wisata</td><td><input type="radio" name="q21o" value="1" required /></td><td><input type="radio" name="q21o" value="2" /></td><td><input type="radio" name="q21o" value="3" /></td><td><input type="radio" name="q21o" value="4" /></td><td><input type="radio" name="q21o" value="5" /></td></tr>
+              <tr><td>21p. Keamanan & keselamatan (pagar jurang, lampu)</td><td><input type="radio" name="q21p" value="1" required /></td><td><input type="radio" name="q21p" value="2" /></td><td><input type="radio" name="q21p" value="3" /></td><td><input type="radio" name="q21p" value="4" /></td><td><input type="radio" name="q21p" value="5" /></td></tr>
+              <tr><td>21q. Kesesuaian harga tiket/fasilitas dgn mutu</td><td><input type="radio" name="q21q" value="1" required /></td><td><input type="radio" name="q21q" value="2" /></td><td><input type="radio" name="q21q" value="3" /></td><td><input type="radio" name="q21q" value="4" /></td><td><input type="radio" name="q21q" value="5" /></td></tr>
             </tbody>
           </table>
         </div>
@@ -456,11 +851,14 @@
 
       <!-- E. PERSEPSI KEPADATAN DAN KENYAMANAN -->
       <div class="card">
-        <div class="card-title">E. Persepsi Kepadatan dan Kenyamanan</div>
+        <div class="card-title">
+          <i class="fa-solid fa-users-viewfinder"></i>
+          <span>E. Persepsi Kepadatan dan Kenyamanan</span>
+        </div>
         
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label">22. Pada saat matahari terbit, kawasan ini terasa:</label>
+            <label class="title-label"><i class="fa-solid fa-sun"></i> 22. Pada saat matahari terbit, kawasan ini terasa:</label>
             <select id="q22Kepadatan" required>
               <option value="Sepi">Sepi</option>
               <option value="Cukup nyaman">Cukup nyaman</option>
@@ -469,7 +867,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="title-label">23. Apakah kepadatan mengganggu pengalaman Anda?</label>
+            <label class="title-label"><i class="fa-solid fa-person-circle-exclamation"></i> 23. Apakah kepadatan mengganggu pengalaman Anda?</label>
             <select id="q23GangguanKepadatan" required>
               <option value="Tidak sama sekali">Tidak sama sekali</option>
               <option value="Sedikit">Sedikit</option>
@@ -481,15 +879,15 @@
 
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label">24. Apakah Anda merasa aman di jalur dan titik pandang?</label>
+            <label class="title-label"><i class="fa-solid fa-shield-halved"></i> 24. Apakah Anda merasa aman di jalur dan titik pandang?</label>
             <select id="q24RasaAman" required>
               <option value="Ya">Ya, merasa aman</option>
               <option value="Tidak">Tidak merasa aman</option>
             </select>
-            <input type="text" id="q24AlasanTidakAman" placeholder="Jika tidak, sebutkan alasannya..." style="margin-top:6px;" />
+            <input type="text" id="q24AlasanTidakAman" placeholder="Jika tidak, sebutkan alasannya..." style="display:none; margin-top:8px;" />
           </div>
           <div class="form-group">
-            <label class="title-label">25. Apakah bangunan kafe/vila terasa mengganggu pemandangan?</label>
+            <label class="title-label"><i class="fa-solid fa-building"></i> 25. Apakah bangunan kafe/vila terasa mengganggu pemandangan?</label>
             <select id="q25BangunanGanggu" required>
               <option value="Tidak">Tidak</option>
               <option value="Sedikit">Sedikit</option>
@@ -501,41 +899,44 @@
 
       <!-- F. HARAPAN PENGEMBANGAN & EVALUASI -->
       <div class="card">
-        <div class="card-title">F. Harapan Pengembangan & Evaluasi</div>
+        <div class="card-title">
+          <i class="fa-solid fa-lightbulb"></i>
+          <span>F. Harapan Pengembangan & Evaluasi</span>
+        </div>
         
         <div class="form-group">
-          <label class="title-label">26. Fasilitas yang paling perlu ditambah atau diperbaiki (Pilih maksimal 3):</label>
+          <label class="title-label"><i class="fa-solid fa-screwdriver-wrench"></i> 26. Fasilitas yang paling perlu ditambah atau diperbaiki <span style="font-weight: normal; color: var(--danger);">(Pilih maksimal 3)</span>:</label>
           <div class="options-grid" id="groupFasilitas">
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Parkir" /> Parkir</label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Toilet" /> Toilet</label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Penginapan" /> Penginapan</label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Tempat makan" /> Tempat makan</label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Pusat informasi" /> Pusat informasi</label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Jalur pejalan kaki & pagar" /> Jalur pejalan & pagar pengaman</label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Penerangan" /> Penerangan jalur</label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Shuttle dari Rantepao" /> Shuttle dari Rantepao</label>
-            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" id="chkFasilitasLainnya" value="Lainnya" /> Lainnya</label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Parkir" /> <span><i class="fa-solid fa-square-parking" style="color:#0284c7;"></i> Parkir</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Toilet" /> <span><i class="fa-solid fa-restroom" style="color:#10b981;"></i> Toilet</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Penginapan" /> <span><i class="fa-solid fa-bed" style="color:#8b5cf6;"></i> Penginapan</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Tempat makan" /> <span><i class="fa-solid fa-bowl-food" style="color:#f59e0b;"></i> Tempat makan</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Pusat informasi" /> <span><i class="fa-solid fa-circle-info" style="color:#3b82f6;"></i> Pusat informasi</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Jalur pejalan kaki & pagar" /> <span><i class="fa-solid fa-person-walking" style="color:#14b8a6;"></i> Jalur pejalan & pagar</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Penerangan" /> <span><i class="fa-regular fa-lightbulb" style="color:#eab308;"></i> Penerangan jalur</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" value="Shuttle dari Rantepao" /> <span><i class="fa-solid fa-bus" style="color:#6366f1;"></i> Shuttle dari Rantepao</span></label>
+            <label class="option-label"><input type="checkbox" name="fasilitasPrioritas" id="chkFasilitasLainnya" value="Lainnya" /> <span><i class="fa-solid fa-ellipsis"></i> Lainnya</span></label>
           </div>
-          <input type="text" id="fasilitasLainnya" placeholder="Sebutkan fasilitas lainnya..." style="display:none; margin-top:6px;" />
+          <input type="text" id="fasilitasLainnya" placeholder="Sebutkan fasilitas lainnya..." style="display:none; margin-top:8px;" />
         </div>
 
         <div class="form-group">
-          <label class="title-label">27. Kegiatan yang ingin Anda lakukan jika tersedia:</label>
+          <label class="title-label"><i class="fa-solid fa-person-hiking"></i> 27. Kegiatan yang ingin Anda lakukan jika tersedia:</label>
           <div class="options-grid">
-            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Trekking/jungle tracking" /> Trekking / Jungle tracking</label>
-            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Wisata kopi (kebun-seduh)" /> Wisata kopi (kebun s/d seduh)</label>
-            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Belajar tenun" /> Workshop belajar tenun</label>
-            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Kemah" /> Berkemah (Camping)</label>
-            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Paralayang" /> Paralayang (Paragliding)</label>
-            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Paket wisata budaya" /> Paket wisata budaya</label>
-            <label class="option-label"><input type="checkbox" name="kegiatanBaru" id="chkKegiatanLainnya" value="Lainnya" /> Lainnya</label>
+            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Trekking/jungle tracking" /> <span><i class="fa-solid fa-mountain" style="color:#059669;"></i> Trekking / Jungle tracking</span></label>
+            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Wisata kopi (kebun-seduh)" /> <span><i class="fa-solid fa-mug-hot" style="color:#b45309;"></i> Wisata kopi (kebun s/d seduh)</span></label>
+            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Belajar tenun" /> <span><i class="fa-solid fa-vest" style="color:#db2777;"></i> Workshop belajar tenun</span></label>
+            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Kemah" /> <span><i class="fa-solid fa-campground" style="color:#16a34a;"></i> Berkemah (Camping)</span></label>
+            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Paralayang" /> <span><i class="fa-solid fa-parachute-box" style="color:#0284c7;"></i> Paralayang (Paragliding)</span></label>
+            <label class="option-label"><input type="checkbox" name="kegiatanBaru" value="Paket wisata budaya" /> <span><i class="fa-solid fa-masks-theater" style="color:#7c3aed;"></i> Paket wisata budaya</span></label>
+            <label class="option-label"><input type="checkbox" name="kegiatanBaru" id="chkKegiatanLainnya" value="Lainnya" /> <span><i class="fa-solid fa-ellipsis"></i> Lainnya</span></label>
           </div>
-          <input type="text" id="kegiatanLainnya" placeholder="Sebutkan kegiatan lainnya..." style="display:none; margin-top:6px;" />
+          <input type="text" id="kegiatanLainnya" placeholder="Sebutkan kegiatan lainnya..." style="display:none; margin-top:8px;" />
         </div>
 
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label">28. Harga tiket masuk yang masih wajar jika fasilitas diperbaiki:</label>
+            <label class="title-label"><i class="fa-solid fa-tags"></i> 28. Harga tiket masuk yang masih wajar jika fasilitas diperbaiki:</label>
             <select id="tiketWajar" required>
               <option value="Rp15.000 (tetap)">Rp 15.000 (tetap)</option>
               <option value="Rp20.000">Rp 20.000</option>
@@ -545,50 +946,57 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="title-label">29. Kepuasan Keseluruhan (1 = Sangat tidak puas, 5 = Sangat puas)</label>
+            <label class="title-label"><i class="fa-solid fa-face-smile"></i> 29. Kepuasan Keseluruhan (1 = Sangat tidak puas, 5 = Sangat puas)</label>
             <select id="kepuasanTotal" required>
-              <option value="5">5 - Sangat Puas</option>
-              <option value="4" selected>4 - Puas</option>
-              <option value="3">3 - Cukup</option>
-              <option value="2">2 - Kurang Puas</option>
-              <option value="1">1 - Sangat Tidak Puas</option>
+              <option value="5">⭐⭐⭐⭐⭐ 5 - Sangat Puas</option>
+              <option value="4" selected>⭐⭐⭐⭐ 4 - Puas</option>
+              <option value="3">⭐⭐⭐ 3 - Cukup</option>
+              <option value="2">⭐⭐ 2 - Kurang Puas</option>
+              <option value="1">⭐ 1 - Sangat Tidak Puas</option>
             </select>
           </div>
         </div>
 
         <div class="grid-2">
           <div class="form-group">
-            <label class="title-label">30. Apakah Anda ingin berkunjung kembali?</label>
+            <label class="title-label"><i class="fa-solid fa-arrow-rotate-left"></i> 30. Apakah Anda ingin berkunjung kembali?</label>
             <select id="minatKembali" required>
-              <option value="Ya">Ya</option>
-              <option value="Mungkin">Mungkin</option>
-              <option value="Tidak">Tidak</option>
+              <option value="Ya">👍 Ya</option>
+              <option value="Mungkin">🤔 Mungkin</option>
+              <option value="Tidak">👎 Tidak</option>
             </select>
           </div>
           <div class="form-group">
-            <label class="title-label">31. Merekomendasikan Lolai ke orang lain?</label>
+            <label class="title-label"><i class="fa-solid fa-thumbs-up"></i> 31. Merekomendasikan Lolai ke orang lain?</label>
             <select id="rekomendasi" required>
-              <option value="Ya">Ya</option>
-              <option value="Mungkin">Mungkin</option>
-              <option value="Tidak">Tidak</option>
+              <option value="Ya">👍 Ya</option>
+              <option value="Mungkin">🤔 Mungkin</option>
+              <option value="Tidak">👎 Tidak</option>
             </select>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="title-label">32. Saran untuk pengembangan kawasan Lolai:</label>
-          <textarea id="saran" rows="3" placeholder="Tuliskan saran perbaikan fisik, fasilitas, atau pelayanan..."></textarea>
+          <label class="title-label"><i class="fa-regular fa-comment-dots"></i> 32. Saran untuk pengembangan kawasan Lolai:</label>
+          <textarea id="saran" rows="3" placeholder="Tuliskan saran perbaikan fisik, fasilitas, kebersihan, atau pelayanan..."></textarea>
         </div>
       </div>
 
-      <button type="submit" id="btnSubmit" class="btn-submit">Kirim Kuesioner ke Google Sheets</button>
+      <button type="submit" id="btnSubmit" class="btn-submit">
+        <i class="fa-solid fa-paper-plane"></i>
+        <span>Kirim Kuesioner ke Google Sheets</span>
+      </button>
     </form>
 
     <div id="alertBox" class="alert"></div>
+
+    <div class="footer-note">
+      <p>Kuesioner Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai &bull; Toraja Utara</p>
+    </div>
   </div>
 
   <script>
-    // ⚠️ GANTI DENGAN WEB APP URL DARI GOOGLE APPS SCRIPT ANDA
+    // ⚠️ GANTI DENGAN WEB APP URL DARI GOOGLE APPS SCRIPT ANDA:
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/exec";
 
     // Toggle input manual untuk opsi select/dropdown
@@ -742,7 +1150,7 @@
       }
 
       btn.disabled = true;
-      btn.innerText = "Menyimpan data survei...";
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Menyimpan data survei...</span>';
       alertBox.style.display = "none";
 
       // Format 13a Waktu Kedatangan (Tanggal + Jam)
@@ -845,8 +1253,8 @@
 
         if (result.status === "success") {
           alertBox.className = "alert alert-success";
-          alertBox.innerHTML = "🎉 <strong>Sukses!</strong> Data kuesioner berhasil tersimpan di Google Sheets.";
-          alertBox.style.display = "block";
+          alertBox.innerHTML = '<i class="fa-solid fa-circle-check" style="font-size: 22px;"></i> <div><strong>Berhasil!</strong> Data kuesioner berhasil tersimpan di Google Sheets.</div>';
+          alertBox.style.display = "flex";
           form.reset();
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
@@ -855,11 +1263,11 @@
       } catch (err) {
         console.error(err);
         alertBox.className = "alert alert-error";
-        alertBox.innerHTML = "⚠️ <strong>Gagal:</strong> Pastikan Anda telah memasukkan Web App URL aktif pada <code>APPS_SCRIPT_URL</code>.";
-        alertBox.style.display = "block";
+        alertBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="font-size: 22px;"></i> <div><strong>Gagal!</strong> Pastikan Anda telah memasukkan Web App URL aktif pada <code>APPS_SCRIPT_URL</code>.</div>';
+        alertBox.style.display = "flex";
       } finally {
         btn.disabled = false;
-        btn.innerText = "Kirim Kuesioner ke Google Sheets";
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>Kirim Kuesioner ke Google Sheets</span>';
       }
     });
   </script>

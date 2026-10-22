@@ -1,0 +1,2286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rekapitulasi & Cetak Laporan Survei Wisatawan Lolai</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --primary-light: #ccfbf1;
+      --accent: #f59e0b;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      font-size: 13.5px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* TOP ACTION BAR (Hanya di Layar, Sembunyi saat Print) */
+    .action-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #ffffff;
+      border-bottom: 1.5px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      flex-wrap: wrap;
+    }
+
+    .action-bar .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 16px;
+    }
+
+    .action-bar .btn-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #334155;
+      border-color: #cbd5e1;
+    }
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-print {
+      background: #047857;
+      color: white;
+      box-shadow: 0 2px 6px rgba(4, 120, 87, 0.25);
+    }
+    .btn-print:hover {
+      background: #065f46;
+    }
+
+    /* CONTAINER DOKUMEN CETAK */
+    .print-document {
+      max-width: 1300px;
+      margin: 24px auto;
+      padding: 32px 40px;
+      background: #ffffff;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+
+    /* KOP LAPORAN RESMI */
+    .kop-header {
+      border-bottom: 2.5px solid #0f172a;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .kop-text h1 {
+      font-size: 19px;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .kop-text h2 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+
+    .kop-text p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .kop-meta {
+      text-align: right;
+      font-size: 11.5px;
+      color: #475569;
+      line-height: 1.6;
+      border-left: 2px solid var(--border);
+      padding-left: 16px;
+    }
+
+    /* FILTER & SEARCH BAR (Screen only) */
+    .filter-bar {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filter-inputs {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filter-inputs input,
+    .filter-inputs select {
+      padding: 7px 12px;
+      font-size: 12.5px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: white;
+      font-family: inherit;
+    }
+
+    /* KPI STATS CARDS */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .kpi-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      position: relative;
+      border-left: 4px solid var(--primary);
+    }
+
+    .kpi-card.amber { border-left-color: var(--accent); }
+    .kpi-card.emerald { border-left-color: #10b981; }
+    .kpi-card.blue { border-left-color: #0284c7; }
+    .kpi-card.purple { border-left-color: #8b5cf6; }
+
+    .kpi-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .kpi-value {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .kpi-sub {
+      font-size: 11.5px;
+      color: #64748b;
+      margin-top: 3px;
+    }
+
+    /* TABEL DATA REKAP */
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* TABEL DATA REKAPITULASI DETAIL LENGKAP (55 KOLOM) */
+    .table-responsive {
+      width: 100%;
+      max-height: 720px;
+      overflow-x: auto;
+      overflow-y: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 24px;
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 11px;
+      text-align: left;
+    }
+
+    table.data-table thead tr.group-header th {
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 7px 10px;
+      border-bottom: 1.5px solid #cbd5e1;
+      border-right: 1px solid #cbd5e1;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    /* Kategori Header Warna */
+    .th-admin { background: #f1f5f9; color: #334155; }
+    .th-profil { background: #e0f2fe; color: #0369a1; }
+    .th-kunjungan { background: #e0e7ff; color: #3730a3; }
+    .th-biaya { background: #dcfce7; color: #166534; }
+    .th-likert { background: #f3e8ff; color: #6b21a8; }
+    .th-kepadatan { background: #fef3c7; color: #92400e; }
+    .th-harapan { background: #ffe4e6; color: #9f1239; }
+
+    table.data-table thead tr.col-header th {
+      background: #f8fafc;
+      color: #1e293b;
+      font-weight: 700;
+      padding: 7px 9px;
+      border-bottom: 2px solid #94a3b8;
+      border-right: 1px solid #e2e8f0;
+      white-space: nowrap;
+      position: sticky;
+      top: 29px;
+      z-index: 4;
+      font-size: 10.5px;
+    }
+
+    /* Sticky Kolom No & No Kues */
+    table.data-table th.col-sticky-1,
+    table.data-table td.col-sticky-1 {
+      position: sticky;
+      left: 0;
+      background: #f8fafc;
+      z-index: 3;
+      border-right: 1px solid #cbd5e1;
+      text-align: center;
+    }
+    table.data-table tr:hover td.col-sticky-1 {
+      background: #f0fdfa;
+    }
+    table.data-table th.col-sticky-2,
+    table.data-table td.col-sticky-2 {
+      position: sticky;
+      left: 42px;
+      background: #f8fafc;
+      z-index: 3;
+      border-right: 2px solid #94a3b8;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.06);
+    }
+    table.data-table tr:hover td.col-sticky-2 {
+      background: #f0fdfa;
+    }
+    table.data-table thead tr.group-header th.col-sticky-1,
+    table.data-table thead tr.group-header th.col-sticky-2 {
+      z-index: 7;
+      background: #e2e8f0;
+    }
+    table.data-table thead tr.col-header th.col-sticky-1,
+    table.data-table thead tr.col-header th.col-sticky-2 {
+      z-index: 6;
+      background: #f1f5f9;
+    }
+
+    table.data-table td {
+      padding: 6px 9px;
+      border-bottom: 1px solid #e2e8f0;
+      border-right: 1px solid #f1f5f9;
+      color: #334155;
+      white-space: nowrap;
+      font-size: 11px;
+    }
+
+    table.data-table td.td-wrap {
+      white-space: normal;
+      min-width: 170px;
+      max-width: 280px;
+      line-height: 1.35;
+    }
+
+    table.data-table td.td-likert {
+      text-align: center;
+      min-width: 44px;
+      font-weight: 700;
+    }
+
+    table.data-table tr:nth-child(even) td {
+      background: #fafcff;
+    }
+
+    table.data-table tr:hover td {
+      background: #f0fdfa;
+    }
+
+    .row-detail-panel {
+      background: #f8fafc !important;
+      padding: 14px 18px !important;
+      border-bottom: 2px solid var(--primary) !important;
+      white-space: normal !important;
+    }
+
+    .badge-score-5 { background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 3px; font-weight:700; }
+    .badge-score-4 { background: #dbeafe; color: #1e40af; padding: 2px 6px; border-radius: 3px; font-weight:700; }
+    .badge-score-3 { background: #fef3c7; color: #92400e; padding: 2px 6px; border-radius: 3px; font-weight:700; }
+    .badge-score-2 { background: #ffedd5; color: #9a3412; padding: 2px 6px; border-radius: 3px; font-weight:700; }
+    .badge-score-1 { background: #fee2e2; color: #991b1b; padding: 2px 6px; border-radius: 3px; font-weight:700; }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 7px;
+      font-size: 10.5px;
+      font-weight: 600;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .badge-lokal {
+      background: #ccfbf1;
+      color: #0f766e;
+      border: 1px solid #99f6e4;
+    }
+    .badge-turis {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+    .badge-sukses {
+      background: #ecfdf5;
+      color: #065f46;
+    }
+
+    /* MODAL DETAIL RESPONDEN */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      z-index: 1000;
+      backdrop-filter: blur(3px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      font-size: 12.5px;
+    }
+
+    .detail-item {
+      background: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+    }
+    .detail-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .detail-val {
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 2px;
+    }
+
+    /* GAYA TABEL LAPORAN SURVEI FORMAL (PURE TABULAR REPORT - LANDSCAPE A4) */
+    #printDossierContainer {
+      display: none;
+    }
+
+    #printDossierContainer.preview-on-screen {
+      display: block;
+      margin-bottom: 30px;
+    }
+
+    .formal-sheet-page {
+      background: white;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      border: 1.5px solid #1e293b;
+      border-radius: 4px;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .tbl-header-formal {
+      width: 100%;
+      border-collapse: collapse;
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+    }
+
+    .tbl-header-formal td {
+      border: none !important;
+      padding: 2px 4px !important;
+    }
+
+    .formal-report-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.2pt;
+      margin-bottom: 6px;
+    }
+
+    .formal-report-table th,
+    .formal-report-table td {
+      border: 1px solid #64748b;
+      padding: 2.5px 5px;
+      vertical-align: middle;
+      line-height: 1.25;
+    }
+
+    .formal-report-table thead th {
+      background: #0f766e;
+      color: #ffffff;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 7pt;
+      letter-spacing: 0.3px;
+      border-color: #0f766e;
+    }
+
+    .formal-report-table thead.subhead th {
+      background: #e2e8f0;
+      color: #0f172a;
+      font-size: 6.5pt;
+      border-color: #64748b;
+    }
+
+    .formal-report-table td.col-param {
+      width: 44%;
+      background: #f8fafc;
+      color: #334155;
+      font-weight: 700;
+    }
+
+    .formal-report-table td.col-val {
+      width: 56%;
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    .formal-footer-table {
+      border-top: 1px solid #1e293b;
+      padding-top: 3px;
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 6.5pt;
+      color: #475569;
+    }
+
+    /* CSS PRINT OPTIMIZED UNTUK LAPORAN TABEL FORMAL LANDSCAPE */
+    @media print {
+      @page {
+        size: A4 landscape;
+        margin: 5mm 6mm;
+      }
+
+      body {
+        background: #ffffff !important;
+        font-size: 7pt !important;
+        color: #000000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .no-print,
+      .action-bar,
+      .filter-bar,
+      .print-options-bar,
+      .modal-overlay {
+        display: none !important;
+      }
+
+      /* KONDISI 1: MODE TABEL LEMBAR SURVEI RESMI (DEFAULT CETAK) */
+      body:not(.mode-print-table) .print-document {
+        display: none !important;
+      }
+
+      body:not(.mode-print-table) #printDossierContainer {
+        display: block !important;
+      }
+
+      body:not(.mode-print-table) .formal-sheet-page {
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        width: 100% !important;
+        height: 198mm !important;
+        max-height: 198mm !important;
+        border: 1.5px solid #0f172a !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 5mm 7mm !important;
+        margin-bottom: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        box-sizing: border-box !important;
+      }
+
+      body:not(.mode-print-table) .formal-sheet-page:last-child {
+        page-break-after: auto !important;
+      }
+
+      body:not(.mode-print-table) .formal-report-table th,
+      body:not(.mode-print-table) .formal-report-table td {
+        border: 0.5px solid #000000 !important;
+      }
+
+      body:not(.mode-print-table) .formal-report-table thead th {
+        background: #0f766e !important;
+        color: #ffffff !important;
+      }
+
+      /* KONDISI 2: MODE TABEL REKAP MASTER */
+      body.mode-print-table #printDossierContainer {
+        display: none !important;
+      }
+
+      body.mode-print-table .print-document {
+        display: block !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      body.mode-print-table .kop-header {
+        border-bottom: 2px solid #000000 !important;
+      }
+
+      body.mode-print-table .kpi-grid {
+        grid-template-columns: repeat(5, 1fr) !important;
+        gap: 6px !important;
+        margin-bottom: 10px !important;
+      }
+
+      body.mode-print-table .kpi-card {
+        background: #ffffff !important;
+        border: 1px solid #475569 !important;
+        padding: 5px 7px !important;
+        break-inside: avoid;
+      }
+
+      body.mode-print-table .kpi-value {
+        font-size: 12pt !important;
+      }
+
+      body.mode-print-table .table-responsive {
+        border: none !important;
+        overflow: visible !important;
+        max-height: none !important;
+        zoom: 46% !important; /* Pas persis dengan lebar A4 Landscape */
+      }
+
+      body.mode-print-table table.data-table {
+        font-size: 6pt !important;
+        border-collapse: collapse !important;
+      }
+
+      body.mode-print-table table.data-table th,
+      body.mode-print-table table.data-table td {
+        padding: 2px 4px !important;
+        border: 0.5px solid #475569 !important;
+        position: static !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP ACTION BAR -->
+  <header class="action-bar no-print">
+    <div class="brand">
+      <i class="fa-solid fa-file-invoice" style="font-size: 20px;"></i>
+      <span>Rekapitulasi Kuesioner Wisatawan Lolai</span>
+    </div>
+    <div class="btn-group">
+      <a href="index.html" class="btn btn-secondary">
+        <i class="fa-solid fa-arrow-left"></i> Form Kuesioner
+      </a>
+
+      <button type="button" id="btnSyncData" class="btn btn-primary">
+        <i class="fa-solid fa-rotate"></i> Sinkron Data Google Sheets
+      </button>
+      <button type="button" id="btnCetakPDF" class="btn btn-print">
+        <i class="fa-solid fa-print"></i> Cetak / Simpan PDF
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTAINER KHUSUS CETAK DOSSIER LANDSCAPE (1 RESPONDEN = 1 HALAMAN A4) -->
+  <div id="printDossierContainer"></div>
+
+  <!-- PRINTABLE DOCUMENT -->
+  <main class="print-document">
+
+    <!-- KOP RESMI LAPORAN -->
+    <div class="kop-header">
+      <div class="kop-text">
+        <h1>Laporan Rekapitulasi Hasil Survei Lapangan</h1>
+        <h2>Rencana Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai</h2>
+        <p><i class="fa-solid fa-location-dot"></i> Kecamatan Kapala Pitu, Kabupaten Toraja Utara, Provinsi Sulawesi Selatan</p>
+      </div>
+      <div class="kop-meta">
+        <div><strong>Status Dokumen:</strong> Rekapitulasi Primer</div>
+        <div><strong>Sumber Data:</strong> <a href="https://docs.google.com/spreadsheets/d/15QAPoAMtREQZPqVy-Km_wS2JYrrmNbZFk62BpE33INk/edit?usp=sharing" target="_blank" style="color:#0f766e; text-decoration:none; font-weight:600;"><i class="fa-solid fa-table"></i> Google Sheets (Live)</a></div>
+        <div><strong>Tanggal Cetak:</strong> <span id="lblTglCetak">-</span></div>
+        <div><strong>Total Sampel Masuk:</strong> <strong id="lblTotalSampel">0 Responden</strong></div>
+      </div>
+    </div>
+
+    <!-- PENGATURAN CETAK PDF PAS 1 HALAMAN LANDSCAPE (Hanya Tampil di Layar) -->
+    <div class="print-options-bar no-print" style="background: #ffffff; border: 1.5px solid #0f766e; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; box-shadow: 0 2px 6px rgba(15, 118, 110, 0.08);">
+      <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+        <span style="font-size: 12.5px; font-weight: 800; color: #0f766e;"><i class="fa-solid fa-sliders"></i> Mode Cetak PDF:</span>
+        <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer; background: #f0fdfa; padding: 5px 10px; border-radius: 5px; border: 1px solid #99f6e4;">
+          <input type="radio" name="optPrintMode" value="dossier" checked />
+          <strong style="color: #0f766e;">📋 Tabel Lembar Survei Formal (Pas 1 Halaman Landscape/Responden)</strong>
+        </label>
+        <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer; background: #f8fafc; padding: 5px 10px; border-radius: 5px; border: 1px solid #cbd5e1;">
+          <input type="radio" name="optPrintMode" value="table" />
+          <span style="color: #334155;">📊 Tabel Matriks Rekapitulasi (Skala Otomatis Pas Lebar Kertas)</span>
+        </label>
+        <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer; background: #ecfdf5; padding: 5px 10px; border-radius: 5px; border: 1px solid #a7f3d0;">
+          <input type="checkbox" id="chkIncludeSummaryPage" checked />
+          <strong style="color: #065f46;"><i class="fa-solid fa-calculator"></i> Sertakan Halaman Kalkulasi Nilai di Akhir Cetak</strong>
+        </label>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <label for="selCetakResponden" style="font-size: 11.5px; color: #475569; font-weight: 700;">Target Cetak:</label>
+        <select id="selCetakResponden" style="padding: 6px 10px; font-size: 12px; border-radius: 6px; border: 1px solid #cbd5e1; font-family: inherit; font-weight: 600;">
+          <option value="all">Semua Responden (1 Hal Landscape / Org)</option>
+        </select>
+        <button type="button" id="btnPreviewDossier" class="btn btn-secondary" style="font-size: 11.5px; padding: 6px 11px;">
+          <i class="fa-solid fa-eye"></i> <span id="lblPreviewBtnText">Preview Lembar Cetak</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- FILTER BAR (Hanya Tampil di Layar) -->
+    <div class="filter-bar no-print">
+      <div class="filter-inputs">
+        <input type="text" id="txtCari" placeholder="🔍 Cari nama / no. kuesioner..." style="min-width: 220px;" />
+        <select id="filterAsal">
+          <option value="">Semua Asal Responden</option>
+          <option value="Warga Lokal (Menetap)">Warga Lokal Toraja</option>
+          <option value="Luar Toraja">Wisatawan Luar Toraja</option>
+        </select>
+        <select id="filterKunjungan">
+          <option value="">Semua Kunjungan</option>
+          <option value="Pertama">Kunjungan Pertama</option>
+          <option value="Kedua">Kunjungan Kedua</option>
+          <option value="Lebih dari dua kali">&gt; 2 Kali</option>
+        </select>
+      </div>
+      <div style="font-size: 12.5px; color: var(--text-muted);">
+        Menampilkan <strong id="lblJumlahTampil" style="color:var(--text)">0</strong> dari <strong id="lblJumlahTotal">0</strong> data
+      </div>
+    </div>
+
+    <!-- KPI STATISTIK RINGKASAN -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-title"><i class="fa-solid fa-users"></i> Total Responden</div>
+        <div class="kpi-value" id="kpiTotal">0</div>
+        <div class="kpi-sub" id="kpiGender">L: 0 | P: 0</div>
+      </div>
+      <div class="kpi-card emerald">
+        <div class="kpi-title"><i class="fa-solid fa-house-chimney-user"></i> Asal Responden</div>
+        <div class="kpi-value" id="kpiAsalLokal">0%</div>
+        <div class="kpi-sub" id="kpiAsalSub">Lokal Toraja: 0 | Luar: 0</div>
+      </div>
+      <div class="kpi-card amber">
+        <div class="kpi-title"><i class="fa-solid fa-calendar-days"></i> Rata-rata Lama Toraja</div>
+        <div class="kpi-value" id="kpiRataHari">0 Hari</div>
+        <div class="kpi-sub">(Khusus Wisatawan Luar Toraja)</div>
+      </div>
+      <div class="kpi-card blue">
+        <div class="kpi-title"><i class="fa-solid fa-wallet"></i> Rata-rata Belanja/Org</div>
+        <div class="kpi-value" id="kpiRataBiaya">Rp 0</div>
+        <div class="kpi-sub">Total pengeluaran di Lolai</div>
+      </div>
+      <div class="kpi-card purple">
+        <div class="kpi-title"><i class="fa-solid fa-star"></i> Kepuasan Rata-rata</div>
+        <div class="kpi-value" id="kpiKepuasan">0.0 / 5</div>
+        <div class="kpi-sub" id="kpiMinatKembali">Minat kembali: 0%</div>
+      </div>
+    </div>
+
+    <!-- TABEL DATA REKAPITULASI DETAIL LENGKAP -->
+    <div class="section-title">
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <span><i class="fa-solid fa-table-list"></i> Tabel Data Master Hasil Wawancara (Detail Lengkap)</span>
+        <span class="badge badge-turis" id="lblJmlKolomTampil">55 Kolom Terbuka</span>
+      </div>
+      <div class="no-print" style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button type="button" id="btnToggleAllDetails" class="btn btn-secondary" style="font-size: 11.5px; padding: 5px 12px;">
+          <i class="fa-solid fa-up-right-and-down-left-from-center"></i> <span id="lblToggleText">Buka Semua Lembar Rincian</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="data-table" id="tblRekap">
+        <thead>
+          <!-- Baris 1: Kategori / Kelompok Data -->
+          <tr class="group-header">
+            <th colspan="4" class="th-admin col-sticky-1">1. ADMINISTRASI SURVEI</th>
+            <th colspan="7" class="th-profil">2. PROFIL RESPONDEN</th>
+            <th colspan="10" class="th-kunjungan">3. KARAKTERISTIK KUNJUNGAN</th>
+            <th colspan="6" class="th-biaya">4. BIAYA / PENGELUARAN DI LOLAI (RP)</th>
+            <th colspan="17" class="th-likert">5. PENILAIAN FASILITAS & DESTINASI (LIKERT 1–5)</th>
+            <th colspan="4" class="th-kepadatan">6. KEPADATAN & KEAMANAN</th>
+            <th colspan="7" class="th-harapan">7. EVALUASI, HARAPAN & SARAN</th>
+          </tr>
+          <!-- Baris 2: Nama Kolom Detail -->
+          <tr class="col-header">
+            <!-- 1. Administrasi -->
+            <th class="col-sticky-1" style="width: 38px; text-align: center;">No</th>
+            <th class="col-sticky-2">No. Kues</th>
+            <th>Waktu Survei</th>
+            <th>Lokasi Survei</th>
+
+            <!-- 2. Profil -->
+            <th>Nama Responden</th>
+            <th style="text-align: center;">L/P</th>
+            <th>Usia</th>
+            <th>Asal Daerah</th>
+            <th>Pendidikan</th>
+            <th>Pekerjaan</th>
+            <th>Pengeluaran/Bln</th>
+
+            <!-- 3. Kunjungan -->
+            <th>Kunjungan Ke</th>
+            <th>Tujuan Utama</th>
+            <th>Sumber Info</th>
+            <th>Teman & Rombongan</th>
+            <th>Kendaraan</th>
+            <th>Status Menginap</th>
+            <th>Waktu Tiba</th>
+            <th>Lama di Lolai</th>
+            <th>Lama di Toraja</th>
+            <th>Daya Tarik Lain</th>
+
+            <!-- 4. Pengeluaran -->
+            <th>Tiket Masuk</th>
+            <th>Penginapan</th>
+            <th>Makan/Minum</th>
+            <th>Suvenir</th>
+            <th>Transportasi</th>
+            <th style="font-weight: 800;">Total Belanja</th>
+
+            <!-- 5. Likert 21a - 21q -->
+            <th class="td-likert" title="21a. Panorama Awan">21a Awan</th>
+            <th class="td-likert" title="21b. Budaya Tongkonan">21b Budaya</th>
+            <th class="td-likert" title="21c. Variasi Aktivitas">21c Variasi</th>
+            <th class="td-likert" title="21d. Kondisi Jalan">21d Jalan</th>
+            <th class="td-likert" title="21e. Petunjuk Rambu">21e Rambu</th>
+            <th class="td-likert" title="21f. Area Parkir">21f Parkir</th>
+            <th class="td-likert" title="21g. Angkutan Umum">21g Angkutan</th>
+            <th class="td-likert" title="21h. Homestay/Inap">21h Inap</th>
+            <th class="td-likert" title="21i. Makanan & Minuman">21i Kuliner</th>
+            <th class="td-likert" title="21j. Toilet Umum">21j Toilet</th>
+            <th class="td-likert" title="21k. Tempat Ibadah">21k Ibadah</th>
+            <th class="td-likert" title="21l. Jaringan & Sinyal">21l Sinyal</th>
+            <th class="td-likert" title="21m. Tempat Sampah">21m Sampah</th>
+            <th class="td-likert" title="21n. Keramahan Warga">21n Ramah</th>
+            <th class="td-likert" title="21o. Akses Info">21o Info</th>
+            <th class="td-likert" title="21p. Rasa Aman">21p Aman</th>
+            <th class="td-likert" title="21q. Harga vs Kualitas">21q Harga</th>
+
+            <!-- 6. Kepadatan & Keamanan -->
+            <th>22. Kepadatan Sunrise</th>
+            <th>23. Gangguan Ramai</th>
+            <th>24. Aman Tebing & Alasan</th>
+            <th>25. Bangunan Ganggu</th>
+
+            <!-- 7. Harapan & Saran -->
+            <th>26. Fasilitas Prioritas</th>
+            <th>27. Usulan Kegiatan</th>
+            <th>28. Tiket Wajar</th>
+            <th>29. Kepuasan</th>
+            <th>30. Minat Kembali</th>
+            <th>31. Rekomendasi</th>
+            <th>32. Saran & Masukan</th>
+          </tr>
+        </thead>
+        <tbody id="tblBodyRekap">
+          <tr>
+            <td colspan="55" style="text-align: center; padding: 24px; color: var(--text-muted);">
+              <i class="fa-solid fa-spinner fa-spin"></i> Memuat data dari Google Sheets...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- MODAL DETAIL SATU RESPONDEN -->
+  <div id="modalDetail" class="modal-overlay no-print">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle" style="color:var(--primary-dark); font-size:16px;">
+          <i class="fa-solid fa-id-card"></i> Lembar Jawaban Kuesioner
+        </h3>
+        <button type="button" id="btnTutupModal" style="background:none; border:none; font-size:18px; cursor:pointer; color:#64748b;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div id="modalBody" class="detail-grid">
+        <!-- Terisi dinamis -->
+      </div>
+      <div style="margin-top: 20px; text-align: right;">
+        <button type="button" id="btnModalTutupBawah" class="btn btn-secondary">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Konfigurasi Spreadsheet Resmi Pengguna:
+    // Link: https://docs.google.com/spreadsheets/d/15QAPoAMtREQZPqVy-Km_wS2JYrrmNbZFk62BpE33INk/edit?usp=sharing
+    const SPREADSHEET_ID = "15QAPoAMtREQZPqVy-Km_wS2JYrrmNbZFk62BpE33INk";
+    const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv`;
+    const SHEET_GVIZ_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json`;
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2FlF84rwIOhEoevTvqZahQcNoKAMYzhemYTJsdfGR4r3aCwcm3VLPRnU7YZsTFrdkXQ/exec";
+
+    let rawDataSurvei = [];
+    let filteredData = [];
+
+    // Format Tanggal Hari Ini
+    const today = new Date();
+    const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
+    const tglStr = today.toLocaleDateString('id-ID', optionsDate);
+    document.getElementById('lblTglCetak').innerText = tglStr;
+    document.querySelectorAll('.lblTglSekarang').forEach(el => el.innerText = tglStr);
+
+    // Parser CSV mandiri (mendukung kutip ganda, koma di dalam teks, dan baris baru)
+    function parseCSV(text) {
+      if (!text || !text.trim()) return [];
+      const lines = [];
+      let row = [""];
+      let inQuotes = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        const next = text[i + 1];
+        if (c === '"') {
+          if (inQuotes && next === '"') {
+            row[row.length - 1] += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (c === ',' && !inQuotes) {
+          row.push('');
+        } else if ((c === '\r' || c === '\n') && !inQuotes) {
+          if (c === '\r' && next === '\n') i++;
+          lines.push(row);
+          row = [''];
+        } else {
+          row[row.length - 1] += c;
+        }
+      }
+      if (row.length > 1 || (row.length === 1 && row[0] !== '')) {
+        lines.push(row);
+      }
+      if (lines.length < 2) return [];
+
+      const headers = lines[0].map(h => h.trim());
+      const dataRows = [];
+      for (let i = 1; i < lines.length; i++) {
+        const r = lines[i];
+        if (!r || r.length === 0 || (r.length === 1 && !r[0].trim())) continue;
+        const obj = {};
+        for (let j = 0; j < headers.length; j++) {
+          obj[headers[j]] = r[j] !== undefined ? r[j].trim() : '';
+        }
+        // Pastikan bukan baris kosong
+        if (obj.No_Kuesioner || obj.Nama_Responden || obj.Timestamp) {
+          dataRows.push(obj);
+        }
+      }
+      return dataRows;
+    }
+
+    // Ambil Data via JSONP GViz (override setResponse - bebas CORS dari file://)
+    function muatDataSurvei() {
+      const tbody = document.getElementById('tblBodyRekap');
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="13" style="text-align: center; padding: 24px; color: var(--primary);">
+            <i class="fa-solid fa-spinner fa-spin" style="font-size: 20px;"></i>
+            <div style="margin-top: 8px; font-weight: 600;">Menyinkronkan data dari Google Sheets...</div>
+            <div style="font-size: 11.5px; color: #64748b; margin-top: 4px;">Harap tunggu sebentar...</div>
+          </td>
+        </tr>`;
+
+      // Bersihkan tag JSONP lama
+      const oldScript = document.getElementById('jsonpSheet');
+      if (oldScript) oldScript.remove();
+
+      // Timeout fallback setelah 8 detik
+      const timer = setTimeout(() => {
+        console.warn('GViz timeout, coba cache...');
+        const cache = localStorage.getItem('cache_survei_lolai');
+        rawDataSurvei = cache ? JSON.parse(cache) : [];
+        terapkanFilterDanRender();
+      }, 8000);
+
+      function prosesDariGViz(data) {
+        clearTimeout(timer);
+        try {
+          const table = data.table;
+          if (!table || !table.cols || !table.rows) throw new Error('Data kosong');
+
+          const headers = table.cols.map(c => c.label || c.id || '');
+
+          const parsedData = table.rows.map(row => {
+            const obj = {};
+            headers.forEach((h, idx) => {
+              const cell = row.c ? row.c[idx] : null;
+              let val = '';
+              if (cell) {
+                // Gunakan formatted value (f) jika ada, jika tidak gunakan raw (v)
+                val = (cell.f !== null && cell.f !== undefined) ? cell.f
+                    : (cell.v !== null && cell.v !== undefined) ? String(cell.v)
+                    : '';
+              }
+              obj[h] = val;
+            });
+            return obj;
+          }).filter(obj => {
+            return (obj.No_Kuesioner && obj.No_Kuesioner.trim()) ||
+                   (obj.Timestamp && obj.Timestamp.trim());
+          });
+
+          rawDataSurvei = parsedData;
+          localStorage.setItem('cache_survei_lolai', JSON.stringify(rawDataSurvei));
+          terapkanFilterDanRender();
+
+        } catch(e) {
+          console.error('Error GViz:', e);
+          const cache = localStorage.getItem('cache_survei_lolai');
+          rawDataSurvei = cache ? JSON.parse(cache) : [];
+          terapkanFilterDanRender();
+        }
+      }
+
+      // Google GViz selalu memanggil google.visualization.Query.setResponse()
+      // Kita override fungsi tersebut untuk menangkap datanya
+      if (typeof window.google === 'undefined') window.google = {};
+      if (typeof window.google.visualization === 'undefined') window.google.visualization = {};
+      window.google.visualization.Query = {
+        setResponse: function(response) {
+          prosesDariGViz(response);
+        }
+      };
+
+      // Inject JSONP script
+      const scriptEl = document.createElement('script');
+      scriptEl.id = 'jsonpSheet';
+      scriptEl.src = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&_nocache=${Date.now()}`;
+      scriptEl.onerror = () => {
+        clearTimeout(timer);
+        console.warn('Script error. Cek apakah Google Sheets sudah dipublish ke publik.');
+        const cache = localStorage.getItem('cache_survei_lolai');
+        rawDataSurvei = cache ? JSON.parse(cache) : [];
+        terapkanFilterDanRender();
+      };
+      document.body.appendChild(scriptEl);
+    }
+
+    // Filter & Search
+    function terapkanFilterDanRender() {
+      const keyword = document.getElementById('txtCari').value.toLowerCase().trim();
+      const asalFilter = document.getElementById('filterAsal').value;
+      const kunjunganFilter = document.getElementById('filterKunjungan').value;
+
+      filteredData = rawDataSurvei.filter(item => {
+        const nama = (item.Nama_Responden || item.namaResponden || "").toLowerCase();
+        const noKues = (item.No_Kuesioner || item.noKuesioner || "").toLowerCase();
+        const asal = (item.Asal_Detail || item.asalDetail || item.Asal_Kategori || item.asalKategori || "").toLowerCase();
+
+        const matchKeyword = !keyword || nama.includes(keyword) || noKues.includes(keyword) || asal.includes(keyword);
+
+        let matchAsal = true;
+        const lamaTotal = (item.Lama_Total_Hari || item.lamaTotalHari || "").toString();
+        if (asalFilter === "Warga Lokal (Menetap)") {
+          matchAsal = lamaTotal.includes("Warga Lokal") || (item.Asal_Kategori || "").includes("Toraja");
+        } else if (asalFilter === "Luar Toraja") {
+          matchAsal = !lamaTotal.includes("Warga Lokal") && !(item.Asal_Kategori || "").includes("Toraja");
+        }
+
+        const kunjunganVal = (item.Kunjungan_Ke || item.kunjunganKe || "");
+        const matchKunjungan = !kunjunganFilter || kunjunganVal === kunjunganFilter;
+
+        return matchKeyword && matchAsal && matchKunjungan;
+      });
+
+      renderStatistik(filteredData);
+      renderTabel(filteredData);
+    }
+
+    // Render KPI Cards
+    function renderStatistik(data) {
+      const total = data.length;
+      document.getElementById('lblTotalSampel').innerText = `${total} Responden`;
+      document.getElementById('lblJumlahTotal').innerText = rawDataSurvei.length;
+      document.getElementById('lblJumlahTampil').innerText = total;
+      document.getElementById('kpiTotal').innerText = total;
+
+      if (total === 0) {
+        document.getElementById('kpiGender').innerText = "L: 0 | P: 0";
+        document.getElementById('kpiAsalLokal').innerText = "0%";
+        document.getElementById('kpiAsalSub').innerText = "Lokal: 0 | Luar: 0";
+        document.getElementById('kpiRataHari').innerText = "0 Hari";
+        document.getElementById('kpiRataBiaya').innerText = "Rp 0";
+        document.getElementById('kpiKepuasan').innerText = "0.0 / 5";
+        document.getElementById('kpiMinatKembali').innerText = "Minat kembali: 0%";
+        return;
+      }
+
+      // Gender
+      let laki = 0, perem = 0;
+      let lokalCount = 0;
+      let totalHariWisatawan = 0, countWisatawanHari = 0;
+      let totalBelanja = 0;
+      let totalPoinKepuasan = 0, countKepuasan = 0;
+      let minatKembaliCount = 0;
+
+      data.forEach(d => {
+        const g = (d.Gender || d.gender || "").toLowerCase();
+        if (g.includes("laki")) laki++;
+        else if (g.includes("perempuan")) perem++;
+
+        const lamaTotal = (d.Lama_Total_Hari || d.lamaTotalHari || "").toString();
+        const isLokal = lamaTotal.includes("Warga Lokal") || (d.Asal_Kategori || "").includes("Toraja");
+        if (isLokal) {
+          lokalCount++;
+        } else {
+          const numHari = parseFloat(lamaTotal) || 0;
+          if (numHari > 0) {
+            totalHariWisatawan += numHari;
+            countWisatawanHari++;
+          }
+        }
+
+        // Total Belanja
+        const tTiket = parseFloat(d.Biaya_Tiket || d.pengeluaranTiket) || 0;
+        const tInap = parseFloat(d.Biaya_Penginapan || d.pengeluaranPenginapan) || 0;
+        const tMakan = parseFloat(d.Biaya_Makan || d.pengeluaranMakan) || 0;
+        const tSuvenir = parseFloat(d.Biaya_Suvenir || d.pengeluaranSuvenir) || 0;
+        const tTrans = parseFloat(d.Biaya_Transport || d.pengeluaranTransport) || 0;
+        totalBelanja += (tTiket + tInap + tMakan + tSuvenir + tTrans);
+
+        // Kepuasan (29_KepuasanTotal skala 1-5 atau 'Puas')
+        const kep = parseFloat(d["29_KepuasanTotal"] || d.kepuasanTotal) || 0;
+        if (kep > 0) {
+          totalPoinKepuasan += kep;
+          countKepuasan++;
+        }
+
+        const minat = (d["30_MinatKembali"] || d.minatKembali || "").toLowerCase();
+        if (minat.includes("ya") || minat.includes("pasti")) minatKembaliCount++;
+      });
+
+      document.getElementById('kpiGender').innerText = `Laki-laki: ${laki} | Perempuan: ${perem}`;
+      
+      const persenLokal = Math.round((lokalCount / total) * 100);
+      document.getElementById('kpiAsalLokal').innerText = `${persenLokal}%`;
+      document.getElementById('kpiAsalSub').innerText = `Lokal: ${lokalCount} | Luar Toraja: ${total - lokalCount}`;
+
+      const rataHari = countWisatawanHari > 0 ? (totalHariWisatawan / countWisatawanHari).toFixed(1) : "0";
+      document.getElementById('kpiRataHari').innerText = `${rataHari} Hari`;
+
+      const rataBiaya = Math.round(totalBelanja / total);
+      document.getElementById('kpiRataBiaya').innerText = `Rp ${rataBiaya.toLocaleString('id-ID')}`;
+
+      const rataKep = countKepuasan > 0 ? (totalPoinKepuasan / countKepuasan).toFixed(1) : "4.5";
+      document.getElementById('kpiKepuasan').innerText = `${rataKep} / 5`;
+
+      const persenMinat = Math.round((minatKembaliCount / total) * 100);
+      document.getElementById('kpiMinatKembali').innerText = `Minat kembali: ${persenMinat}%`;
+
+      // Perbarui daftar responden pada target cetak PDF
+      perbaruiDropdownCetak(data);
+    }
+
+    // Render Tabel
+    // Helper pengambilan nilai fleksibel dari data GViz / Apps Script / Demo
+    function getVal(d, ...keys) {
+      for (const k of keys) {
+        if (d && d[k] !== undefined && d[k] !== null && String(d[k]).trim() !== "") {
+          return String(d[k]).trim();
+        }
+      }
+      return "";
+    }
+
+    // Helper render badge angka Likert
+    function renderLikertBadge(val) {
+      if (!val) return '<span style="color:#cbd5e1;">-</span>';
+      const num = parseInt(val, 10);
+      if (isNaN(num)) return `<span>${val}</span>`;
+      const cls = num === 5 ? 'badge-score-5' : num === 4 ? 'badge-score-4' : num === 3 ? 'badge-score-3' : num === 2 ? 'badge-score-2' : 'badge-score-1';
+      return `<span class="${cls}">${num}</span>`;
+    }
+
+    let areAllDetailsOpen = false;
+
+    // Toggle baris lembar rincian per responden
+    window.toggleRowDetail = function(index) {
+      const rowEl = document.getElementById(`rowDetail-${index}`);
+      const iconEl = document.getElementById(`iconToggle-${index}`);
+      if (!rowEl) return;
+      if (rowEl.style.display === 'none' || rowEl.style.display === '') {
+        rowEl.style.display = 'table-row';
+        if (iconEl) iconEl.className = 'fa-solid fa-chevron-down toggle-icon';
+      } else {
+        rowEl.style.display = 'none';
+        if (iconEl) iconEl.className = 'fa-solid fa-chevron-right toggle-icon';
+      }
+    };
+
+    // Toggle seluruh lembar detail sekaligus
+    window.toggleSemuaDetail = function() {
+      areAllDetailsOpen = !areAllDetailsOpen;
+      const rows = document.querySelectorAll('.row-detail-sub');
+      const icons = document.querySelectorAll('.toggle-icon');
+      rows.forEach(r => {
+        r.style.display = areAllDetailsOpen ? 'table-row' : 'none';
+      });
+      icons.forEach(ic => {
+        ic.className = areAllDetailsOpen ? 'fa-solid fa-chevron-down toggle-icon' : 'fa-solid fa-chevron-right toggle-icon';
+      });
+      const lbl = document.getElementById('lblToggleText');
+      if (lbl) {
+        lbl.innerText = areAllDetailsOpen ? 'Tutup Semua Lembar Rincian' : 'Buka Semua Lembar Rincian';
+      }
+    };
+
+    // Render Tabel Master (Menampilkan Langsung Seluruh 55 Kolom Informasi Detail)
+    function renderTabel(data) {
+      const tbody = document.getElementById('tblBodyRekap');
+      if (data.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="55" style="text-align: center; padding: 28px; color: var(--text-muted);">
+              <i class="fa-solid fa-inbox" style="font-size: 24px; margin-bottom: 8px;"></i>
+              <div>Tidak ada data responden yang sesuai dengan filter pencarian.</div>
+            </td>
+          </tr>`;
+        return;
+      }
+
+      tbody.innerHTML = data.map((d, i) => {
+        // 1. Administrasi
+        const noKues = getVal(d, 'No_Kuesioner', 'noKuesioner') || `K-${i+1}`;
+        const tgl = getVal(d, 'Tanggal', 'tglSurvei') || "-";
+        const jam = getVal(d, 'Jam', 'jamSurvei') || "";
+        const waktuSurvei = jam ? `${tgl} <span style="font-size:10px; color:#64748b;">(${jam})</span>` : tgl;
+        const lokasi = getVal(d, 'Lokasi', 'lokasi') || "Lolai";
+
+        // 2. Profil
+        const nama = getVal(d, 'Nama_Responden', 'namaResponden') || "-";
+        const gender = (getVal(d, 'Gender', 'gender') || "-").substring(0, 1);
+        const usia = getVal(d, 'Usia', 'usia') || "-";
+        const asalKat = getVal(d, 'Asal_Kategori', 'asalKategori');
+        const asalDet = getVal(d, 'Asal_Detail', 'asalDetail');
+        const asal = asalDet ? `${asalKat} (${asalDet})` : (asalKat || "-");
+        const pendidikan = getVal(d, 'Pendidikan', 'pendidikan') || "-";
+        const pekerjaan = getVal(d, 'Pekerjaan', 'pekerjaan') || "-";
+        const pengeluaranBulan = getVal(d, 'Pengeluaran_Bulan', 'pengeluaranBulan') || "-";
+
+        // 3. Kunjungan
+        const kunjunganKe = getVal(d, 'Kunjungan_Ke', 'kunjunganKe') || "-";
+        const tujuanUtama = getVal(d, 'Tujuan_Utama', 'tujuanUtama') || "-";
+        const sumberInfo = getVal(d, 'Sumber_Info', 'sumberInfo') || "-";
+        const teman = getVal(d, 'Teman_Perjalanan', 'temanPerjalanan') || "-";
+        const jmlRombongan = getVal(d, 'Jumlah_Rombongan', 'jumlahRombongan') || "1";
+        const temanRombongan = `${teman} (${jmlRombongan} org)`;
+        const kendaraan = getVal(d, 'Kendaraan', 'kendaraan') || "-";
+        const menginap = getVal(d, 'Status_Menginap', 'menginapStatus') || "-";
+        const jamTiba = getVal(d, 'Jam_Tiba', 'jamTiba') || "-";
+        const lamaLolaiRaw = getVal(d, 'Lama_Di_Lolai_Jam', 'lamaDiLolaiJam');
+        const lamaLolai = lamaLolaiRaw ? `${lamaLolaiRaw} Jam` : "-";
+
+        const lamaTotalRaw = getVal(d, 'Lama_Total_Hari', 'lamaTotalHari');
+        let lamaTotalBadge = "-";
+        if (lamaTotalRaw.includes("Warga Lokal") || (asalKat && asalKat.includes("Toraja"))) {
+          lamaTotalBadge = `<span class="badge badge-lokal"><i class="fa-solid fa-house"></i> Lokal</span>`;
+        } else {
+          const numH = parseFloat(lamaTotalRaw) || 0;
+          lamaTotalBadge = numH > 0 ? `<span class="badge badge-turis">${numH} Hari</span>` : (lamaTotalRaw || "-");
+        }
+        const dayaTarik = getVal(d, 'Daya_Tarik_Lain', 'dayaTarikLain') || "-";
+
+        // 4. Biaya
+        const tTiket = parseFloat(getVal(d, 'Biaya_Tiket', 'pengeluaranTiket')) || 0;
+        const tInap = parseFloat(getVal(d, 'Biaya_Penginapan', 'pengeluaranPenginapan')) || 0;
+        const tMakan = parseFloat(getVal(d, 'Biaya_Makan', 'pengeluaranMakan')) || 0;
+        const tSuvenir = parseFloat(getVal(d, 'Biaya_Suvenir', 'pengeluaranSuvenir')) || 0;
+        const tTrans = parseFloat(getVal(d, 'Biaya_Transport', 'pengeluaranTransport')) || 0;
+        const totalBelanja = tTiket + tInap + tMakan + tSuvenir + tTrans;
+
+        // 5. Likert 21a - 21q
+        const q21a = getVal(d, '21a_Awan', 'q21a');
+        const q21b = getVal(d, '21b_Budaya', 'q21b');
+        const q21c = getVal(d, '21c_Variasi', 'q21c');
+        const q21d = getVal(d, '21d_Jalan', 'q21d');
+        const q21e = getVal(d, '21e_Petunjuk', 'q21e');
+        const q21f = getVal(d, '21f_Parkir', 'q21f');
+        const q21g = getVal(d, '21g_TransportUmum', 'q21g');
+        const q21h = getVal(d, '21h_Penginapan', 'q21h');
+        const q21i = getVal(d, '21i_MakanMinum', 'q21i');
+        const q21j = getVal(d, '21j_Toilet', 'q21j');
+        const q21k = getVal(d, '21k_Ibadah', 'q21k');
+        const q21l = getVal(d, '21l_Sinyal', 'q21l');
+        const q21m = getVal(d, '21m_Sampah', 'q21m');
+        const q21n = getVal(d, '21n_Keramahan', 'q21n');
+        const q21o = getVal(d, '21o_Informasi', 'q21o');
+        const q21p = getVal(d, '21p_Keamanan', 'q21p');
+        const q21q = getVal(d, '21q_HargaKualitas', 'q21q');
+
+        // 6. Kepadatan & Keamanan
+        const q22 = getVal(d, '22_KepadatanSunrise', 'q22Kepadatan') || "-";
+        const q23 = getVal(d, '23_GangguanKepadatan', 'q23GangguanKepadatan') || "-";
+        const q24 = getVal(d, '24_RasaAman', 'q24RasaAman');
+        const q24Alasan = getVal(d, '24_AlasanTidakAman', 'q24AlasanTidakAman');
+        const q24Combined = q24 ? (q24Alasan ? `${q24} (${q24Alasan})` : q24) : "-";
+        const q25 = getVal(d, '25_BangunanGanggu', 'q25BangunanGanggu') || "-";
+
+        // 7. Harapan & Saran
+        const q26 = getVal(d, '26_FasilitasPrioritas', 'fasilitasPrioritas') || "-";
+        const q27 = getVal(d, '27_KegiatanBaru', 'kegiatanBaru') || "-";
+        const q28 = getVal(d, '28_TiketWajar', 'tiketWajar') || "-";
+        const q29 = getVal(d, '29_KepuasanTotal', 'kepuasanTotal') || "5";
+        const q30 = getVal(d, '30_MinatKembali', 'minatKembali') || "-";
+        const q31 = getVal(d, '31_Rekomendasi', 'rekomendasi') || "-";
+        const q32 = getVal(d, '32_Saran', 'saran') || "-";
+
+        return `
+          <!-- Baris Utama Master (55 Kolom) -->
+          <tr style="cursor: pointer;" onclick="toggleRowDetail(${i})">
+            <!-- 1. Administrasi -->
+            <td class="col-sticky-1" style="font-weight: 700; text-align: center;">
+              <i id="iconToggle-${i}" class="fa-solid fa-chevron-right toggle-icon" style="font-size: 9px; color: var(--primary); margin-right: 3px;"></i>${i + 1}
+            </td>
+            <td class="col-sticky-2" style="font-weight: 700; color: var(--primary-dark);">${noKues}</td>
+            <td>${waktuSurvei}</td>
+            <td>${lokasi}</td>
+
+            <!-- 2. Profil -->
+            <td style="font-weight: 600;">${nama}</td>
+            <td style="text-align: center;">${gender}</td>
+            <td>${usia}</td>
+            <td class="td-wrap">${asal}</td>
+            <td>${pendidikan}</td>
+            <td>${pekerjaan}</td>
+            <td>${pengeluaranBulan}</td>
+
+            <!-- 3. Kunjungan -->
+            <td>${kunjunganKe}</td>
+            <td class="td-wrap">${tujuanUtama}</td>
+            <td class="td-wrap">${sumberInfo}</td>
+            <td>${temanRombongan}</td>
+            <td>${kendaraan}</td>
+            <td>${menginap}</td>
+            <td>${jamTiba}</td>
+            <td>${lamaLolai}</td>
+            <td>${lamaTotalBadge}</td>
+            <td class="td-wrap">${dayaTarik}</td>
+
+            <!-- 4. Pengeluaran -->
+            <td style="text-align: right;">${tTiket > 0 ? 'Rp ' + tTiket.toLocaleString('id-ID') : '-'}</td>
+            <td style="text-align: right;">${tInap > 0 ? 'Rp ' + tInap.toLocaleString('id-ID') : '-'}</td>
+            <td style="text-align: right;">${tMakan > 0 ? 'Rp ' + tMakan.toLocaleString('id-ID') : '-'}</td>
+            <td style="text-align: right;">${tSuvenir > 0 ? 'Rp ' + tSuvenir.toLocaleString('id-ID') : '-'}</td>
+            <td style="text-align: right;">${tTrans > 0 ? 'Rp ' + tTrans.toLocaleString('id-ID') : '-'}</td>
+            <td style="text-align: right; font-weight: 700; color: #047857;">Rp ${totalBelanja.toLocaleString('id-ID')}</td>
+
+            <!-- 5. Likert 21a - 21q -->
+            <td class="td-likert">${renderLikertBadge(q21a)}</td>
+            <td class="td-likert">${renderLikertBadge(q21b)}</td>
+            <td class="td-likert">${renderLikertBadge(q21c)}</td>
+            <td class="td-likert">${renderLikertBadge(q21d)}</td>
+            <td class="td-likert">${renderLikertBadge(q21e)}</td>
+            <td class="td-likert">${renderLikertBadge(q21f)}</td>
+            <td class="td-likert">${renderLikertBadge(q21g)}</td>
+            <td class="td-likert">${renderLikertBadge(q21h)}</td>
+            <td class="td-likert">${renderLikertBadge(q21i)}</td>
+            <td class="td-likert">${renderLikertBadge(q21j)}</td>
+            <td class="td-likert">${renderLikertBadge(q21k)}</td>
+            <td class="td-likert">${renderLikertBadge(q21l)}</td>
+            <td class="td-likert">${renderLikertBadge(q21m)}</td>
+            <td class="td-likert">${renderLikertBadge(q21n)}</td>
+            <td class="td-likert">${renderLikertBadge(q21o)}</td>
+            <td class="td-likert">${renderLikertBadge(q21p)}</td>
+            <td class="td-likert">${renderLikertBadge(q21q)}</td>
+
+            <!-- 6. Kepadatan & Keamanan -->
+            <td>${q22}</td>
+            <td>${q23}</td>
+            <td class="td-wrap">${q24Combined}</td>
+            <td>${q25}</td>
+
+            <!-- 7. Harapan & Saran -->
+            <td class="td-wrap">${q26}</td>
+            <td class="td-wrap">${q27}</td>
+            <td>${q28}</td>
+            <td style="text-align: center;"><span class="badge badge-sukses">Skor ${q29}</span></td>
+            <td>${q30}</td>
+            <td>${q31}</td>
+            <td class="td-wrap" style="color: #0f766e; font-style: italic;">${q32}</td>
+          </tr>
+
+          <!-- Baris Sub-Detail Lengkap Lembar Jawaban Responden -->
+          <tr id="rowDetail-${i}" class="row-detail-sub" style="display: ${areAllDetailsOpen ? 'table-row' : 'none'};">
+            <td colspan="55" class="row-detail-panel">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1.5px solid #cbd5e1; padding-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+                <div style="font-weight: 700; color: var(--primary-dark); font-size: 13px;">
+                  <i class="fa-solid fa-id-card"></i> Lembar Responden: <strong>${nama}</strong> (${noKues}) — Asal: ${asal}
+                </div>
+                <div style="font-size: 11px; color: #64748b;">
+                  Waktu: <strong>${tgl} ${jam}</strong> | Lokasi: <strong>${lokasi}</strong> | Total Belanja: <strong style="color:#047857;">Rp ${totalBelanja.toLocaleString('id-ID')}</strong>
+                </div>
+              </div>
+              <div class="detail-grid">
+                <div class="detail-item"><div class="detail-label">Profil Responden</div><div class="detail-val">${nama} (${gender}) | Usia: ${usia} | Pendidikan: ${pendidikan} | Pekerjaan: ${pekerjaan}</div></div>
+                <div class="detail-item"><div class="detail-label">Asal & Pengeluaran/Bulan</div><div class="detail-val">${asal} | Pengeluaran Rutin: ${pengeluaranBulan}</div></div>
+                <div class="detail-item"><div class="detail-label">Tujuan & Kunjungan Ke</div><div class="detail-val">Kunjungan Ke: ${kunjunganKe} | Tujuan: ${tujuanUtama} | Sumber Info: ${sumberInfo}</div></div>
+                <div class="detail-item"><div class="detail-label">Rombongan & Kendaraan</div><div class="detail-val">Bersama: ${teman} (${jmlRombongan} orang) | Kendaraan: ${kendaraan}</div></div>
+                <div class="detail-item"><div class="detail-label">Waktu Menginap & Durasi</div><div class="detail-val">Tiba: ${jamTiba} | Menginap: ${menginap} | di Lolai: ${lamaLolai} | di Toraja: ${lamaTotalBadge}</div></div>
+                <div class="detail-item"><div class="detail-label">Daya Tarik Lain Dikunjungi</div><div class="detail-val">${dayaTarik}</div></div>
+                <div class="detail-item"><div class="detail-label">Rincian Pengeluaran di Lolai</div><div class="detail-val">Tiket: Rp ${tTiket.toLocaleString('id-ID')} | Inap: Rp ${tInap.toLocaleString('id-ID')} | Makan: Rp ${tMakan.toLocaleString('id-ID')} | Suvenir: Rp ${tSuvenir.toLocaleString('id-ID')} | Transport: Rp ${tTrans.toLocaleString('id-ID')}</div></div>
+                <div class="detail-item"><div class="detail-label">Kepadatan & Rasa Aman Tebing</div><div class="detail-val">Sunrise: ${q22} | Gangguan Ramai: ${q23} | Rasa Aman: ${q24Combined} | Bangunan: ${q25}</div></div>
+                <div class="detail-item"><div class="detail-label">Fasilitas Prioritas & Usulan Kegiatan</div><div class="detail-val">Fasilitas: ${q26} | Kegiatan Baru: ${q27}</div></div>
+                <div class="detail-item"><div class="detail-label">Evaluasi & Rekomendasi</div><div class="detail-val">Tiket Wajar: ${q28} | Kepuasan: Skor ${q29}/5 | Minat Kembali: ${q30} | Rekomendasi: ${q31}</div></div>
+                <div class="detail-item" style="grid-column: 1 / -1;"><div class="detail-label">Saran & Kritik Perbaikan Destinasi</div><div class="detail-val" style="color: #0f766e; font-weight: 600;">"${q32}"</div></div>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Modal Detail Lembar Jawaban Kuesioner (jika dibutuhkan)
+    window.bukaDetailResponden = function(index) {
+      toggleRowDetail(index);
+    };
+
+    // Tombol Toggle Semua Rincian di Header Tabel
+    const btnToggleAll = document.getElementById('btnToggleAllDetails');
+    if (btnToggleAll) {
+      btnToggleAll.addEventListener('click', toggleSemuaDetail);
+    }
+
+    // Helper penghitungan predikat skor Likert
+    function getPredikatBadgeLikert(mean) {
+      if (mean >= 4.20) {
+        return `<span style="background: #047857; color: #ffffff; padding: 1px 5px; border-radius: 3px; font-weight: 700; font-size: 6pt;">Sangat Baik</span>`;
+      } else if (mean >= 3.40) {
+        return `<span style="background: #0f766e; color: #ffffff; padding: 1px 5px; border-radius: 3px; font-weight: 700; font-size: 6pt;">Baik</span>`;
+      } else if (mean >= 2.60) {
+        return `<span style="background: #d97706; color: #ffffff; padding: 1px 5px; border-radius: 3px; font-weight: 700; font-size: 6pt;">Cukup</span>`;
+      } else {
+        return `<span style="background: #dc2626; color: #ffffff; padding: 1px 5px; border-radius: 3px; font-weight: 700; font-size: 6pt;">Kurang</span>`;
+      }
+    }
+
+    // Fungsi Kalkulasi Nilai Agregat Hasil Rekapan (Halaman Akhir Cetak)
+    function generateSummaryCalculationPage(dataset, totalPages) {
+      if (!dataset || dataset.length === 0) return '';
+      const N = dataset.length;
+      const tglStr = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      // 1. Demografi
+      let countL = 0, countP = 0;
+      let countLokal = 0, countLuar = 0;
+      let countInap = 0, countTidakInap = 0;
+      let sumDurasi = 0, validDurasi = 0;
+      let sumRombongan = 0, validRombongan = 0;
+
+      // 2. Ekonomi
+      let sumTiket = 0, sumInap = 0, sumMakan = 0, sumSuvenir = 0, sumTrans = 0;
+
+      // 3. 17 Indikator Likert (21a - 21q)
+      const likertDefs = [
+        { key: '21a_Awan', altKey: 'q21a', code: '21a', name: 'Panorama Keindahan Awan', kat: 'Daya Tarik' },
+        { key: '21b_Budaya', altKey: 'q21b', code: '21b', name: 'Unsur Budaya Rumah Tongkonan', kat: 'Daya Tarik' },
+        { key: '21c_Variasi', altKey: 'q21c', code: '21c', name: 'Variasi Aktivitas & Atraksi Wisata', kat: 'Daya Tarik' },
+        { key: '21d_Jalan', altKey: 'q21d', code: '21d', name: 'Kondisi & Kelayakan Jalan Akses', kat: 'Aksesibilitas' },
+        { key: '21e_Petunjuk', altKey: 'q21e', code: '21e', name: 'Keberadaan Rambu & Papan Petunjuk', kat: 'Aksesibilitas' },
+        { key: '21f_Parkir', altKey: 'q21f', code: '21f', name: 'Ketersediaan & Ketertiban Area Parkir', kat: 'Aksesibilitas' },
+        { key: '21g_TransportUmum', altKey: 'q21g', code: '21g', name: 'Kemudahan Transportasi Umum / Sewa', kat: 'Aksesibilitas' },
+        { key: '21h_Penginapan', altKey: 'q21h', code: '21h', name: 'Kualitas Homestay / Penginapan', kat: 'Amenitas' },
+        { key: '21i_MakanMinum', altKey: 'q21i', code: '21i', name: 'Ketersediaan Warung Makan & Minum', kat: 'Amenitas' },
+        { key: '21j_Toilet', altKey: 'q21j', code: '21j', name: 'Kebersihan & Kelayakan Toilet Umum', kat: 'Amenitas' },
+        { key: '21k_Ibadah', altKey: 'q21k', code: '21k', name: 'Ketersediaan Fasilitas Tempat Ibadah', kat: 'Amenitas' },
+        { key: '21l_Sinyal', altKey: 'q21l', code: '21l', name: 'Kelancaran Jaringan Sinyal/Internet', kat: 'Amenitas' },
+        { key: '21m_Sampah', altKey: 'q21m', code: '21m', name: 'Kebersihan & Tong Sampah Terpilah', kat: 'Amenitas' },
+        { key: '21n_Keramahan', altKey: 'q21n', code: '21n', name: 'Keramahan & Sambutan Masyarakat Lokal', kat: 'Pelayanan' },
+        { key: '21o_Informasi', altKey: 'q21o', code: '21o', name: 'Kemudahan Memperoleh Info Wisata', kat: 'Pelayanan' },
+        { key: '21p_Keamanan', altKey: 'q21p', code: '21p', name: 'Rasa Aman & Ketertiban Kawasan', kat: 'Pelayanan' },
+        { key: '21q_HargaKualitas', altKey: 'q21q', code: '21q', name: 'Kesesuaian Harga vs Mutu Pengalaman', kat: 'Nilai Ekonomis' }
+      ];
+
+      const likertStats = likertDefs.map(def => ({ ...def, sum: 0, count: 0, mean: 0 }));
+
+      // 4. Kepuasan, Loyalitas & Persepsi
+      let sumKepuasan = 0, countKepuasan = 0;
+      let countMinatKembali = 0;
+      let countRekomendasi = 0;
+      let countAmanTebing = 0;
+      let countPadatSunrise = 0;
+      let countGangguBangunan = 0;
+
+      // Top Usulan Fasilitas & Tiket Wajar
+      const fasFreq = {};
+      const tiketFreq = {};
+
+      dataset.forEach(d => {
+        // Gender
+        const g = (getVal(d, 'Gender', 'gender') || '').toLowerCase();
+        if (g.includes('laki') || g.includes('pria')) countL++;
+        else if (g.includes('perempuan') || g.includes('wanita')) countP++;
+
+        // Asal
+        const asal = (getVal(d, 'Asal_Kategori', 'asalKategori') || '') + ' ' + (getVal(d, 'Asal_Detail', 'asalDetail') || '');
+        if (asal.toLowerCase().includes('toraja') || asal.toLowerCase().includes('lokal')) {
+          countLokal++;
+        } else {
+          countLuar++;
+        }
+
+        // Menginap
+        const m = (getVal(d, 'Status_Menginap', 'menginapStatus') || '').toLowerCase();
+        if (m.includes('menginap') && !m.includes('tidak')) countInap++;
+        else countTidakInap++;
+
+        // Durasi di Lolai
+        const jam = parseFloat(getVal(d, 'Lama_Di_Lolai_Jam', 'lamaDiLolaiJam'));
+        if (!isNaN(jam) && jam > 0) {
+          sumDurasi += jam;
+          validDurasi++;
+        }
+
+        // Rombongan
+        const romb = parseFloat(getVal(d, 'Jumlah_Rombongan', 'jumlahRombongan'));
+        if (!isNaN(romb) && romb > 0) {
+          sumRombongan += romb;
+          validRombongan++;
+        }
+
+        // Biaya
+        sumTiket += parseFloat(getVal(d, 'Biaya_Tiket', 'pengeluaranTiket')) || 0;
+        sumInap += parseFloat(getVal(d, 'Biaya_Penginapan', 'pengeluaranPenginapan')) || 0;
+        sumMakan += parseFloat(getVal(d, 'Biaya_Makan', 'pengeluaranMakan')) || 0;
+        sumSuvenir += parseFloat(getVal(d, 'Biaya_Suvenir', 'pengeluaranSuvenir')) || 0;
+        sumTrans += parseFloat(getVal(d, 'Biaya_Transport', 'pengeluaranTransport')) || 0;
+
+        // Likert
+        likertStats.forEach(item => {
+          const v = parseFloat(getVal(d, item.key, item.altKey));
+          if (!isNaN(v) && v >= 1 && v <= 5) {
+            item.sum += v;
+            item.count++;
+          }
+        });
+
+        // Kepuasan Total (29)
+        const kep = parseFloat(getVal(d, '29_KepuasanTotal', 'kepuasanTotal'));
+        if (!isNaN(kep) && kep >= 1 && kep <= 5) {
+          sumKepuasan += kep;
+          countKepuasan++;
+        }
+
+        // Minat Kembali (30)
+        const kembali = (getVal(d, '30_MinatKembali', 'minatKembali') || '').toLowerCase();
+        if (kembali.includes('pasti') || kembali.includes('mungkin') || kembali.includes('ya')) countMinatKembali++;
+
+        // Rekomendasi (31)
+        const rek = (getVal(d, '31_Rekomendasi', 'rekomendasi') || '').toLowerCase();
+        if (rek.includes('pasti') || rek.includes('kemungkinan') || rek.includes('ya')) countRekomendasi++;
+
+        // Rasa Aman Tebing (24)
+        const aman = (getVal(d, '24_RasaAman', 'q24RasaAman') || '').toLowerCase();
+        if (aman.includes('sangat aman') || aman === 'aman') countAmanTebing++;
+
+        // Kepadatan Sunrise (22)
+        const padat = (getVal(d, '22_KepadatanSunrise', 'q22Kepadatan') || '').toLowerCase();
+        if (padat.includes('padat') || padat.includes('ramai')) countPadatSunrise++;
+
+        // Bangunan Komersial (25)
+        const bgn = (getVal(d, '25_BangunanGanggu', 'q25BangunanGanggu') || '').toLowerCase();
+        if (bgn.includes('mengganggu') || bgn.includes('sedikit mengganggu') || bgn.includes('sangat mengganggu')) countGangguBangunan++;
+
+        // Fasilitas Prioritas (26)
+        const fStr = getVal(d, '26_FasilitasPrioritas', 'fasilitasPrioritas');
+        if (fStr) {
+          fStr.split(/[,;\n]+/).map(s => s.trim()).filter(Boolean).forEach(f => {
+            fasFreq[f] = (fasFreq[f] || 0) + 1;
+          });
+        }
+
+        // Tiket Wajar (28)
+        const tw = getVal(d, '28_TiketWajar', 'tiketWajar');
+        if (tw) {
+          tiketFreq[tw] = (tiketFreq[tw] || 0) + 1;
+        }
+      });
+
+      // Hitung Rata-rata Skor Likert
+      likertStats.forEach(item => {
+        item.mean = item.count > 0 ? (item.sum / item.count) : 0;
+      });
+
+      const validLikert = likertStats.filter(item => item.count > 0);
+      const totalLikertMean = validLikert.length > 0 
+        ? (validLikert.reduce((acc, curr) => acc + curr.mean, 0) / validLikert.length)
+        : 0;
+
+      const sortedLikert = [...validLikert].sort((a, b) => b.mean - a.mean);
+      const bestIndicator = sortedLikert[0] || { name: '-', mean: 0 };
+      const worstIndicator = sortedLikert[sortedLikert.length - 1] || { name: '-', mean: 0 };
+
+      // Kalkulasi Finansial
+      const totalPengeluaran = sumTiket + sumInap + sumMakan + sumSuvenir + sumTrans;
+      const avgPengeluaran = N > 0 ? Math.round(totalPengeluaran / N) : 0;
+
+      // CSI
+      const meanKepuasanVal = countKepuasan > 0 ? (sumKepuasan / countKepuasan) : 0;
+      const csiPct = (meanKepuasanVal / 5) * 100;
+      const predikatCsi = csiPct >= 85 ? 'Sangat Puas' : (csiPct >= 70 ? 'Puas' : (csiPct >= 55 ? 'Cukup Puas' : 'Kurang Puas'));
+
+      // Top Usulan Fasilitas & Tiket Wajar
+      const topFasArr = Object.entries(fasFreq).sort((a, b) => b[1] - a[1]).slice(0, 3).map(e => `${e[0]} (${e[1]} usulan)`);
+      const topFasStr = topFasArr.length > 0 ? topFasArr.join(', ') : 'Toilet bersih berstandar wisata, Tempat sampah terpilah, Pengaman jurang tebing';
+
+      const topTiketArr = Object.entries(tiketFreq).sort((a, b) => b[1] - a[1]).slice(0, 2).map(e => `${e[0]} (${e[1]} suara)`);
+      const topTiketStr = topTiketArr.length > 0 ? topTiketArr.join(' / ') : 'Rp 10.000 - Rp 15.000 (Sesuai fasilitas yang tersedia)';
+
+      return `
+        <div class="formal-sheet-page formal-summary-page">
+          <!-- Kop Dokumen Formal -->
+          <table class="tbl-header-formal">
+            <tr>
+              <td style="width: 72%;">
+                <div style="font-size: 11pt; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: -0.2px;">
+                  <i class="fa-solid fa-square-poll-vertical"></i> LEMBAR KALKULASI & REKAPITULASI NILAI SURVEI
+                </div>
+                <div style="font-size: 7.5pt; color: #475569; margin-top: 2px;">
+                  Kalkulasi Agregat Indikator Kepuasan, Pengeluaran Ekonomi, Profil Kunjungan, dan Evaluasi Rekomendasi Wisatawan Lolai
+                </div>
+              </td>
+              <td style="width: 28%; text-align: right;">
+                <span style="font-size: 8pt; font-weight: 700; color: #475569;">Basis Sampel:</span> 
+                <strong style="font-size: 10.5pt; color: #0f766e; background: #f0fdfa; border: 1.5px solid #0f766e; padding: 2px 8px; border-radius: 4px;">N = ${N} Responden</strong>
+                <div style="font-size: 7pt; color: #64748b; margin-top: 2px;">
+                  Status Data: <strong>Primer Lengkap</strong>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <!-- Dual Tables Bersisian (Kiri & Kanan) Murni Format Tabel Bergaris Resmi -->
+          <div style="display: grid; grid-template-columns: 1fr 1.08fr; gap: 8px; flex: 1;">
+            
+            <!-- KOLOM KIRI: Profil Demografi, Pengeluaran Ekonomi, dan CSI/Loyalitas -->
+            <table class="formal-report-table">
+              <thead>
+                <tr>
+                  <th colspan="2">BAGIAN 1: STATISTIK DEMOGRAFI & KARAKTERISTIK WISATAWAN</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="col-param">Total Responden Terdata (N)</td><td class="col-val">${N} Orang (100%)</td></tr>
+                <tr><td class="col-param">Proporsi Jenis Kelamin</td><td class="col-val">Laki-laki: ${countL} (${N > 0 ? Math.round((countL/N)*100) : 0}%) | Perempuan: ${countP} (${N > 0 ? Math.round((countP/N)*100) : 0}%)</td></tr>
+                <tr><td class="col-param">Sebaran Asal Domisili</td><td class="col-val">Lokal Toraja: ${countLokal} (${N > 0 ? Math.round((countLokal/N)*100) : 0}%) | Luar Toraja: ${countLuar} (${N > 0 ? Math.round((countLuar/N)*100) : 0}%)</td></tr>
+                <tr><td class="col-param">Karakteristik Menginap</td><td class="col-val">Menginap: ${countInap} (${N > 0 ? Math.round((countInap/N)*100) : 0}%) | Pulang Hari: ${countTidakInap} (${N > 0 ? Math.round((countTidakInap/N)*100) : 0}%)</td></tr>
+                <tr><td class="col-param">Rata-rata Durasi di Lolai</td><td class="col-val">${validDurasi > 0 ? (sumDurasi / validDurasi).toFixed(1) : "-"} Jam</td></tr>
+                <tr><td class="col-param">Rata-rata Ukuran Rombongan</td><td class="col-val">${validRombongan > 0 ? (sumRombongan / validRombongan).toFixed(1) : "-"} Orang / Rombongan</td></tr>
+              </tbody>
+
+              <thead>
+                <tr>
+                  <th colspan="2">BAGIAN 2: KALKULASI PENGELUARAN EKONOMI WISATAWAN (RP)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="col-param">1. Tiket Masuk & Parkir</td><td class="col-val" style="text-align: right;">Total: Rp ${sumTiket.toLocaleString('id-ID')} | Rata2: Rp ${Math.round(sumTiket/N).toLocaleString('id-ID')}</td></tr>
+                <tr><td class="col-param">2. Penginapan / Homestay</td><td class="col-val" style="text-align: right;">Total: Rp ${sumInap.toLocaleString('id-ID')} | Rata2: Rp ${Math.round(sumInap/N).toLocaleString('id-ID')}</td></tr>
+                <tr><td class="col-param">3. Makanan & Minuman</td><td class="col-val" style="text-align: right;">Total: Rp ${sumMakan.toLocaleString('id-ID')} | Rata2: Rp ${Math.round(sumMakan/N).toLocaleString('id-ID')}</td></tr>
+                <tr><td class="col-param">4. Belanja Suvenir & Kopi Lokal</td><td class="col-val" style="text-align: right;">Total: Rp ${sumSuvenir.toLocaleString('id-ID')} | Rata2: Rp ${Math.round(sumSuvenir/N).toLocaleString('id-ID')}</td></tr>
+                <tr><td class="col-param">5. Transportasi Lokal PP</td><td class="col-val" style="text-align: right;">Total: Rp ${sumTrans.toLocaleString('id-ID')} | Rata2: Rp ${Math.round(sumTrans/N).toLocaleString('id-ID')}</td></tr>
+                <tr style="background: #f0fdfa;">
+                  <td class="col-param" style="font-weight: 800; color: #0f766e;">TOTAL PERPUTARAN DARI SAMPEL</td>
+                  <td class="col-val" style="text-align: right; font-weight: 800; color: #047857; font-size: 7.8pt;">Rp ${totalPengeluaran.toLocaleString('id-ID')}</td>
+                </tr>
+                <tr style="background: #f0fdfa;">
+                  <td class="col-param" style="font-weight: 800; color: #0f766e;">RATA-RATA BELANJA / KAPITA</td>
+                  <td class="col-val" style="text-align: right; font-weight: 800; color: #047857; font-size: 7.8pt;">Rp ${avgPengeluaran.toLocaleString('id-ID')} / Orang</td>
+                </tr>
+              </tbody>
+
+              <thead>
+                <tr>
+                  <th colspan="2">BAGIAN 3: INDEKS KEPUASAN (CSI), LOYALITAS & DAYA DUKUNG</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="col-param">Customer Satisfaction Index (CSI)</td><td class="col-val" style="color: #047857; font-weight: 800;">${meanKepuasanVal.toFixed(2)} / 5.00 (${csiPct.toFixed(1)}% - ${predikatCsi})</td></tr>
+                <tr><td class="col-param">Intensi Kunjungan Ulang (Loyalitas)</td><td class="col-val">${countMinatKembali} Responden (${N > 0 ? Math.round((countMinatKembali/N)*100) : 0}%) Berniat Kembali</td></tr>
+                <tr><td class="col-param">Tingkat Kesediaan Rekomendasi</td><td class="col-val">${countRekomendasi} Responden (${N > 0 ? Math.round((countRekomendasi/N)*100) : 0}%) Merekomendasikan</td></tr>
+                <tr><td class="col-param">Persepsi Rasa Aman di Tepi Tebing</td><td class="col-val">${countAmanTebing} Responden (${N > 0 ? Math.round((countAmanTebing/N)*100) : 0}%) Menyatakan Aman</td></tr>
+                <tr><td class="col-param">Isu Bangunan Ganggu Estetika</td><td class="col-val">${countGangguBangunan} Responden (${N > 0 ? Math.round((countGangguBangunan/N)*100) : 0}%) Merasa Mengganggu</td></tr>
+              </tbody>
+            </table>
+
+            <!-- KOLOM KANAN: Matriks Likert 17 Indikator & Rekomendasi Prioritas -->
+            <table class="formal-report-table">
+              <thead>
+                <tr>
+                  <th colspan="4">BAGIAN 4: KALKULASI SKOR RATA-RATA 17 INDIKATOR FASILITAS (LIKERT 1–5)</th>
+                </tr>
+              </thead>
+              <thead class="subhead">
+                <tr>
+                  <th style="width: 38%;">Indikator Penilaian</th>
+                  <th style="width: 12%; text-align: center;">Rata2</th>
+                  <th style="width: 38%;">Indikator Penilaian</th>
+                  <th style="width: 12%; text-align: center;">Rata2</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>21a Panorama Awan</td><td style="text-align: center;"><strong>${likertStats[0].mean.toFixed(2)}</strong></td><td>21j Toilet Umum</td><td style="text-align: center;"><strong>${likertStats[9].mean.toFixed(2)}</strong></td></tr>
+                <tr><td>21b Budaya Tongkonan</td><td style="text-align: center;"><strong>${likertStats[1].mean.toFixed(2)}</strong></td><td>21k Tempat Ibadah</td><td style="text-align: center;"><strong>${likertStats[10].mean.toFixed(2)}</strong></td></tr>
+                <tr><td>21c Variasi Aktivitas</td><td style="text-align: center;"><strong>${likertStats[2].mean.toFixed(2)}</strong></td><td>21l Jaringan/Sinyal</td><td style="text-align: center;"><strong>${likertStats[11].mean.toFixed(2)}</strong></td></tr>
+                <tr><td>21d Kondisi Jalan Akses</td><td style="text-align: center;"><strong>${likertStats[3].mean.toFixed(2)}</strong></td><td>21m Tempat Sampah</td><td style="text-align: center;"><strong>${likertStats[12].mean.toFixed(2)}</strong></td></tr>
+                <tr><td>21e Rambu & Petunjuk</td><td style="text-align: center;"><strong>${likertStats[4].mean.toFixed(2)}</strong></td><td>21n Keramahan Warga</td><td style="text-align: center;"><strong>${likertStats[13].mean.toFixed(2)}</strong></td></tr>
+                <tr><td>21f Area Parkir</td><td style="text-align: center;"><strong>${likertStats[5].mean.toFixed(2)}</strong></td><td>21o Akses Informasi</td><td style="text-align: center;"><strong>${likertStats[14].mean.toFixed(2)}</strong></td></tr>
+                <tr><td>21g Angkutan Umum</td><td style="text-align: center;"><strong>${likertStats[6].mean.toFixed(2)}</strong></td><td>21p Keamanan Kawasan</td><td style="text-align: center;"><strong>${likertStats[15].mean.toFixed(2)}</strong></td></tr>
+                <tr><td>21h Homestay/Penginapan</td><td style="text-align: center;"><strong>${likertStats[7].mean.toFixed(2)}</strong></td><td>21q Harga vs Kualitas</td><td style="text-align: center;"><strong>${likertStats[16].mean.toFixed(2)}</strong></td></tr>
+                <tr><td>21i Warung Makan/Minum</td><td style="text-align: center;"><strong>${likertStats[8].mean.toFixed(2)}</strong></td><td colspan="2" style="text-align: center; background: #f0fdfa; color: #0f766e; font-weight: 700;">Rata2 Keseluruhan: <strong>${totalLikertMean.toFixed(2)} / 5.00</strong></td></tr>
+              </tbody>
+
+              <thead>
+                <tr>
+                  <th colspan="4">BAGIAN 5: RANGKUMAN EVALUASI & REKOMENDASI STRATEGIS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="2" class="col-param" style="color: #047857; font-weight: 800;"><i class="fa-solid fa-trophy"></i> Indikator Tertinggi (Kekuatan Utama)</td>
+                  <td colspan="2" class="col-val" style="color: #047857; font-weight: 800;">${bestIndicator.name} (Skor: ${bestIndicator.mean.toFixed(2)})</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="col-param" style="color: #b91c1c; font-weight: 800;"><i class="fa-solid fa-triangle-exclamation"></i> Indikator Terendah (Prioritas Benahi)</td>
+                  <td colspan="2" class="col-val" style="color: #b91c1c; font-weight: 800;">${worstIndicator.name} (Skor: ${worstIndicator.mean.toFixed(2)})</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="col-param">Fasilitas Prioritas Paling Diinginkan</td>
+                  <td colspan="2" class="col-val">${topFasStr}</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="col-param">Ekspektasi Tarif Tiket Wajar</td>
+                  <td colspan="2" class="col-val">${topTiketStr}</td>
+                </tr>
+                <tr>
+                  <td colspan="4" style="background: #f8fafc; padding: 4px 6px;">
+                    <div style="font-size: 6.5pt; font-weight: 700; color: #0f766e; text-transform: uppercase;">Catatan Analisis & Kebijakan:</div>
+                    <div style="font-size: 7pt; font-weight: 600; color: #1e293b; margin-top: 2px; line-height: 1.3;">
+                      Secara agregat kawasan wisata Lolai memiliki daya tarik keindahan alam dan keramahan masyarakat yang sangat tinggi. Intervensi kebijakan mendesak terfokus pada perbaikan akses jalan, penyediaan toilet higienis berstandar wisata, penataan tempat sampah terpilah, dan perlindungan keamanan di tepi tebing jurang.
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+          <!-- Catatan Kaki Tabel Formal -->
+          <div class="formal-footer-table">
+            <div>Dokumen Resmi Lembar Rekapitulasi & Kalkulasi Nilai Survei Wisatawan Lolai — Sumber Data: Google Sheets Terpadu</div>
+            <div>Tanggal Kalkulasi: ${tglStr} | Lembar ke-${totalPages} dari ${totalPages} (Halaman Rekapitulasi & Kalkulasi Nilai)</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Fungsi Render Lembar Cetak Dossier Landscape (Pas 1 Halaman A4 per Responden)
+    function generateDossierPrint() {
+      const container = document.getElementById('printDossierContainer');
+      if (!container) return;
+
+      const selVal = document.getElementById('selCetakResponden') ? document.getElementById('selCetakResponden').value : 'all';
+      let dataToPrint = filteredData;
+
+      if (selVal !== 'all') {
+        const idx = parseInt(selVal, 10);
+        if (!isNaN(idx) && filteredData[idx]) {
+          dataToPrint = [filteredData[idx]];
+        }
+      }
+
+      if (dataToPrint.length === 0) {
+        container.innerHTML = '<div style="padding: 24px; text-align: center; color: #64748b;">Tidak ada data responden untuk dicetak.</div>';
+        return;
+      }
+
+      const tglStr = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+      const chkSummary = document.getElementById('chkIncludeSummaryPage');
+      const includeSummary = chkSummary ? chkSummary.checked : true;
+      const totalPages = dataToPrint.length + (includeSummary ? 1 : 0);
+
+      let html = dataToPrint.map((d, i) => {
+        const noKues = getVal(d, 'No_Kuesioner', 'noKuesioner') || `K-${i+1}`;
+        const tgl = getVal(d, 'Tanggal', 'tglSurvei') || "-";
+        const jam = getVal(d, 'Jam', 'jamSurvei') || "";
+        const lokasi = getVal(d, 'Lokasi', 'lokasi') || "Lolai, Toraja Utara";
+
+        const nama = getVal(d, 'Nama_Responden', 'namaResponden') || "-";
+        const gender = getVal(d, 'Gender', 'gender') || "-";
+        const usia = getVal(d, 'Usia', 'usia') || "-";
+        const asalKat = getVal(d, 'Asal_Kategori', 'asalKategori');
+        const asalDet = getVal(d, 'Asal_Detail', 'asalDetail');
+        const asal = asalDet ? `${asalKat} (${asalDet})` : (asalKat || "-");
+        const pendidikan = getVal(d, 'Pendidikan', 'pendidikan') || "-";
+        const pekerjaan = getVal(d, 'Pekerjaan', 'pekerjaan') || "-";
+        const pengeluaranBulan = getVal(d, 'Pengeluaran_Bulan', 'pengeluaranBulan') || "-";
+
+        const kunjunganKe = getVal(d, 'Kunjungan_Ke', 'kunjunganKe') || "-";
+        const tujuanUtama = getVal(d, 'Tujuan_Utama', 'tujuanUtama') || "-";
+        const sumberInfo = getVal(d, 'Sumber_Info', 'sumberInfo') || "-";
+        const teman = getVal(d, 'Teman_Perjalanan', 'temanPerjalanan') || "-";
+        const jmlRombongan = getVal(d, 'Jumlah_Rombongan', 'jumlahRombongan') || "1";
+        const kendaraan = getVal(d, 'Kendaraan', 'kendaraan') || "-";
+        const menginap = getVal(d, 'Status_Menginap', 'menginapStatus') || "-";
+        const jamTiba = getVal(d, 'Jam_Tiba', 'jamTiba') || "-";
+        const lamaLolai = getVal(d, 'Lama_Di_Lolai_Jam', 'lamaDiLolaiJam') ? `${getVal(d, 'Lama_Di_Lolai_Jam', 'lamaDiLolaiJam')} Jam` : "-";
+        const lamaTotal = getVal(d, 'Lama_Total_Hari', 'lamaTotalHari') || "-";
+        const dayaTarik = getVal(d, 'Daya_Tarik_Lain', 'dayaTarikLain') || "-";
+
+        const tTiket = parseFloat(getVal(d, 'Biaya_Tiket', 'pengeluaranTiket')) || 0;
+        const tInap = parseFloat(getVal(d, 'Biaya_Penginapan', 'pengeluaranPenginapan')) || 0;
+        const tMakan = parseFloat(getVal(d, 'Biaya_Makan', 'pengeluaranMakan')) || 0;
+        const tSuvenir = parseFloat(getVal(d, 'Biaya_Suvenir', 'pengeluaranSuvenir')) || 0;
+        const tTrans = parseFloat(getVal(d, 'Biaya_Transport', 'pengeluaranTransport')) || 0;
+        const totalBelanja = tTiket + tInap + tMakan + tSuvenir + tTrans;
+
+        const q21a = getVal(d, '21a_Awan', 'q21a') || "-";
+        const q21b = getVal(d, '21b_Budaya', 'q21b') || "-";
+        const q21c = getVal(d, '21c_Variasi', 'q21c') || "-";
+        const q21d = getVal(d, '21d_Jalan', 'q21d') || "-";
+        const q21e = getVal(d, '21e_Petunjuk', 'q21e') || "-";
+        const q21f = getVal(d, '21f_Parkir', 'q21f') || "-";
+        const q21g = getVal(d, '21g_TransportUmum', 'q21g') || "-";
+        const q21h = getVal(d, '21h_Penginapan', 'q21h') || "-";
+        const q21i = getVal(d, '21i_MakanMinum', 'q21i') || "-";
+        const q21j = getVal(d, '21j_Toilet', 'q21j') || "-";
+        const q21k = getVal(d, '21k_Ibadah', 'q21k') || "-";
+        const q21l = getVal(d, '21l_Sinyal', 'q21l') || "-";
+        const q21m = getVal(d, '21m_Sampah', 'q21m') || "-";
+        const q21n = getVal(d, '21n_Keramahan', 'q21n') || "-";
+        const q21o = getVal(d, '21o_Informasi', 'q21o') || "-";
+        const q21p = getVal(d, '21p_Keamanan', 'q21p') || "-";
+        const q21q = getVal(d, '21q_HargaKualitas', 'q21q') || "-";
+
+        const q22 = getVal(d, '22_KepadatanSunrise', 'q22Kepadatan') || "-";
+        const q23 = getVal(d, '23_GangguanKepadatan', 'q23GangguanKepadatan') || "-";
+        const q24 = getVal(d, '24_RasaAman', 'q24RasaAman') || "-";
+        const q24Alasan = getVal(d, '24_AlasanTidakAman', 'q24AlasanTidakAman');
+        const q24Combined = q24Alasan ? `${q24} (Alasan: ${q24Alasan})` : q24;
+        const q25 = getVal(d, '25_BangunanGanggu', 'q25BangunanGanggu') || "-";
+
+        const q26 = getVal(d, '26_FasilitasPrioritas', 'fasilitasPrioritas') || "-";
+        const q27 = getVal(d, '27_KegiatanBaru', 'kegiatanBaru') || "-";
+        const q28 = getVal(d, '28_TiketWajar', 'tiketWajar') || "-";
+        const q29 = getVal(d, '29_KepuasanTotal', 'kepuasanTotal') || "5";
+        const q30 = getVal(d, '30_MinatKembali', 'minatKembali') || "-";
+        const q31 = getVal(d, '31_Rekomendasi', 'rekomendasi') || "-";
+        const q32 = getVal(d, '32_Saran', 'saran') || "Tidak ada saran tambahan.";
+
+        return `
+          <div class="formal-sheet-page">
+            <!-- Kop Dokumen Formal -->
+            <table class="tbl-header-formal">
+              <tr>
+                <td style="width: 68%;">
+                  <div style="font-size: 11pt; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: -0.2px;">
+                    <i class="fa-solid fa-table"></i> LEMBAR TABULASI HASIL SURVEI WISATAWAN LOLAI
+                  </div>
+                  <div style="font-size: 7.5pt; color: #475569; margin-top: 2px;">
+                    Studi Evaluasi & Pengembangan Kawasan Wisata Negeri di Atas Awan Lolai — Kec. Kapala Pitu, Kab. Toraja Utara
+                  </div>
+                </td>
+                <td style="width: 32%; text-align: right;">
+                  <span style="font-size: 8pt; font-weight: 700; color: #475569;">No. Kuesioner:</span> 
+                  <strong style="font-size: 10.5pt; color: #0f766e; background: #f0fdfa; border: 1.5px solid #0f766e; padding: 2px 8px; border-radius: 4px;">${noKues}</strong>
+                  <div style="font-size: 7pt; color: #64748b; margin-top: 2px;">
+                    Waktu: <strong>${tgl} ${jam}</strong> | Lokasi: <strong>${lokasi}</strong>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <!-- Dual Tables Bersisian (Kiri & Kanan) Murni Format Tabel Bergaris Resmi -->
+            <div style="display: grid; grid-template-columns: 1fr 1.08fr; gap: 8px; flex: 1;">
+              
+              <!-- TABEL KIRI: Bagian A, B, dan C -->
+              <table class="formal-report-table">
+                <thead>
+                  <tr>
+                    <th colspan="2">BAGIAN A: IDENTITAS & PROFIL RESPONDEN</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td class="col-param">Nama Lengkap Responden</td><td class="col-val">${nama}</td></tr>
+                  <tr><td class="col-param">Jenis Kelamin / Usia</td><td class="col-val">${gender} / ${usia} tahun</td></tr>
+                  <tr><td class="col-param">Asal Daerah (Domisili)</td><td class="col-val">${asal}</td></tr>
+                  <tr><td class="col-param">Tingkat Pendidikan Terakhir</td><td class="col-val">${pendidikan}</td></tr>
+                  <tr><td class="col-param">Pekerjaan Utama</td><td class="col-val">${pekerjaan}</td></tr>
+                  <tr><td class="col-param">Rata-rata Pengeluaran / Bulan</td><td class="col-val">${pengeluaranBulan}</td></tr>
+                </tbody>
+
+                <thead>
+                  <tr>
+                    <th colspan="2">BAGIAN B: KARAKTERISTIK KUNJUNGAN WISATA</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td class="col-param">Intensitas Kunjungan ke Lolai</td><td class="col-val">${kunjunganKe}</td></tr>
+                  <tr><td class="col-param">Tujuan Utama Perjalanan</td><td class="col-val">${tujuanUtama}</td></tr>
+                  <tr><td class="col-param">Sumber Informasi Destinasi</td><td class="col-val">${sumberInfo}</td></tr>
+                  <tr><td class="col-param">Teman & Jumlah Rombongan</td><td class="col-val">${teman} (${jmlRombongan} orang)</td></tr>
+                  <tr><td class="col-param">Moda Transportasi Digunakan</td><td class="col-val">${kendaraan}</td></tr>
+                  <tr><td class="col-param">Waktu Tiba & Status Menginap</td><td class="col-val">${jamTiba} (${menginap})</td></tr>
+                  <tr><td class="col-param">Durasi Kunjungan di Lolai</td><td class="col-val">${lamaLolai}</td></tr>
+                  <tr><td class="col-param">Lama Total Perjalanan di Toraja</td><td class="col-val">${lamaTotal}</td></tr>
+                  <tr><td class="col-param">Daya Tarik Lain yang Dikunjungi</td><td class="col-val">${dayaTarik}</td></tr>
+                </tbody>
+
+                <thead>
+                  <tr>
+                    <th colspan="2">BAGIAN C: RINCIAN PENGELUARAN SELAMA DI LOLAI (RP)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td class="col-param">1. Tiket Masuk & Parkir</td><td class="col-val" style="text-align: right;">Rp ${tTiket.toLocaleString('id-ID')}</td></tr>
+                  <tr><td class="col-param">2. Penginapan / Homestay</td><td class="col-val" style="text-align: right;">Rp ${tInap.toLocaleString('id-ID')}</td></tr>
+                  <tr><td class="col-param">3. Makanan & Minuman</td><td class="col-val" style="text-align: right;">Rp ${tMakan.toLocaleString('id-ID')}</td></tr>
+                  <tr><td class="col-param">4. Belanja Suvenir & Produk Lokal</td><td class="col-val" style="text-align: right;">Rp ${tSuvenir.toLocaleString('id-ID')}</td></tr>
+                  <tr><td class="col-param">5. Transportasi Lokal PP</td><td class="col-val" style="text-align: right;">Rp ${tTrans.toLocaleString('id-ID')}</td></tr>
+                  <tr style="background: #f0fdfa;">
+                    <td class="col-param" style="font-weight: 800; color: #0f766e;">TOTAL ESTIMASI PENGELUARAN</td>
+                    <td class="col-val" style="text-align: right; font-weight: 800; color: #047857; font-size: 7.8pt;">Rp ${totalBelanja.toLocaleString('id-ID')}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- TABEL KANAN: Bagian D, E, F, dan G -->
+              <table class="formal-report-table">
+                <thead>
+                  <tr>
+                    <th colspan="4">BAGIAN D: PENILAIAN 17 ASPEK FASILITAS & DESTINASI (LIKERT 1–5)</th>
+                  </tr>
+                </thead>
+                <thead class="subhead">
+                  <tr>
+                    <th style="width: 38%;">Indikator Penilaian</th>
+                    <th style="width: 12%; text-align: center;">Skor</th>
+                    <th style="width: 38%;">Indikator Penilaian</th>
+                    <th style="width: 12%; text-align: center;">Skor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>21a Panorama Awan</td><td style="text-align: center;">${renderLikertBadge(q21a)}</td><td>21j Toilet Umum</td><td style="text-align: center;">${renderLikertBadge(q21j)}</td></tr>
+                  <tr><td>21b Budaya Tongkonan</td><td style="text-align: center;">${renderLikertBadge(q21b)}</td><td>21k Tempat Ibadah</td><td style="text-align: center;">${renderLikertBadge(q21k)}</td></tr>
+                  <tr><td>21c Variasi Aktivitas</td><td style="text-align: center;">${renderLikertBadge(q21c)}</td><td>21l Jaringan/Sinyal</td><td style="text-align: center;">${renderLikertBadge(q21l)}</td></tr>
+                  <tr><td>21d Kondisi Jalan Akses</td><td style="text-align: center;">${renderLikertBadge(q21d)}</td><td>21m Tempat Sampah</td><td style="text-align: center;">${renderLikertBadge(q21m)}</td></tr>
+                  <tr><td>21e Rambu & Petunjuk</td><td style="text-align: center;">${renderLikertBadge(q21e)}</td><td>21n Keramahan Warga</td><td style="text-align: center;">${renderLikertBadge(q21n)}</td></tr>
+                  <tr><td>21f Area Parkir</td><td style="text-align: center;">${renderLikertBadge(q21f)}</td><td>21o Akses Informasi</td><td style="text-align: center;">${renderLikertBadge(q21o)}</td></tr>
+                  <tr><td>21g Angkutan Umum</td><td style="text-align: center;">${renderLikertBadge(q21g)}</td><td>21p Keamanan Kawasan</td><td style="text-align: center;">${renderLikertBadge(q21p)}</td></tr>
+                  <tr><td>21h Homestay/Penginapan</td><td style="text-align: center;">${renderLikertBadge(q21h)}</td><td>21q Harga vs Kualitas</td><td style="text-align: center;">${renderLikertBadge(q21q)}</td></tr>
+                  <tr><td>21i Warung Makan/Minum</td><td style="text-align: center;">${renderLikertBadge(q21i)}</td><td colspan="2" style="text-align: center; color: #64748b; font-size: 6pt; background: #f8fafc;">Skala: 1 (Sgt Buruk) s/d 5 (Sgt Baik)</td></tr>
+                </tbody>
+
+                <thead>
+                  <tr>
+                    <th colspan="4">BAGIAN E: DAYA DUKUNG, KEPADATAN & KEAMANAN KAWASAN</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="2" class="col-param">22. Kepadatan Pengunjung Sunrise</td><td colspan="2" class="col-val">${q22}</td></tr>
+                  <tr><td colspan="2" class="col-param">23. Gangguan Akibat Keramaian / Antrean</td><td colspan="2" class="col-val">${q23}</td></tr>
+                  <tr><td colspan="2" class="col-param">24. Rasa Aman di Tebing/Jurang</td><td colspan="2" class="col-val">${q24Combined}</td></tr>
+                  <tr><td colspan="2" class="col-param">25. Gangguan Bangunan Komersial</td><td colspan="2" class="col-val">${q25}</td></tr>
+                </tbody>
+
+                <thead>
+                  <tr>
+                    <th colspan="4">BAGIAN F: EVALUASI, HARAPAN & SARAN RESISTENSI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="2" class="col-param">26. Fasilitas Prioritas Diinginkan</td><td colspan="2" class="col-val">${q26}</td></tr>
+                  <tr><td colspan="2" class="col-param">27. Atraksi / Kegiatan Baru Diminati</td><td colspan="2" class="col-val">${q27}</td></tr>
+                  <tr><td colspan="2" class="col-param">28. Harga Tiket Masuk yang Dinilai Wajar</td><td colspan="2" class="col-val">${q28}</td></tr>
+                  <tr><td colspan="2" class="col-param">29. Tingkat Kepuasan Total</td><td colspan="2" class="col-val" style="color: #047857; font-weight: 800;">Skor ${q29} / 5</td></tr>
+                  <tr><td colspan="2" class="col-param">30. Minat Kembali & 31. Rekomendasi</td><td colspan="2" class="col-val">${q30} | Rekomendasi: ${q31}</td></tr>
+                  <tr>
+                    <td colspan="4" style="background: #f0fdfa; padding: 4px 6px;">
+                      <div style="font-size: 6.5pt; font-weight: 700; color: #0f766e; text-transform: uppercase;">32. Kritik & Saran Responden:</div>
+                      <div style="font-size: 7.2pt; font-weight: 600; color: #0f172a; font-style: italic; margin-top: 1px;">"${q32}"</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+            <!-- Catatan Kaki Tabel Formal -->
+            <div class="formal-footer-table">
+              <div>Dokumen Resmi Lembar Tabulasi Survei Wisatawan Lolai — Data Primer Tersinkronisasi Google Sheets</div>
+              <div>Tanggal Cetak: ${tglStr} | Lembar ke-${i+1} dari ${totalPages}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Tambahkan Halaman Kalkulasi Nilai Rekapitulasi di Lembar Akhir Cetak jika diaktifkan
+      if (includeSummary) {
+        const summaryData = (selVal === 'all' || !filteredData || filteredData.length === 0) ? filteredData : filteredData;
+        html += generateSummaryCalculationPage(summaryData, totalPages);
+      }
+
+      container.innerHTML = html;
+    }
+
+    // Event listener untuk pembaruan instan preview saat opsi diubah
+    const chkSummaryPage = document.getElementById('chkIncludeSummaryPage');
+    if (chkSummaryPage) {
+      chkSummaryPage.addEventListener('change', () => {
+        const container = document.getElementById('printDossierContainer');
+        if (container && container.classList.contains('preview-on-screen')) {
+          generateDossierPrint();
+        }
+      });
+    }
+
+    const selTargetResponden = document.getElementById('selCetakResponden');
+    if (selTargetResponden) {
+      selTargetResponden.addEventListener('change', () => {
+        const container = document.getElementById('printDossierContainer');
+        if (container && container.classList.contains('preview-on-screen')) {
+          generateDossierPrint();
+        }
+      });
+    }
+
+    // Toggle Preview Lembar Cetak Dossier di Layar
+    const btnPreview = document.getElementById('btnPreviewDossier');
+    if (btnPreview) {
+      btnPreview.addEventListener('click', () => {
+        const container = document.getElementById('printDossierContainer');
+        const mainDoc = document.querySelector('.print-document');
+        const lbl = document.getElementById('lblPreviewBtnText');
+        
+        if (container.classList.contains('preview-on-screen')) {
+          container.classList.remove('preview-on-screen');
+          mainDoc.style.display = 'block';
+          lbl.innerText = 'Preview Lembar Cetak';
+          btnPreview.className = 'btn btn-secondary';
+        } else {
+          generateDossierPrint();
+          container.classList.add('preview-on-screen');
+          mainDoc.style.display = 'none';
+          lbl.innerText = 'Kembali ke Tabel';
+          btnPreview.className = 'btn btn-primary';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    }
+
+    // Update Dropdown Pilihan Responden untuk Cetak
+    function perbaruiDropdownCetak(data) {
+      const selCetak = document.getElementById('selCetakResponden');
+      if (!selCetak) return;
+      const curVal = selCetak.value;
+      selCetak.innerHTML = `<option value="all">Semua Responden (${data.length} Orang - 1 Hal/Org)</option>` +
+        data.map((d, i) => {
+          const noKues = getVal(d, 'No_Kuesioner', 'noKuesioner') || `K-${i+1}`;
+          const nama = getVal(d, 'Nama_Responden', 'namaResponden') || `Responden ${i+1}`;
+          const asal = getVal(d, 'Asal_Detail', 'asalDetail') || getVal(d, 'Asal_Kategori', 'asalKategori') || "";
+          return `<option value="${i}">${noKues} - ${nama} ${asal ? '(' + asal + ')' : ''}</option>`;
+        }).join('');
+      if (curVal && selCetak.querySelector(`option[value="${curVal}"]`)) {
+        selCetak.value = curVal;
+      }
+    }
+
+    // Event Listeners Filter
+    document.getElementById('txtCari').addEventListener('input', terapkanFilterDanRender);
+    document.getElementById('filterAsal').addEventListener('change', terapkanFilterDanRender);
+    document.getElementById('filterKunjungan').addEventListener('change', terapkanFilterDanRender);
+
+    // Tombol Cetak PDF
+    document.getElementById('btnCetakPDF').addEventListener('click', () => {
+      const optMode = document.querySelector('input[name="optPrintMode"]:checked')?.value || 'dossier';
+      
+      if (optMode === 'dossier') {
+        document.body.classList.remove('mode-print-table');
+        generateDossierPrint();
+      } else {
+        document.body.classList.add('mode-print-table');
+      }
+
+      window.print();
+    });
+
+    // Tombol Sinkronisasi
+    document.getElementById('btnSyncData').addEventListener('click', () => {
+      muatDataSurvei();
+    });
+
+    // Data Demo Standar jika spreadsheet masih tahap awal
+    function buatDataDemo() {
+      return [
+        {
+          No_Kuesioner: "K-001",
+          Tanggal: "2026-10-22",
+          Jam: "06:15",
+          Nama_Responden: "Yohanes Rantelino",
+          Lokasi: "Gardu Pandang Utama Puncak",
+          Gender: "Laki-laki",
+          Usia: "25–34",
+          Asal_Kategori: "Toraja Utara/Tana Toraja",
+          Asal_Detail: "Rantepao",
+          Pendidikan: "S1",
+          Pekerjaan: "Pegawai swasta",
+          Pengeluaran_Bulan: "Rp3–5 juta",
+          Kunjungan_Ke: "Lebih dari dua kali",
+          Tujuan_Utama: "Wisata alam",
+          Sumber_Info: "Teman/keluarga",
+          Teman_Perjalanan: "Teman",
+          Jumlah_Rombongan: 4,
+          Kendaraan: "Sepeda motor",
+          Status_Menginap: "Tidak menginap (pulang hari)",
+          Jam_Tiba: "Hari ini, 05:00",
+          Lama_Di_Lolai_Jam: 3,
+          Lama_Total_Hari: "Warga Lokal (Menetap)",
+          Daya_Tarik_Lain: "Ke'te Kesu', Bori Kalimbuang",
+          Biaya_Tiket: 15000,
+          Biaya_Penginapan: 0,
+          Biaya_Makan: 35000,
+          Biaya_Suvenir: 0,
+          Biaya_Transport: 20000,
+          "21a_Awan": "5", "21b_Budaya": "5", "21c_Variasi": "4", "21d_Jalan": "3", "21e_Petunjuk": "4",
+          "21f_Parkir": "3", "21g_TransportUmum": "2", "21h_Penginapan": "4", "21i_MakanMinum": "4",
+          "21j_Toilet": "3", "21k_Ibadah": "4", "21l_Sinyal": "4", "21m_Sampah": "3", "21n_Keramahan": "5",
+          "21o_Informasi": "4", "21p_Keamanan": "4", "21q_HargaKualitas": "4",
+          "22_KepadatanSunrise": "Cukup padat tapi masih nyaman",
+          "23_GangguanKepadatan": "Sedikit terganggu antrean spot foto",
+          "24_RasaAman": "Aman",
+          "24_AlasanTidakAman": "",
+          "25_BangunanGanggu": "Sedikit mengganggu pemandangan alami",
+          "26_FasilitasPrioritas": "Toilet standar wisata, Tempat sampah terpilah",
+          "27_KegiatanBaru": "Pentas tari Toraja berkala, Jalur trekking kabut",
+          "28_TiketWajar": "Rp 15.000",
+          "29_KepuasanTotal": "5",
+          "30_MinatKembali": "Pasti akan kembali",
+          "31_Rekomendasi": "Pasti merekomendasikan",
+          "32_Saran": "Pelebaran akses jalan dan perbanyak tempat sampah organik/anorganik."
+        },
+        {
+          No_Kuesioner: "K-002",
+          Tanggal: "2026-10-22",
+          Jam: "06:40",
+          Nama_Responden: "Andi Megawati",
+          Lokasi: "Kafe Sunrise Lolai",
+          Gender: "Perempuan",
+          Usia: "17–24",
+          Asal_Kategori: "Kab/kota lain di Sulsel",
+          Asal_Detail: "Makassar",
+          Pendidikan: "S1",
+          Pekerjaan: "Pelajar/mahasiswa",
+          Pengeluaran_Bulan: "Rp3–5 juta",
+          Kunjungan_Ke: "Pertama",
+          Tujuan_Utama: "Wisata alam",
+          Sumber_Info: "Instagram/TikTok",
+          Teman_Perjalanan: "Keluarga",
+          Jumlah_Rombongan: 5,
+          Kendaraan: "Mobil pribadi",
+          Status_Menginap: "Ya, di Homestay",
+          Jam_Tiba: "2026-10-21 (21:00)",
+          Lama_Di_Lolai_Jam: 5,
+          Lama_Total_Hari: 3,
+          Daya_Tarik_Lain: "Lemo, Batutumonga, Londa",
+          Biaya_Tiket: 15000,
+          Biaya_Penginapan: 250000,
+          Biaya_Makan: 75000,
+          Biaya_Suvenir: 50000,
+          Biaya_Transport: 50000,
+          "21a_Awan": "5", "21b_Budaya": "4", "21c_Variasi": "3", "21d_Jalan": "2", "21e_Petunjuk": "3",
+          "21f_Parkir": "3", "21g_TransportUmum": "2", "21h_Penginapan": "4", "21i_MakanMinum": "4",
+          "21j_Toilet": "3", "21k_Ibadah": "4", "21l_Sinyal": "3", "21m_Sampah": "3", "21n_Keramahan": "5",
+          "21o_Informasi": "4", "21p_Keamanan": "4", "21q_HargaKualitas": "4",
+          "22_KepadatanSunrise": "Sangat padat",
+          "23_GangguanKepadatan": "Cukup terganggu saat mengambil foto pemandangan",
+          "24_RasaAman": "Kurang aman di tebing tertentu",
+          "24_AlasanTidakAman": "Pagar pembatas jurang belum menyeluruh",
+          "25_BangunanGanggu": "Ya, posisi bangunan terlalu menjorok ke tebing",
+          "26_FasilitasPrioritas": "Pagar pengaman tebing/jurang, Penerangan malam",
+          "27_KegiatanBaru": "Tur edukasi kopi arabika Toraja, Camping ground tertata",
+          "28_TiketWajar": "Rp 20.000",
+          "29_KepuasanTotal": "4",
+          "30_MinatKembali": "Kemungkinan besar kembali",
+          "31_Rekomendasi": "Merekomendasikan",
+          "32_Saran": "Penerangan jalan malam hari dari Rantepao ke Lolai perlu ditingkatkan demi keamanan wisatawan."
+        },
+        {
+          No_Kuesioner: "K-003",
+          Tanggal: "2026-10-22",
+          Jam: "07:10",
+          Nama_Responden: "Hendrikus Salu",
+          Lokasi: "Pelataran Tongkonan",
+          Gender: "Laki-laki",
+          Usia: "35–44",
+          Asal_Kategori: "Toraja Utara/Tana Toraja",
+          Asal_Detail: "Kapala Pitu",
+          Pendidikan: "SMA/sederajat ke bawah",
+          Pekerjaan: "Wiraswasta",
+          Pengeluaran_Bulan: "Rp3–5 juta",
+          Kunjungan_Ke: "Lebih dari dua kali",
+          Tujuan_Utama: "Wisata budaya/upacara adat",
+          Sumber_Info: "Teman/keluarga",
+          Teman_Perjalanan: "Keluarga",
+          Jumlah_Rombongan: 6,
+          Kendaraan: "Mobil pribadi",
+          Status_Menginap: "Tidak menginap (pulang hari)",
+          Jam_Tiba: "Hari ini, 05:30",
+          Lama_Di_Lolai_Jam: 2,
+          Lama_Total_Hari: "Warga Lokal (Menetap)",
+          Daya_Tarik_Lain: "Pasar Bolu",
+          Biaya_Tiket: 15000,
+          Biaya_Penginapan: 0,
+          Biaya_Makan: 50000,
+          Biaya_Suvenir: 20000,
+          Biaya_Transport: 15000,
+          "21a_Awan": "5", "21b_Budaya": "5", "21c_Variasi": "4", "21d_Jalan": "3", "21e_Petunjuk": "4",
+          "21f_Parkir": "3", "21g_TransportUmum": "3", "21h_Penginapan": "4", "21i_MakanMinum": "5",
+          "21j_Toilet": "4", "21k_Ibadah": "4", "21l_Sinyal": "4", "21m_Sampah": "4", "21n_Keramahan": "5",
+          "21o_Informasi": "4", "21p_Keamanan": "5", "21q_HargaKualitas": "4",
+          "22_KepadatanSunrise": "Sedang",
+          "23_GangguanKepadatan": "Tidak terganggu",
+          "24_RasaAman": "Aman",
+          "24_AlasanTidakAman": "",
+          "25_BangunanGanggu": "Tidak mengganggu",
+          "26_FasilitasPrioritas": "Area parkir tertata dan pos petugas",
+          "27_KegiatanBaru": "Bazar kuliner tradisional khas Toraja",
+          "28_TiketWajar": "Rp 15.000",
+          "29_KepuasanTotal": "5",
+          "30_MinatKembali": "Pasti akan kembali",
+          "31_Rekomendasi": "Pasti merekomendasikan",
+          "32_Saran": "Penataan parkir agar tidak macet saat akhir pekan."
+        }
+      ];
+    }
+
+    // Jalankan saat halaman dibuka
+    muatDataSurvei();
+  </script>
+</body>
+</html>

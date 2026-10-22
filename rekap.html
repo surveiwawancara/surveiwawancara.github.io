@@ -849,7 +849,7 @@
             <th colspan="7" class="th-profil">2. PROFIL RESPONDEN</th>
             <th colspan="10" class="th-kunjungan">3. KARAKTERISTIK KUNJUNGAN</th>
             <th colspan="6" class="th-biaya">4. BIAYA / PENGELUARAN DI LOLAI (RP)</th>
-            <th colspan="17" class="th-likert">5. PENILAIAN FASILITAS & DESTINASI (LIKERT 1–5)</th>
+            <th colspan="17" class="th-likert" title="Skala Likert: 1=Sangat Buruk, 2=Buruk, 3=Cukup, 4=Baik, 5=Sangat Baik">5. PENILAIAN FASILITAS & DESTINASI (LIKERT 1–5: 1=Sgt Buruk s/d 5=Sgt Baik)</th>
             <th colspan="4" class="th-kepadatan">6. KEPADATAN & KEAMANAN</th>
             <th colspan="7" class="th-harapan">7. EVALUASI, HARAPAN & SARAN</th>
           </tr>
@@ -1664,6 +1664,14 @@
       const bestIndicator = sortedLikert[0] || { name: '-', mean: 0 };
       const worstIndicator = sortedLikert[sortedLikert.length - 1] || { name: '-', mean: 0 };
 
+      const getLikertPredikat = (score) => {
+        if (score >= 4.21) return 'Sangat Baik';
+        if (score >= 3.41) return 'Baik';
+        if (score >= 2.61) return 'Cukup';
+        if (score >= 1.81) return 'Buruk';
+        return 'Sangat Buruk';
+      };
+
       // Kalkulasi Finansial
       const totalPengeluaran = sumTiket + sumInap + sumMakan + sumSuvenir + sumTrans;
       const avgPengeluaran = N > 0 ? Math.round(totalPengeluaran / N) : 0;
@@ -1763,6 +1771,11 @@
                 <tr>
                   <th colspan="4">BAGIAN 4: KALKULASI SKOR RATA-RATA 17 INDIKATOR FASILITAS (LIKERT 1–5)</th>
                 </tr>
+                <tr style="background: #f8fafc; color: #334155; font-size: 6.2pt; border-bottom: 1px solid #cbd5e1;">
+                  <td colspan="4" style="padding: 2.5px 5px; text-align: center; line-height: 1.35;">
+                    <strong style="color: #0f766e;">Keterangan Skala:</strong> [1] Sangat Buruk &bull; [2] Buruk &bull; [3] Cukup &bull; [4] Baik &bull; [5] Sangat Baik &nbsp;|&nbsp; <em>Rentang: 1.00–1.80 (S.Buruk) &bull; 1.81–2.60 (Buruk) &bull; 2.61–3.40 (Cukup) &bull; 3.41–4.20 (Baik) &bull; 4.21–5.00 (S.Baik)</em>
+                  </td>
+                </tr>
               </thead>
               <thead class="subhead">
                 <tr>
@@ -1781,7 +1794,7 @@
                 <tr><td>21f Area Parkir</td><td style="text-align: center;"><strong>${likertStats[5].mean.toFixed(2)}</strong></td><td>21o Akses Informasi</td><td style="text-align: center;"><strong>${likertStats[14].mean.toFixed(2)}</strong></td></tr>
                 <tr><td>21g Angkutan Umum</td><td style="text-align: center;"><strong>${likertStats[6].mean.toFixed(2)}</strong></td><td>21p Keamanan Kawasan</td><td style="text-align: center;"><strong>${likertStats[15].mean.toFixed(2)}</strong></td></tr>
                 <tr><td>21h Homestay/Penginapan</td><td style="text-align: center;"><strong>${likertStats[7].mean.toFixed(2)}</strong></td><td>21q Harga vs Kualitas</td><td style="text-align: center;"><strong>${likertStats[16].mean.toFixed(2)}</strong></td></tr>
-                <tr><td>21i Warung Makan/Minum</td><td style="text-align: center;"><strong>${likertStats[8].mean.toFixed(2)}</strong></td><td colspan="2" style="text-align: center; background: #f0fdfa; color: #0f766e; font-weight: 700;">Rata2 Keseluruhan: <strong>${totalLikertMean.toFixed(2)} / 5.00</strong></td></tr>
+                <tr><td>21i Warung Makan/Minum</td><td style="text-align: center;"><strong>${likertStats[8].mean.toFixed(2)}</strong></td><td colspan="2" style="text-align: center; background: #f0fdfa; color: #0f766e; font-weight: 700;">Rata2 Keseluruhan: <strong>${totalLikertMean.toFixed(2)} / 5.00</strong> (${getLikertPredikat(totalLikertMean)})</td></tr>
               </tbody>
 
               <thead>
@@ -1792,11 +1805,11 @@
               <tbody>
                 <tr>
                   <td colspan="2" class="col-param" style="color: #047857; font-weight: 800;"><i class="fa-solid fa-trophy"></i> Indikator Tertinggi (Kekuatan Utama)</td>
-                  <td colspan="2" class="col-val" style="color: #047857; font-weight: 800;">${bestIndicator.name} (Skor: ${bestIndicator.mean.toFixed(2)})</td>
+                  <td colspan="2" class="col-val" style="color: #047857; font-weight: 800;">${bestIndicator.name} (Skor: ${bestIndicator.mean.toFixed(2)} &bull; ${getLikertPredikat(bestIndicator.mean)})</td>
                 </tr>
                 <tr>
                   <td colspan="2" class="col-param" style="color: #b91c1c; font-weight: 800;"><i class="fa-solid fa-triangle-exclamation"></i> Indikator Terendah (Prioritas Benahi)</td>
-                  <td colspan="2" class="col-val" style="color: #b91c1c; font-weight: 800;">${worstIndicator.name} (Skor: ${worstIndicator.mean.toFixed(2)})</td>
+                  <td colspan="2" class="col-val" style="color: #b91c1c; font-weight: 800;">${worstIndicator.name} (Skor: ${worstIndicator.mean.toFixed(2)} &bull; ${getLikertPredikat(worstIndicator.mean)})</td>
                 </tr>
                 <tr>
                   <td colspan="2" class="col-param">Fasilitas Prioritas Paling Diinginkan</td>
@@ -2004,6 +2017,11 @@
                   <tr>
                     <th colspan="4">BAGIAN D: PENILAIAN 17 ASPEK FASILITAS & DESTINASI (LIKERT 1–5)</th>
                   </tr>
+                  <tr style="background: #f8fafc; color: #334155; font-size: 6.2pt; border-bottom: 1px solid #cbd5e1;">
+                    <td colspan="4" style="padding: 2.5px 5px; text-align: center; color: #475569;">
+                      <strong style="color: #0f766e;">Keterangan Skala:</strong> 1 = Sangat Buruk &bull; 2 = Buruk &bull; 3 = Cukup &bull; 4 = Baik &bull; 5 = Sangat Baik
+                    </td>
+                  </tr>
                 </thead>
                 <thead class="subhead">
                   <tr>
@@ -2022,7 +2040,7 @@
                   <tr><td>21f Area Parkir</td><td style="text-align: center;">${renderLikertBadge(q21f)}</td><td>21o Akses Informasi</td><td style="text-align: center;">${renderLikertBadge(q21o)}</td></tr>
                   <tr><td>21g Angkutan Umum</td><td style="text-align: center;">${renderLikertBadge(q21g)}</td><td>21p Keamanan Kawasan</td><td style="text-align: center;">${renderLikertBadge(q21p)}</td></tr>
                   <tr><td>21h Homestay/Penginapan</td><td style="text-align: center;">${renderLikertBadge(q21h)}</td><td>21q Harga vs Kualitas</td><td style="text-align: center;">${renderLikertBadge(q21q)}</td></tr>
-                  <tr><td>21i Warung Makan/Minum</td><td style="text-align: center;">${renderLikertBadge(q21i)}</td><td colspan="2" style="text-align: center; color: #64748b; font-size: 6pt; background: #f8fafc;">Skala: 1 (Sgt Buruk) s/d 5 (Sgt Baik)</td></tr>
+                  <tr><td>21i Warung Makan/Minum</td><td style="text-align: center;">${renderLikertBadge(q21i)}</td><td colspan="2" style="text-align: center; color: #0f766e; font-size: 6.2pt; font-weight: 700; background: #f0fdfa;">1 (Sgt Buruk) s/d 5 (Sgt Baik)</td></tr>
                 </tbody>
 
                 <thead>

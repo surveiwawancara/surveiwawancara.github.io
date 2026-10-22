@@ -751,7 +751,14 @@
           </div>
           <div class="form-group">
             <label class="title-label"><i class="fa-solid fa-calendar-days"></i> 14. Lama Total di Toraja</label>
-            <input type="number" id="lamaTotalHari" placeholder="Jumlah hari (cth: 2)" min="1" required />
+            <input type="number" id="lamaTotalHari" placeholder="Jumlah hari kunjungan (cth: 2)" min="1" required />
+            <label class="option-label" style="margin-top: 8px; font-size: 13px; background: #f0fdfa; border: 1px dashed #0d9488; cursor: pointer; padding: 8px 12px; border-radius: 8px;">
+              <input type="checkbox" id="chkWargaLokal" />
+              <span><i class="fa-solid fa-house-chimney-user" style="color:#0f766e;"></i> Responden adalah warga lokal (Tinggal menetap di Toraja)</span>
+            </label>
+            <div id="wargaLokalBadge" style="display:none; font-size: 12px; color: #0f766e; font-weight: 600; margin-top: 5px;">
+              <i class="fa-solid fa-circle-check"></i> Dicatat di sistem: <em>Warga Lokal (Tinggal Menetap)</em>
+            </div>
           </div>
         </div>
 
@@ -1134,6 +1141,44 @@
           alert("Maksimal hanya boleh memilih 3 fasilitas prioritas.");
         }
       });
+    // --- Penanganan Cerdas No. 14: Responden Warga Lokal Menetap vs Wisatawan ---
+    const chkWargaLokal = document.getElementById('chkWargaLokal');
+    const lamaTotalHariInput = document.getElementById('lamaTotalHari');
+    const wargaLokalBadge = document.getElementById('wargaLokalBadge');
+    const asalKategoriSelect = document.getElementById('asalKategori');
+
+    function toggleWargaLokal(isLokal) {
+      if (isLokal) {
+        lamaTotalHariInput.value = '';
+        lamaTotalHariInput.disabled = true;
+        lamaTotalHariInput.required = false;
+        lamaTotalHariInput.placeholder = "Warga lokal (Tinggal menetap di Toraja)";
+        lamaTotalHariInput.style.backgroundColor = "#f1f5f9";
+        lamaTotalHariInput.style.color = "#64748b";
+        wargaLokalBadge.style.display = "block";
+      } else {
+        lamaTotalHariInput.disabled = false;
+        lamaTotalHariInput.required = true;
+        lamaTotalHariInput.placeholder = "Jumlah hari kunjungan (cth: 2)";
+        lamaTotalHariInput.style.backgroundColor = "";
+        lamaTotalHariInput.style.color = "";
+        wargaLokalBadge.style.display = "none";
+      }
+    }
+
+    chkWargaLokal.addEventListener('change', (e) => {
+      toggleWargaLokal(e.target.checked);
+    });
+
+    // Otomatis sinkron jika No. 3 (Asal Daerah) memilih Toraja Utara/Tana Toraja
+    asalKategoriSelect.addEventListener('change', () => {
+      if (asalKategoriSelect.value === 'Toraja Utara/Tana Toraja') {
+        chkWargaLokal.checked = true;
+        toggleWargaLokal(true);
+      } else {
+        chkWargaLokal.checked = false;
+        toggleWargaLokal(false);
+      }
     });
 
     const form = document.getElementById('kuesionerForm');
@@ -1196,7 +1241,7 @@
         menginapStatus: getSelectValueWithOther('menginapStatus', 'menginapLainnya'),
         jamTiba: waktuTibaFormatted,
         lamaDiLolaiJam: Number(document.getElementById('lamaDiLolaiJam').value) || 0,
-        lamaTotalHari: Number(document.getElementById('lamaTotalHari').value) || 0,
+        lamaTotalHari: chkWargaLokal.checked ? "Warga Lokal (Menetap)" : (Number(document.getElementById('lamaTotalHari').value) || 0),
         dayaTarikLain: dayaTarikList,
 
         // C. Pengeluaran
